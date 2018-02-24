@@ -1,0 +1,81 @@
+.login {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    width: 35%;
+    height: 40%;
+    transform: translate(-50%, -50%);
+}
+
+button {
+    width: 50%;
+    cursor: pointer;
+    opacity: 0.9;
+    border: none;
+    position:relative;
+    left:25%;
+}
+
+.btn-success {
+    background-color: white;
+    border-color: green;
+    color: green;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.btn-info {
+    top: 5px;
+    background-color: white;
+    border-color: #17a2b8;
+    color: #17a2b8;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.form-group input[type="text"]{
+    overflow: auto;
+}
+
+.form-group {
+    position: relative;
+}
+
+.student {
+    float: left;
+    width: 50%;
+    text-align: center;
+    position: relative;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+a {
+    color: grey;
+}
+
+.demonstrator {
+    float: right;
+    width: 50%;
+    text-align: center;
+    position: relative;
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+a:link {
+    text-decoration:  none;
+}
+
+a:visited {
+    text-decoration:  none;
+}
+a:hover {
+    text-decoration:  none;
+    color: green;
+}
+
+a:active {
+    color: green;
+    text-decoration:  none;
+}
