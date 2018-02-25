@@ -19,13 +19,13 @@
     <body class="container-fluid">
     <div class="login">
             <div class="student">
-                <a href="#" class="active" id="student-form">Student</a>
+                <a href="" class="active" id="student-form">Student</a>
             </div>
             <div class="demonstrator">
-                <a href="#" id="demon-form">Demonstrator</a>
+                <a href="" id="demon-form">Demonstrator</a>
             </div>
             <br>
-            <form action="" method="post" name="login" id="student-login-form">
+            <form action="" method="post" name="loginStu" id="student-login-form">
                 <div class="container-fluid">
 
                     <hr>
@@ -41,6 +41,26 @@
                     <button type="submit" class="btn btn-success">Login</button>
                     <button type="button" class="btn btn-info">Furhter Info</button>
                     
+                    <hr>
+
+                </div>
+            </form>
+            <form action="" method="post" name="loginDem" id="demon-login-form" style="display: none;">
+                <div class="container-fluid">
+
+                    <hr>
+
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter Your Username" name="uname" id="uname" class="form-control" required>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="password" placeholder="Enter Password" name="upsw" id="upsw" class="form-control" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Login</button>
+                    <button type="button" class="btn btn-info">Furhter Info</button>
+
                     <hr>
 
                 </div>

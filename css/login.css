@@ -3,6 +3,7 @@
     left: 50%;
     position: absolute;
     width: 35%;
+    min-width: 250px;
     height: 40%;
     transform: translate(-50%, -50%);
 }
@@ -33,7 +34,11 @@ button {
     word-wrap: break-word;
 }
 
-.form-group input[type="text"]{
+.form-group input[type="text"]:focus{
+    overflow: auto;
+}
+
+.form-group input[type="password"]:focus{
     overflow: auto;
 }
 
@@ -76,6 +81,11 @@ a:hover {
 }
 
 a:active {
+    color: green;
+    text-decoration:  none;
+}
+
+.active{
     color: green;
     text-decoration:  none;
 }
