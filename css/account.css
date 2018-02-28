@@ -24,7 +24,7 @@
     background-color: #ddd;
 }
 
-button {
+#submitAcc { 
     width: 50%;
     min-width: 175px;
     cursor: pointer;
