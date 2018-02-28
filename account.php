@@ -4,7 +4,7 @@
 ?>
 
 <html>
-    <header>
+    <head>
         <title>Account</title>
 
         <meta charset="utf-8">
@@ -15,7 +15,36 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/account.css">
-    </header>
+
+        <script>
+            //function below posts form data to createAcc.php
+            $(function () {
+                $('#crtAcc').on('submit', function(e) { //function is called when create account button is pressed
+
+                    e.preventDefault(); //prevents page from opening
+
+                    $.ajax({
+                        type: 'POST', //get or post? this time we want to post data to the php file for processing
+                        url: 'createAcc.php', //php we send the data to
+                        dataType: 'json', //done to be able to recieve the data back that is to be displayed to the user
+                        data: $('#crtAcc').serialize(), //takes contents of the form
+                        success : function (data) { 
+                            if(data.type == 'error'){ //if username exists or there is a sql error then this would be displayed in red in the form box abocve the button
+                                $("#crtAcc")[0].reset();
+                                $("#msg-response").css("color", "red");
+                                document.getElementById("msg-response").innerHTML=data.text;
+                            }
+                            else{ //if account is created successfully then a essage will appear saying just that
+                                $("#crtAcc")[0].reset();
+                                $("#msg-response").css("color", "green");
+                                document.getElementById("msg-response").innerHTML=data.text;
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+    </head>
 
     <body class="container-fluid">
 
@@ -28,7 +57,7 @@
         </div>
 
         <div class="createAcc">
-            <form action="createAcc.php" method="post" name="createAccount" style="border:1px solid #ccc">
+            <form id="crtAcc" name="crtAcc" style="border:1px solid #ccc">
                 <div class="container-fluid">
                     <h1>Create Account</h1>
                     <p>Fill in the form below to create an account for a demonstrator</p>
@@ -48,11 +77,12 @@
                         <label for="accType"><b>Choose Account Type:</b></label>
                         <select name="accType" id="accType" class="form-control" required>
                             <option value="admin">Admin Account</option>
-                            <option value="stnd">Standard Account</option>
+                            <option value="standard">Standard Account</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Create Account</button>
+                    <p id="msg-response" style="color: green; font-size: 10pt;"></p>
+                    <button type="submit" id="submitAcc" class="btn btn-success">Create Account</button> <!-- will need to sort out the css form this button as can not use 'button' in the css file as the selector for editting the button settings as it would edit it for all button tags -->
 
                 </div>
             </form>
