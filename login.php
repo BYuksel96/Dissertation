@@ -2,7 +2,7 @@
     
 ?>
 <html>
-    <header>
+    <head>
         <title>Login</title>
 
         <meta charset="utf-8">
@@ -14,7 +14,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/login.css">
         <script src="js/login.js"></script>
-    </header>
+    </head>
 
     <body class="container-fluid">
     <div class="login">
@@ -39,7 +39,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Login</button>
-                    <button type="button" class="btn btn-info">Furhter Info</button>
+                    <button type="button" class="btn btn-info">Further Info</button>
                     
                     <hr>
 
@@ -59,7 +59,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Login</button>
-                    <button type="button" class="btn btn-info">Furhter Info</button>
+                    <button type="button" class="btn btn-info">Further Info</button>
 
                     <hr>
 
