@@ -24,17 +24,17 @@
                     e.preventDefault(); //prevents page from opening
 
                     $.ajax({
-                        type: 'POST', //get or post? this time we want to post data to the php file for processing
+                        type: 'POST', //get or post? this time we want to post data to the php file
                         url: 'createAcc.php', //php we send the data to
-                        dataType: 'json', //done to be able to recieve the data back that is to be displayed to the user
+                        dataType: 'json',
                         data: $('#crtAcc').serialize(), //takes contents of the form
                         success : function (data) { 
-                            if(data.type == 'error'){ //if username exists or there is a sql error then this would be displayed in red in the form box abocve the button
+                            if(data.type == 'error'){ //if username exists or there is a sql error then this an error message will be displayed
                                 $("#crtAcc")[0].reset();
                                 $("#msg-response").css("color", "red");
                                 document.getElementById("msg-response").innerHTML=data.text;
                             }
-                            else{ //if account is created successfully then a essage will appear saying just that
+                            else{ //if account is created successfully then a message will appear saying just that
                                 $("#crtAcc")[0].reset();
                                 $("#msg-response").css("color", "green");
                                 document.getElementById("msg-response").innerHTML=data.text;
