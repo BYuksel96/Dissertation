@@ -14,29 +14,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/login.css">
         <script src="js/login.js"></script>
-        <script>
-            $(function () {
-                $('#demon-login-form').on('submit', function(e) { //function is called when login button is pressed
-                    
-                    e.preventDefault(); //prevents page from opening - so basically stops the page it is currently on from refreshing
-
-                    $.ajax({
-                        type: 'POST', //get or post? this time we want to post data to the php file
-                        url: 'demonLogin.php', //php we send the data login data to
-                        dataType: 'json',
-                        data: $('#demon-login-form').serialize(), //takes contents of the form
-                        success : function (data) { 
-                            if(data.type == 'error'){ //if username does not exist or password is inccorect an error message is displayed
-                                document.getElementById("msg-response").innerHTML=data.text;
-                            }
-                            else { //if all is successful demonstrator is redirected to the main page
-                                window.location.replace("main.php");
-                            }
-                        }
-                    });
-                });
-            });
-        </script>
     </head>
 
     <body class="container-fluid">
