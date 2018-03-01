@@ -18,7 +18,7 @@
 
         <script>
             //function below posts form data to createAcc.php
-            $(function () {
+            $(function () { //waits for page to load before js function works
                 $('#crtAcc').on('submit', function(e) { //function is called when create account button is pressed
 
                     e.preventDefault(); //prevents page from opening
