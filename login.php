@@ -25,7 +25,7 @@
                 <a href="" id="demon-form">Demonstrator</a>
             </div>
             <br>
-            <form action="" method="post" name="loginStu" id="student-login-form">
+            <form name="loginStu" id="student-login-form">
                 <div class="container-fluid">
 
                     <hr>
@@ -37,7 +37,7 @@
                     <div class="form-group">
                         <input type="text" placeholder="Enter Student Number" name="stuNum" id="stuNum" class="form-control" required>
                     </div>
-
+                    <p id="msg-response-stu" style="color: red; font-size: 10pt;"></p>
                     <button type="submit" class="btn btn-success">Login</button>
                     <button type="button" class="btn btn-info">Further Info</button>
                     
