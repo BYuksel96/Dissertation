@@ -37,4 +37,5 @@ if (isset($_POST['uname'])){
         die($response);
     }
 }
+mysqli_close($connection);
 ?>
