@@ -1,5 +1,9 @@
 <?php
     include('connection.php');
+    session_start();
+	if(isset($_SESSION['accName'])){
+		header("location:main.php");
+	}
 ?>
 <html>
     <head>

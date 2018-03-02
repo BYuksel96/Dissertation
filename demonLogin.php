@@ -1,14 +1,18 @@
 <?php
 
 include('connection.php');
+session_start();
 
 $output = ""; //declaring the variable
+$_SESSION["accType"] = "";
+$_SESSION["accName"] = "";
 
 if (isset($_POST['uname'])){
     $uName = mysqli_real_escape_string($connection, $_POST['uname']);
     $psw = mysqli_real_escape_string($connection, $_POST['upsw']);
     $salt = "";
     $hashedPsw = "";
+    $accType = "";
     
     $accCheck = mysqli_query($connection, "SELECT * FROM users WHERE Username = '$uName'");
     if(mysqli_num_rows($accCheck) != 0) { //check if account exists
@@ -17,14 +21,17 @@ if (isset($_POST['uname'])){
             while($row = mysqli_fetch_assoc($saltQuery)) {
                 $salt = $row["PasswordSalt"]; //acquiring the salt
                 $hashedPsw = $row["PasswordHash"]; //acquiring the salted and hashed password
+                $adminCheck = $row["account_type"];
             }
             $salted = $salt . $psw; //applying the salt in the db to the password entered by the client
             $hashed = hash('sha512', $salted); //hashing the above combination
             if ($hashed == $hashedPsw){ //checking whether the salted and hashed password entered by the demonstrator is the same as it is in the db
                 $response = json_encode(array('type' => 'success', 'text' => 'Success: Logging you in...'));
+                $_SESSION["accType"] = $adminCheck;
+                $_SESSION["demonstrator"] = $uName;
                 die($response);
             }
-            else { //if password is incrrect error message is sent back and displayed to the client
+            else { //if password is incorrect error message is sent back and displayed to the client
                 $output = "Incorrect password for this account";
                 $response = json_encode(array('type' => 'error', 'text' => $output));
                 die($response);
