@@ -2,6 +2,8 @@
 
 include('connection.php');
 
+$_SESSION["accType"] = ""; //will store student into here so when logging out account is deleted from the db
+
 if (isset($_POST['name'])){
     $studentName = mysqli_real_escape_string($connection, $_POST['name']);
     $studentID = mysqli_real_escape_string($connection, $_POST['stuNum']);
