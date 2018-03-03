@@ -2,7 +2,7 @@
     include('connection.php');
     session_start();
     if(!isset($_SESSION['demonstrator'])){
-        header("location:login.php");
+        header("location:main.php");
     }
 
 ?>
@@ -26,8 +26,8 @@
     <body class="container-fluid">
 
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
-            <ul class="nav navbar-nav">
-                <li><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+            <ul class="nav navbar-nav ml-auto">
+                <li><a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
        
