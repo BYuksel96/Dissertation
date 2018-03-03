@@ -1,12 +1,16 @@
 <?php
 
 include('connection.php');
+session_start();
 
-$_SESSION["accType"] = ""; //will store student into here so when logging out account is deleted from the db
+$_SESSION["accType"] = "";
+$_SESSION["studentNumber"] = "";
+$_SESSION["studentName"] = "";
 
 if (isset($_POST['name'])){
     $studentName = mysqli_real_escape_string($connection, $_POST['name']);
     $studentID = mysqli_real_escape_string($connection, $_POST['stuNum']);
+
 
     $accCheck = mysqli_query($connection, "SELECT * FROM students WHERE studentid = '$studentID'");
     if (mysqli_num_rows($accCheck) != 0){
@@ -22,6 +26,9 @@ if (isset($_POST['name'])){
         }
         else {
             $response = json_encode(array('type' => 'success', 'text' => 'Success: Account has been created!'));
+            $_SESSION["accType"] = "student"; 
+            $_SESSION["studentNumber"] = $studentID;
+            $_SESSION["studentName"] = $studentName;
             die($response);
         }
     }
