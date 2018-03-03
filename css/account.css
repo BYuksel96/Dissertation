@@ -1,3 +1,8 @@
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
 .changePsw {
     padding-top: 2px;
     width: 50%;
@@ -37,4 +42,9 @@
 
 button:hover {
     opacity: 1;
+}
+
+#crtAcc{
+    padding-left: 15px;
+    padding-right: 15px;
 }
