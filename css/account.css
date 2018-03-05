@@ -1,24 +1,45 @@
+#accordion {
+    padding-top: 1.5%;
+    width: 50%;
+    min-width: 250px;
+    left:50%;
+    transform: translate(-50%);
+    position:relative;
+}
+
+.gap {
+    padding-top: 2.5%;
+}
+
 .container-fluid {
     padding-left: 0px;
     padding-right: 0px;
 }
 
+.accountInfo {
+    padding-top: 2px;
+    width: 50%;
+    min-width: 250px;
+}
+
 .changePsw {
     padding-top: 2px;
     width: 50%;
-    float: left;
+    min-width: 250px;
 }
 
 .createAcc {
     padding-top: 2px;
     width: 50%;
     min-width: 250px;
-    float: left;
 }
 
 .formHR {
-    border: 1px solid #f1f1f1;
     margin-bottom: 25px;
+    height: 1px;
+    border: 0;
+    background: black;
+    background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, grey)); 
 }
 
 .form-control {
@@ -37,7 +58,7 @@
     border: none;
     position:relative;
     left:50%;
-    transform: translate(-50%, -20%);
+    transform: translate(-50%, 0%);
 }
 
 button:hover {
@@ -47,4 +68,15 @@ button:hover {
 #crtAcc{
     padding-left: 15px;
     padding-right: 15px;
+}
+
+#submitButton { 
+    width: 50%;
+    min-width: 175px;
+    cursor: pointer;
+    opacity: 0.9;
+    border: none;
+    position:relative;
+    left:50%;
+    transform: translate(-50%, 15%);
 }
