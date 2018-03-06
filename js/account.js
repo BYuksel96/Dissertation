@@ -23,4 +23,28 @@ $(function () { //waits for page to load before js function works
             }
         });
     });
+    //function submits help request data
+    $('#addData').on('submit', function(e) { //function is called when create account button is pressed
+
+        e.preventDefault(); //prevents page from opening
+
+        $.ajax({
+            type: 'POST', //get or post? this time we want to post data to the php file
+            url: 'addData.php', //php we send the data to
+            dataType: 'json',
+            data: $('#addData').serialize(), //takes contents of the form
+            success : function (data) { 
+                if(data.type == 'error'){ //if username exists or there is a sql error then this an error message will be displayed
+                    $("#addData")[0].reset();
+                    $("#msg-response2").css("color", "red");
+                    document.getElementById("msg-response2").innerHTML=data.text;
+                }
+                else{ //if account is created successfully then a message will appear saying just that
+                    $("#addData")[0].reset();
+                    $("#msg-response2").css("color", "green");
+                    document.getElementById("msg-response2").innerHTML=data.text;
+                }
+            }
+        });
+    });
 });

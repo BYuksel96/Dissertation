@@ -38,26 +38,7 @@
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Account Info</a>
                 </div>
                 <div id="collapseOne" class="collapse">
-                    <form id="addData" class="card-body" name="addData">
-                        <div class="container-fluid">
-                            <p>The form below is where you can supply the data you expect students to fill out before they make a help request.</p>
-                            <hr class="formHR">
-
-                            <div class="form-group">
-                                <label for="weekSub"><b>Enter week submission # or enter specific help request data (i.e. Exam Question):</b></label>
-                                <input type="text" placeholder="Enter data here" name="weekSub" id="weekSub" class="form-control" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="taskNum"><b>Enter the max task number or enter specific help request data (i.e. Exam Question):</b></label>
-                                <input type="password" placeholder="Enter Password" name="taskNum" id="taskNum" class="form-control" required>
-                            </div>
-
-                            <p id="msg-response2" style="color: green; font-size: 10pt;"></p>
-                            <button type="submit" id="submitButton" class="btn btn-success">Add data</button>
-
-                        </div>
-                    </form>
+                    <p>account info goes here - to be done<p>
                 </div>
             </div>
 
@@ -68,7 +49,7 @@
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Change Password</a>
                 </div>
                 <div id="collapseTwo" class="collapse">
-                    <form id="addData" class="card-body" name="addData">
+                    <form id="changePSW" class="card-body" name="changePSW">
                         <div class="container-fluid">
                             <p>The form below is where you can supply the data you expect students to fill out before they make a help request.</p>
                             <hr class="formHR">
@@ -83,7 +64,7 @@
                                 <input type="password" placeholder="Enter Password" name="taskNum" id="taskNum" class="form-control" required>
                             </div>
 
-                            <p id="msg-response2" style="color: green; font-size: 10pt;"></p>
+                            <p id="msg-response3" style="color: green; font-size: 10pt;"></p>
                             <button type="submit" id="submitButton" class="btn btn-success">Add data</button>
 
                         </div>
@@ -144,13 +125,13 @@
                                 <hr class="formHR">
 
                                 <div class="form-group">
-                                    <label for="weekSub"><b>Enter week submission # or enter specific help request data (i.e. Exam Question):</b></label>
-                                    <input type="text" placeholder="Enter data here" name="weekSub" id="weekSub" class="form-control" required>
+                                    <label for="weekSub"><b>Enter week submission #:</b></label>
+                                    <input type="number" pattern="\d+" placeholder="Enter data here" name="weekSub" id="weekSub" class="form-control" required>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="taskNum"><b>Enter the max task number or enter specific help request data (i.e. Exam Question):</b></label>
-                                    <input type="password" placeholder="Enter Password" name="taskNum" id="taskNum" class="form-control" required>
+                                    <label for="taskNum"><b>Enter the max task number (i.e. if week 11 contains 5 tasks to complete, enter the number 5 below):</b></label>
+                                    <input type="number" pattern="\d+" placeholder="Enter data here" name="taskNum" id="taskNum" class="form-control" required>
                                 </div>
 
                                 <p id="msg-response2" style="color: green; font-size: 10pt;"></p>
