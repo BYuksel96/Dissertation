@@ -1,0 +1,64 @@
+.container-fluid {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.center {
+    width: 50%;
+    height: 75%;
+    min-width: 250px; /* May need to adjust this depending on final outcome of booking system layout */
+    left:50%;
+    transform: translate(-50%);
+    position:relative;
+    border: 1px solid;
+}
+
+.table { /* creating the table - in this case it is circular */
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border: solid 1px;
+    border-radius: 50%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+
+.table .seats{ /* positioning the contents of the table into the center to the move them out */
+    display: block;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.table button{
+    display: block;
+    width: 100%;
+}
+
+/* below we are positioning all the seats into their correct places. */
+
+#seat1 {
+    transform: rotate(90deg) translate(100px) rotate(-90deg);
+    /* first rotate positions item in correct place on circle, translate identifies how far out from the center of the circle and final rotate places item correct way round */
+}
+
+#seat2 {
+    transform: rotate(150deg) translate(100px) rotate(90deg);
+}
+
+#seat3 {
+    transform: rotate(205deg) translate(100px) rotate(90deg);
+}
+
+#seat4 {
+    transform: rotate(270deg) translate(100px) rotate(90deg);
+}
+
+#seat5 {
+    transform: rotate(335deg) translate(100px) rotate(90deg);
+}
+
+#seat6 {
+    transform: rotate(30deg) translate(100px) rotate(90deg);
+}
+
