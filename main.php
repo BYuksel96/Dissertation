@@ -116,12 +116,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="seat"><b>Seat:</b></label>
-                                <input type="text" id="seatFill" name="description" id="description" class="form-control" disabled>
+                                <input type="text" id="seatFill" name="seat" id="seat" class="form-control" readonly>
                             </div>
                         </div>
                         
                         <!-- Modal footer -->
                         <div class="modal-footer">
+                            <p id="msg-response2" style="color: green; font-size: 10pt;"></p>
+                            <button type="submit" id="submitButton" class="btn btn-success">Submit Request</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
