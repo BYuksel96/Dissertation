@@ -9,8 +9,6 @@
         }
     }
 
-    $acc_type = $_SESSION['accType'];
-
 ?>
 
 <html>
@@ -26,7 +24,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script type="text/javascript">var type = "<?= $acc_type ?>";</script>
         <script type="text/javascript" src="js/main.js"></script>
 
     </head>
@@ -65,7 +62,12 @@
             </div>
         </div>
 
-        
+        <!-- Now need to display the table for students -->
+        <?php if ($_SESSION["accType"] == "student") { ?>
+            
+            
+
+        <?php } ?>
 
         <!-- Bootstrap Modal - used for students to fill out form containing help request data -->
 
