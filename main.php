@@ -9,6 +9,8 @@
         }
     }
 
+    $acc_type = $_SESSION['accType'];
+
 ?>
 
 <html>
@@ -24,16 +26,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script>
-            function addSeat(objButton) {
-                var x = objButton.value;
-                $("#seatFill").val(x);
-            }
-        </script>
+        <script type="text/javascript">var type = "<?= $acc_type ?>";</script>
+        <script type="text/javascript" src="js/main.js"></script>
 
     </head>
 
-    <body class="container-fluid">
+    <body class="container-fluid" onload="buttonDisable()">
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="nav navbar-nav ml-auto">
                 <?php if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
@@ -66,6 +64,8 @@
                 </div>
             </div>
         </div>
+
+        
 
         <!-- Bootstrap Modal - used for students to fill out form containing help request data -->
 
