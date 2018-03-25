@@ -81,35 +81,37 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     
-                    <form id="help" class="class-body" name="help">
+                    <form id="helpForm" class="class-body" name="help">
                         <!-- Modal body -->
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="weekSub"><b>Choose the category you need help with:<b style="color: red">*</b></b></label>
                                 <select name="weekSub" id="weekSub" class="form-control" required>
-                                    <option value="admin">Admin Account</option>
-                                    <option value="standard">Standard Account</option>
+                                    <option value="11">Week 11</option>
+                                    <option value="12">Week 12</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="taskNo"><b>Choose the sub category:<b style="color: red">*</b></b></label>
                                 <select name="taskNo" id="taskNo" class="form-control" required>
-                                    <option value="admin">Admin Account</option>
-                                    <option value="standard">Standard Account</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="severity"><b>Select Problem Severity:<b style="color: red">*</b></b></label>
                                 <select name="severity" id="severity" class="form-control" required>
-                                    <option value="admin">Admin Account</option>
-                                    <option value="standard">Standard Account</option>
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="time"><b>Time Allocation for Task:<b style="color: red">*</b></b></label>
+                                <label for="time"><b>Time Allocation Needed for Task:<b style="color: red">*</b></b></label>
                                 <select name="time" id="time" class="form-control" required>
-                                    <option value="admin">Admin Account</option>
-                                    <option value="standard">Standard Account</option>
+                                    <option value="5">5 Minutes</option>
+                                    <option value="10">10 Minutes</option>
+                                    <option value="15">15 Minutes</option>
                                 </select>
                             </div>
                             <div class="form-group">
@@ -125,8 +127,8 @@
                         <!-- Modal footer -->
                         <div class="modal-footer">
                             <p id="msg-response2" style="color: green; font-size: 10pt;"></p>
-                            <button type="submit" id="submitButton" class="btn btn-success">Submit Request</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" id="submitButton" name="submit" class="btn btn-success">Submit Request</button>
+                            <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </form>
 
