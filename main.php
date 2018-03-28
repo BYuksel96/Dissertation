@@ -72,8 +72,8 @@
                     $count = 1;
                     $studentID = $_SESSION["studentNumber"];
 
-                    echo "<table class=\"table table-striped\">";
-                    echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th></tr>";
+                    echo "<table class=\"table table-striped\" style=\"text-align:center;\">";
+                    echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th> </tr>";
                     
 
                     while($row = mysqli_fetch_array($result)){
@@ -82,13 +82,13 @@
                             echo "<tr class=\"table-success\">";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
-                            echo '<td><a href="delete.php?id=' . $row['TicketNo'] . '">Delete</a></td>';
+                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" value=' . $row['TicketNo'] . ' onclick="addSeat(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
                             echo "</tr>";
                         } else{
                             echo "<tr>";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
-                            echo '<td><a href="delete.php?id=' . $row['TicketNo'] . '">Delete</a></td>';
+                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" value=' . $row['TicketNo'] . ' onclick="addSeat(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
                             echo "</tr>";
                         }
                         
@@ -96,9 +96,8 @@
 
                     }
 
-
                     echo "</table>";
-
+                    // need to create javascript function which now populates the modal when the edit button is clicked
                 }
 
             ?>

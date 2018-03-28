@@ -62,3 +62,22 @@
     transform: rotate(30deg) translate(100px) rotate(90deg);
 }
 
+#studentTab {
+    text-align:center;
+    position:relative;
+}
+
+#tabButton {
+    width: 100px;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 5px;
+}
+
+@media (max-width: 978px) {
+    #tabButton {
+        width: 100px;
+        margin-bottom: 5px;
+        margin-right: 5px;
+    }
+}

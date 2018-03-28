@@ -54,3 +54,27 @@ function buttonDisable(){
         }
     });
 }
+
+function deleteItem(objButton) {
+    var x = objButton.value;
+
+    $.ajax({
+        type: 'POST', //get or post? this time we want to post data to the php file
+        url: 'delete.php', //php file we send the data to
+        dataType: 'json',
+        data: { itemQ : x },
+        success : function (data) { 
+            if(data.type == 'error'){
+                alert(data.text);
+                $("#studentTab").load('main.php #studentTab');
+            }
+            else{ //if request is successful the form is reset and then closed
+                $("#studentTab").load('main.php #studentTab');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}

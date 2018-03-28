@@ -142,6 +142,14 @@
                     </div>
                 </div>
 
+                <!-- still to do:
+                    - need to create a table of demonstrator accounts (need to be able to delete the account)
+                    - need to create a table of students currently logged in the system. need to be able to terminate that session remotely (when deleting them from the database: answer 2 logic is the one to use on this link: https://stackoverflow.com/questions/5443355/remotely-destroy-a-session-in-php-user-logs-in-somewhere-else)
+                    - work on change password function
+                    - work on acc info section
+                    - maybe also consider another help request data section in which you can type instead of writing week and task numbers (so specific content like: "PAST PAPER 2015" then "Question 1")
+                 -->
+
             <?php } ?>
         </div>
     </body>
