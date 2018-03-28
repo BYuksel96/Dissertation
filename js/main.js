@@ -13,12 +13,15 @@ $(function () { //waits for page to load before js function works
             success : function (data) { 
                 if(data.type == 'error'){ //if there is an issue with the form being sent it is reset and an appropriate error message is displayed
                     $("#helpForm")[0].reset();
+                    $('#close').trigger('click');
                     alert(data.text);
+                    $("#studentTab").load('main.php #studentTab');
                 }
                 else{ //if request is successful the form is reset and then closed
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
                     alert(data.text);
+                    $("#studentTab").load('main.php #studentTab');
                     //may want a better way of dealing with this... maybe another modal box to say account is created just some suggestion
                 }
             },
