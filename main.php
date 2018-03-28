@@ -88,7 +88,7 @@
                             echo "<tr>";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
-                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" value=' . $row['TicketNo'] . ' onclick="addSeat(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
+                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" disabled>Edit</button><button id="tabButton" class="btn btn-danger" name="delete" disabled>Delete</button></td>';
                             echo "</tr>";
                         }
                         
