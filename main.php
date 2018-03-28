@@ -68,7 +68,7 @@
             
                 if ($_SESSION["accType"] == "student") {
                     
-                    $result = mysqli_query($connection, "SELECT * FROM help_request ORDER BY TicketNo ASC") or die (mysqli_error());
+                    $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocaction, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE 1 ORDER BY TicketNo ASC") or die (mysqli_error());
                     $count = 1;
                     $studentID = $_SESSION["studentNumber"];
 
