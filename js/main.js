@@ -69,6 +69,7 @@ function deleteItem(objButton) {
                 $("#studentTab").load('main.php #studentTab');
             }
             else{ //if request is successful the form is reset and then closed
+                alert(data.text); 
                 $("#studentTab").load('main.php #studentTab');
             }
         },
