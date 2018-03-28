@@ -13,7 +13,7 @@
     else {
         session_destroy();
         $studentNum = $_SESSION["studentNumber"];
-        $result = mysqli_query($connection, "DELETE FROM students WHERE studentid = '$studentNum'");
+        $result = mysqli_query($connection, "DELETE FROM students WHERE StudentID = '$studentNum'");
         header("location:login.php");
     }
 ?>
