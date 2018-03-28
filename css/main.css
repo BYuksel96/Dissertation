@@ -6,14 +6,14 @@
 .center {
     width: 50%;
     height: 75%;
-    min-width: 250px; /* May need to adjust this depending on final outcome of booking system layout */
+    min-width: 250px; /* May need to adjust this depending on final outcome of seating system layout */
     left:50%;
     transform: translate(-50%);
     position:relative;
     border: 1px solid;
 }
 
-.table { /* creating the table - in this case it is circular */
+.desk { /* creating the table - in this case it is circular */
     position: relative;
     width: 200px;
     height: 200px;
@@ -23,14 +23,14 @@
     margin-top: 5%;
 }
 
-.table .seats{ /* positioning the contents of the table into the center to the move them out */
+.desk .seats{ /* positioning the contents of the table into the center to the move them out */
     display: block;
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
 }
 
-.table button{
+.desk button{
     display: block;
     width: 100%;
 }
