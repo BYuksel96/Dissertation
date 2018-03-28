@@ -62,14 +62,15 @@
             </div>
         </div>
 
-        <div class="container">
+        <div id="studentTab" class="container">
             <!-- Now need to display the table for students -->
             <?php 
             
                 if ($_SESSION["accType"] == "student") {
                     
-                    $result = mysqli_query($connection, "SELECT * FROM help_request") or die (mysqli_error());
+                    $result = mysqli_query($connection, "SELECT * FROM help_request ORDER BY TicketNo ASC") or die (mysqli_error());
                     $count = 1;
+                    $studentID = $_SESSION["studentNumber"];
 
                     echo "<table class=\"table table-striped\">";
                     echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th></tr>";
@@ -77,12 +78,20 @@
 
                     while($row = mysqli_fetch_array($result)){
 
-                        echo "<tr>";
-                        echo '<th scope=\"row\">' . $count . '</th>';
-                        echo '<td>' . $row['TicketNo'] . '</td>';
-                        echo '<td><a href="delete.php?id=' . $row['TicketNo'] . '">Delete</a></td>';
-                        echo "</tr>"; 
-
+                        if ($studentID == $row['StudentID']){
+                            echo "<tr class=\"table-success\">";
+                            echo '<th scope=\"row\">' . $count . '</th>';
+                            echo '<td>' . $row['TicketNo'] . '</td>';
+                            echo '<td><a href="delete.php?id=' . $row['TicketNo'] . '">Delete</a></td>';
+                            echo "</tr>";
+                        } else{
+                            echo "<tr>";
+                            echo '<th scope=\"row\">' . $count . '</th>';
+                            echo '<td>' . $row['TicketNo'] . '</td>';
+                            echo '<td><a href="delete.php?id=' . $row['TicketNo'] . '">Delete</a></td>';
+                            echo "</tr>";
+                        }
+                        
                         $count++;
 
                     }
