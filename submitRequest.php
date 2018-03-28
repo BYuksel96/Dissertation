@@ -3,7 +3,6 @@
     session_start();
 
     $stuNum = $_SESSION["studentNumber"];
-    $stuName = $_SESSION["studentName"];
 
     if(isset($_POST['weekSub'])){
         $field1 = mysqli_real_escape_string($connection, $_POST['weekSub']); 
@@ -20,7 +19,7 @@
             die($response);
         }
         else {
-            $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, StudentName, SubWeek, TaskNo, ProblemSeverity, TimeAllocaction, bDesc, SeatLocation) VALUES ('$stuNum','$stuName','$field1','$field2','$field3','$field4','$field5','$field6')");
+            $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocaction, bDesc, SeatLocation) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6')");
             if(!$sql) {
                 $output = "Error" . mysqli_error();
                 $response = json_encode(array('type' => 'error', 'text' => $output));
