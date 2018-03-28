@@ -37,7 +37,7 @@
         </nav>
 
         <div class="center">
-            <div class="table">
+            <div class="desk">
                 <div class="seats">
                     A
                 </div>
@@ -62,12 +62,41 @@
             </div>
         </div>
 
-        <!-- Now need to display the table for students -->
-        <?php if ($_SESSION["accType"] == "student") { ?>
+        <div class="container">
+            <!-- Now need to display the table for students -->
+            <?php 
             
-            
+                if ($_SESSION["accType"] == "student") {
+                    
+                    $result = mysqli_query($connection, "SELECT * FROM help_request") or die (mysqli_error());
+                    $count = 1;
 
-        <?php } ?>
+                    echo "<table class=\"table table-striped\">";
+                    echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th></tr>";
+                    
+
+                    while($row = mysqli_fetch_array($result)){
+
+                        echo "<tr>";
+                        echo '<th scope=\"row\">' . $count . '</th>';
+                        echo '<td>' . $row['TicketNo'] . '</td>';
+                        echo '<td><a href="delete.php?id=' . $row['TicketNo'] . '">Delete</a></td>';
+                        echo "</tr>"; 
+
+                        $count++;
+
+                    }
+
+
+                    echo "</table>";
+
+                }
+
+            ?>
+        </div>
+
+        <!-- Now need to display the table for students -->
+
 
         <!-- Bootstrap Modal - used for students to fill out form containing help request data -->
 
