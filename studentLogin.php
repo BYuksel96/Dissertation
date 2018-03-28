@@ -18,7 +18,7 @@ if (isset($_POST['name'])){
         die($response);
     }
     else {
-        $sql = mysqli_query($connection, "INSERT INTO students(studentid, studentname) VALUES ('$studentID','$studentName')");
+        $sql = mysqli_query($connection, "INSERT INTO students(StudentID, studentname) VALUES ('$studentID','$studentName')");
         if(!$sql) {
             $output = "Error creating account. Error message: " . mysqli_error();
             $response = json_encode(array('type' => 'error', 'text' => $output));
