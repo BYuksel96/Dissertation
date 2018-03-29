@@ -34,8 +34,17 @@ $(function () { //waits for page to load before js function works
 });
 
 function addSeat(objButton) {
-    var x = objButton.value;
-    $("#seatFill").val(x);
+    $("#submitButton").html("Submit Request");
+    $("#submitButton").removeClass("btn btn-warning");
+    $("#submitButton").addClass("btn btn-success");
+    $.ajax({
+        url: 'edit.php',
+        dataType: 'json',
+        success : function (data) { 
+            var x = objButton.value;
+            $("#seatFill").val(x);
+        }
+    });
 }
 
 function buttonDisable(){
@@ -62,7 +71,7 @@ function deleteItem(objButton) {
         type: 'POST', //get or post? this time we want to post data to the php file
         url: 'delete.php', //php file we send the data to
         dataType: 'json',
-        data: { itemQ : x },
+        data: { itemNum : x },
         success : function (data) { 
             if(data.type == 'error'){
                 alert(data.text);
@@ -71,6 +80,37 @@ function deleteItem(objButton) {
             else{ //if request is successful the form is reset and then closed
                 alert(data.text); 
                 $("#studentTab").load('main.php #studentTab');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function editItem(objButton) {
+    var x = objButton.value;
+
+    $.ajax({
+        type: 'POST', //get or post? this time we want to post data to the php file
+        url: 'edit.php', //php file we send the data to
+        dataType: 'json',
+        data: { itemNum : x },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#weekSub").val(data.week);
+                $("#taskNo").val(data.task);
+                $("#severity").val(data.psev);
+                $("#time").val(data.time);
+                $("#description").val(data.desc);
+                $("#seatFill").val(data.seat);
+                $("#submitButton").html("Edit");
+                $("#submitButton").removeClass("btn btn-success");
+                $("#submitButton").addClass("btn btn-warning");
+            }
+            else{
+                alert("nope");
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
