@@ -68,7 +68,7 @@
             
                 if ($_SESSION["accType"] == "student") {
                     
-                    $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocaction, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE 1 ORDER BY TicketNo ASC") or die (mysqli_error());
+                    $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE 1 ORDER BY TicketNo ASC") or die (mysqli_error());
                     $count = 1;
                     $studentID = $_SESSION["studentNumber"];
 
@@ -82,7 +82,7 @@
                             echo "<tr class=\"table-success\">";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
-                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" value=' . $row['TicketNo'] . ' onclick="addSeat(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
+                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" value=' . $row['TicketNo'] . ' onclick="editItem(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
                             echo "</tr>";
                         } else{
                             echo "<tr>";
@@ -107,7 +107,7 @@
 
 
         <!-- Bootstrap Modal - used for students to fill out form containing help request data -->
-
+        <!-- add php code to stop demonstrator from opening the modal -->
         <div class="modal fade" id="myModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
