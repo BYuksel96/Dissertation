@@ -3,10 +3,14 @@
     session_start();
 
     $student = $_SESSION["studentNumber"];
+    
+    if (isset($_SESSION["editItem"])){
+        $_SESSION["editItem"] = "";
+    }
 
-    if(isset($_POST['itemQ'])){
+    if(isset($_POST['itemNum'])){
 
-        $itemID = $_POST['itemQ']; //sotring ticket number in here
+        $itemID = $_POST['itemNum']; //sotring ticket number in here
         $sqlQuery = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID'"); //fidning student number associated with the ticket number
         $result = mysqli_fetch_assoc($sqlQuery); //fetching the result
 
