@@ -5,6 +5,7 @@
     $stuNum = $_SESSION["studentNumber"];
     if (isset($_SESSION["editItem"])){
         $editCheck = $_SESSION["editItem"];
+        $ticket = $_SESSION["ticketNo"];
     } else {
         $editCheck = "";
     }
@@ -19,12 +20,13 @@
 
         //check if ticket exists if it does then do an update query else insert
         if ($editCheck == "true"){
-            $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6' AND StudentID = '$stuNum'");
+            $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE TicketNo = '$ticket' AND SeatLocation = '$field6' AND StudentID = '$stuNum'");
             if(mysqli_num_rows($seatCheck) != 0) {
                 
-                $sqlQuery = "UPDATE help_request SET SubWeek='$field1', TaskNo='$field2', ProblemSeverity='$field3', TimeAllocation='$field4', bDesc ='$field5' WHERE SeatLocation = '$field6' AND StudentID = '$stuNum'";
+                $sqlQuery = "UPDATE help_request SET SubWeek='$field1', TaskNo='$field2', ProblemSeverity='$field3', TimeAllocation='$field4', bDesc ='$field5' WHERE TicketNo = '$ticket' AND SeatLocation = '$field6' AND StudentID = '$stuNum'";
     
                 if (mysqli_query($connection, $sqlQuery)){
+                    $_SESSION["ticketNo"] = "";
                     $response = json_encode(array('type' => 'success', 'text' => 'Update successful')); //message to send back to client side
                     $_SESSION["editItem"] = "";
                     die($response);
@@ -40,13 +42,14 @@
             }
         } else {
             //check if user already has made a request
-            $weekCheck = mysqli_query($connection, "SELECT * FROM help_request WHERE StudentID IN (SELECT students.StudentID FROM students WHERE students.StudentID = '$stuNum')"); //checking if username already exists in db
+            $weekCheck = mysqli_query($connection, "SELECT * FROM help_request WHERE StudentID IN (SELECT students.StudentID FROM students WHERE students.StudentID = '$stuNum') AND active_check = \"TRUE\" "); //checking if username already exists in db
             if(mysqli_num_rows($weekCheck) != 0) {
                 $response = json_encode(array('type' => 'error', 'text' => 'You currently have an active request... Check table below...')); //message to send back to client side
                 die($response);
             }
             else {
-                $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6')");
+                $field7 = "TRUE";
+                $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7')");
                 if(!$sql) {
                     $output = "Error" . mysqli_error();
                     $response = json_encode(array('type' => 'error', 'text' => $output));

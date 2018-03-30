@@ -4,6 +4,7 @@
 
     $student = $_SESSION["studentNumber"];
     $_SESSION["editItem"] = "";
+    $_SESSION["ticketNo"] = "";
 
     if(isset($_POST['itemNum'])){
 
@@ -18,6 +19,7 @@
 
             while($row = mysqli_fetch_assoc($sql)){
                 $_SESSION["editItem"] = "true"; // session used to check if user is editting a request
+                $_SESSION["ticketNo"] = $itemID;
                 $response = json_encode(array('type' => 'success', 'week' => $row['SubWeek'], 'task' => $row['TaskNo'], 'psev' => $row['ProblemSeverity'], 'time' => $row['TimeAllocation'], 'desc' => $row['bDesc'], 'seat' => $row['SeatLocation'])); //message to send back to client side
                 die($response);
             }
