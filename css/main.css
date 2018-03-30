@@ -81,3 +81,8 @@
         margin-right: 5px;
     }
 }
+
+.missing {
+    color: red;
+    font-weight: bold;
+}

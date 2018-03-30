@@ -1,5 +1,8 @@
 $(function () { //waits for page to load before js function works
 
+    var seconds = 5; 
+    setInterval(function() {$("#studentTab").load('main.php #studentTab'); }, seconds*1000)
+
     //function submits help request data
     $('#helpForm').on('submit', function(e) {
 
@@ -118,4 +121,8 @@ function editItem(objButton) {
             console.log(textStatus, errorThrown);
         }
     });
+}
+
+function helpStudent(objButton) {
+    alert("YO");
 }
