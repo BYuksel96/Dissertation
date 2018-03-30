@@ -41,6 +41,7 @@
                 die($response);
             }
         } else {
+
             //check if user already has made a request
             $weekCheck = mysqli_query($connection, "SELECT * FROM help_request WHERE StudentID IN (SELECT students.StudentID FROM students WHERE students.StudentID = '$stuNum') AND active_check = \"TRUE\" "); //checking if username already exists in db
             if(mysqli_num_rows($weekCheck) != 0) {
@@ -48,15 +49,21 @@
                 die($response);
             }
             else {
-                $field7 = "TRUE";
-                $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7')");
-                if(!$sql) {
-                    $output = "Error" . mysqli_error();
-                    $response = json_encode(array('type' => 'error', 'text' => $output));
-                    die($response);
-                }
-                else {
-                    $response = json_encode(array('type' => 'success', 'text' => 'Success: You are now in the queue!'));
+                $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6'");
+                if(mysqli_num_rows($seatCheck) == "0") {
+                    $field7 = "TRUE";
+                    $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7')");
+                    if(!$sql) {
+                        $output = "Error" . mysqli_error();
+                        $response = json_encode(array('type' => 'error', 'text' => $output));
+                        die($response);
+                    }
+                    else {
+                        $response = json_encode(array('type' => 'success', 'text' => 'Success: You are now in the queue!'));
+                        die($response);
+                    }
+                } else {
+                    $response = json_encode(array('type' => 'error', 'text' => 'Cannot carry out this action as that seat is taken')); //message to send back to client side
                     die($response);
                 }
             }

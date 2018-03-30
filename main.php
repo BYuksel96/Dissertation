@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div id="studentTab" class="container">
+        <div id="studentTab" class="container table-responsive">
             <!-- Now need to display the table for students -->
             <?php 
             
@@ -72,7 +72,7 @@
                     $count = 1;
                     $studentID = $_SESSION["studentNumber"];
 
-                    echo "<table class=\"table table-striped\" style=\"text-align:center;\">";
+                    echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                     echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th> </tr>";
                     
 
@@ -105,7 +105,7 @@
                     $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE active_check = \"TRUE\" ORDER BY TicketNo ASC") or die (mysqli_error());
                     $count = 1;
 
-                    echo "<table class=\"table table-striped\" style=\"text-align:center;\">";
+                    echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                     echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Submission Week</th> <th scope=\"col\">Task Number</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                     
 
