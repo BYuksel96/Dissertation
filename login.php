@@ -21,7 +21,7 @@
     </head>
 
     <body class="container-fluid">
-    <div class="login">
+        <div class="login">
             <div class="student">
                 <a href="" class="active" id="student-form">Student</a>
             </div>
@@ -39,11 +39,11 @@
                     </div>
                     
                     <div class="form-group">
-                        <input type="text" placeholder="Enter Student Number" name="stuNum" id="stuNum" class="form-control" required>
+                        <input type="text" placeholder="Enter Student Number" pattern="([A-Za-z]{1})([0-9]{6,})" title="Enter your i or s number" name="stuNum" id="stuNum" class="form-control" required>
                     </div>
                     <p id="msg-response-stu" style="color: red; font-size: 10pt;"></p>
-                    <button type="submit" class="btn btn-success">Login</button>
-                    <button type="button" class="btn btn-info">Further Info</button>
+                    <button type="submit" class="btn btn-success bttn">Login</button>
+                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#studentModal">Further Info</button>
                     
                     <hr>
 
@@ -63,13 +63,62 @@
                     </div>
 
                     <p id="msg-response" style="color: red; font-size: 10pt;"></p>
-                    <button type="submit" class="btn btn-success">Login</button>
-                    <button type="button" class="btn btn-info">Further Info</button>
+                    <button type="submit" class="btn btn-success bttn">Login</button>
+                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#demonModal">Further Info</button>
 
                     <hr>
 
                 </div>
             </form>
         </div>
+
+        <div class="modal fade" id="studentModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">System Info</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" style="border:none; width:100%; height:25%;"></iframe>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="demonModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">System Info</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        Insert video here...
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
