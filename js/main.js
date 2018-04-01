@@ -1,7 +1,7 @@
 $(function () { //waits for page to load before js function works
 
     var seconds = 5; 
-    setInterval(function() {$("#studentTable").load('main.php #studentTab'); }, seconds*1000)
+    setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000)
 
     //function submits help request data
     $('#helpForm').on('submit', function(e) {
@@ -18,13 +18,13 @@ $(function () { //waits for page to load before js function works
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
                     alert(data.text);
-                    $("#studentTab").load('main.php #studentTab');
+                    $("#studentTable").load('main.php #studentTable');
                 }
                 else{ //if request is successful the form is reset and then closed
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
                     alert(data.text);
-                    $("#studentTab").load('main.php #studentTab');
+                    $("#studentTable").load('main.php #studentTable');
                     //may want a better way of dealing with this... maybe another modal box to say account is created just some suggestion
                 }
             },
@@ -78,11 +78,11 @@ function deleteItem(objButton) {
         success : function (data) { 
             if(data.type == 'error'){
                 alert(data.text);
-                $("#studentTab").load('main.php #studentTab');
+                $("#studentTable").load('main.php #studentTable');
             }
             else{ //if request is successful the form is reset and then closed
                 alert(data.text); 
-                $("#studentTab").load('main.php #studentTab');
+                $("#studentTable").load('main.php #studentTable');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -124,5 +124,26 @@ function editItem(objButton) {
 }
 
 function helpStudent(objButton) {
-    alert("YO");
+    var x = objButton.value;
+
+    $.ajax({
+        type: 'POST', //get or post? this time we want to post data to the php file
+        url: 'acceptRequest.php', //php file we send the data to
+        dataType: 'json',
+        data: { itemNum : x },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#studentTable").load('main.php #studentTable');
+                alert(data.text);
+            }
+            else{
+                $("#studentTable").load('main.php #studentTable');
+                alert(data.text);
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
 }
