@@ -11,9 +11,9 @@
         header("location:login.php");
     }
     else {
-        session_destroy();
         $studentNum = $_SESSION["studentNumber"];
         $result = mysqli_query($connection, "DELETE FROM students WHERE StudentID = '$studentNum'");
+        session_destroy();
         header("location:login.php");
     }
 ?>
