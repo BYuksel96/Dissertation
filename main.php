@@ -63,11 +63,11 @@
         </div>
 
         <div id="studentTab" class="container table-responsive">
-            <!-- Now need to display the table for students -->
+            
             <?php 
             
                 if ($_SESSION["accType"] == "student") {
-                    
+                    // Displaying the student table
                     $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE active_check = \"TRUE\" ORDER BY TicketNo ASC") or die (mysqli_error());
                     $count = 1;
                     $studentID = $_SESSION["studentNumber"];
@@ -101,7 +101,7 @@
                 }
 
                 if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) {
-                    
+                    // Displaying the demonstrators table
                     $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE active_check = \"TRUE\" ORDER BY TicketNo ASC") or die (mysqli_error());
                     $count = 1;
 
