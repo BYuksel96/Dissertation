@@ -17,13 +17,15 @@ $(function () { //waits for page to load before js function works
                 if(data.type == 'error'){ //if there is an issue with the form being sent it is reset and an appropriate error message is displayed
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
-                    alert(data.text);
+                    $('#modalText').text(data.text);
+                    $('#responseModal').modal('show');
                     $("#studentTable").load('main.php #studentTable');
                 }
                 else{ //if request is successful the form is reset and then closed
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
-                    alert(data.text);
+                    $('#modalText').text(data.text);
+                    $('#responseModal').modal('show');
                     $("#studentTable").load('main.php #studentTable');
                     //may want a better way of dealing with this... maybe another modal box to say account is created just some suggestion
                 }
@@ -77,11 +79,13 @@ function deleteItem(objButton) {
         data: { itemNum : x },
         success : function (data) { 
             if(data.type == 'error'){
-                alert(data.text);
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
                 $("#studentTable").load('main.php #studentTable');
             }
             else{ //if request is successful the form is reset and then closed
-                alert(data.text); 
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
                 $("#studentTable").load('main.php #studentTable');
             }
         },
@@ -134,11 +138,13 @@ function helpStudent(objButton) {
         success : function (data) { 
             if(data.type == 'success'){
                 $("#studentTable").load('main.php #studentTable');
-                alert(data.text);
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
             }
             else{
                 $("#studentTable").load('main.php #studentTable');
-                alert(data.text);
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
