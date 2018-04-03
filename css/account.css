@@ -80,3 +80,14 @@ button:hover {
     left:50%;
     transform: translate(-50%, 15%);
 }
+
+#submitPsw { 
+    width: 50%;
+    min-width: 175px;
+    cursor: pointer;
+    opacity: 0.9;
+    border: none;
+    position:relative;
+    left:50%;
+    transform: translate(-50%, 15%);
+}
