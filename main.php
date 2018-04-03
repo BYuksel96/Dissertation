@@ -73,7 +73,7 @@
                     $studentID = $_SESSION["studentNumber"];
 
                     echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                    echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th> </tr>";
+                    echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th> </tr>";
                     
 
                     while($row = mysqli_fetch_array($result)){
@@ -106,7 +106,7 @@
                     $count = 1;
 
                     echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                    echo "<tr> <th scope=\"col\">Position in Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Submission Week</th> <th scope=\"col\">Task Number</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
+                    echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Submission Week</th> <th scope=\"col\">Task Number</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                     
 
                     while($row = mysqli_fetch_array($result)){
@@ -211,5 +211,23 @@
                 </div>
             </div>
         <?php } ?>
+
+        <div class="modal fade" id="responseModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">System Info</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div id="modalText" class="modal-body"></div>
+
+                </div>
+            </div>
+        </div>
+
     </body>
 </html>
