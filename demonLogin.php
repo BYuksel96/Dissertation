@@ -33,7 +33,7 @@ if (isset($_POST['uname'])){
                 die($response);
             }
             else { //if password is incorrect error message is sent back and displayed to the client
-                $output = "Incorrect password for this account";
+                $output = "Incorrect User Details";
                 $response = json_encode(array('type' => 'error', 'text' => $output));
                 die($response);
             }
