@@ -49,7 +49,7 @@
                 die($response);
             }
             else {
-                $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6'");
+                $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6' AND active_check = \"TRUE\"");
                 if(mysqli_num_rows($seatCheck) == "0") {
                     $field7 = "TRUE";
                     $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7')");
