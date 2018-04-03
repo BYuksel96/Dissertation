@@ -17,13 +17,13 @@
         $sqlQueryStuNum = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID'"); //fidning student number associated with the ticket number
         $resultStuID = mysqli_fetch_assoc($sqlQueryStuNum); //fetching the result
         if (!$sqlQueryStuNum) {
-            $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue'));
+            $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue. Or another demonstrator is already attending to this student.'));
             die($response);
         }else{
             $demonID = $resultDemID["ID"];
             $stuID = $resultStuID["StudentID"];
             if ($stuID == ""){
-                $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue'));
+                $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue. Or another demonstrator is already attending to this student.'));
                 die($response);
             } else {
                 $sqlInsert = mysqli_query($connection, "INSERT INTO help_completed(users_id, student_id, ticket_no) VALUES ('$demonID','$stuID','$itemID')");
@@ -47,7 +47,7 @@
             }
         }
     }else{
-        $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue'));
+        $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue. Or another demonstrator is already attending to this student.'));
         die($response);
     }
     mysqli_close($connection);
