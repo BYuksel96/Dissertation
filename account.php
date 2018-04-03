@@ -27,6 +27,7 @@
 
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="nav navbar-nav ml-auto">
+                <li><a class="nav-link" href="main.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
@@ -51,21 +52,25 @@
                 <div id="collapseTwo" class="collapse">
                     <form id="changePSW" class="card-body" name="changePSW">
                         <div class="container-fluid">
-                            <p>The form below is where you can supply the data you expect students to fill out before they make a help request.</p>
+                            <p>If you wish to change your password, you can do so here. Simply fill out the required fields and press the change password button once you are done.</p>
+                            <p style="color:red;">* Required fields</p>
                             <hr class="formHR">
 
                             <div class="form-group">
-                                <label for="weekSub"><b>Enter week submission # or enter specific help request data (i.e. Exam Question):</b></label>
-                                <input type="text" placeholder="Enter data here" name="weekSub" id="weekSub" class="form-control" required>
+                                <input type="password" placeholder="Enter your current password *" name="oldpsw" id="oldpsw" class="form-control" required>
+                                <p id="msg-responsepsw" style="font-size: 10pt;"></p>
                             </div>
                             
                             <div class="form-group">
-                                <label for="taskNum"><b>Enter the max task number or enter specific help request data (i.e. Exam Question):</b></label>
-                                <input type="password" placeholder="Enter Password" name="taskNum" id="taskNum" class="form-control" required>
+                                <input type="password" placeholder="Enter New Password *" name="new" id="new" class="form-control" required>
                             </div>
 
-                            <p id="msg-response3" style="color: green; font-size: 10pt;"></p>
-                            <button type="submit" id="submitButton" class="btn btn-success">Add data</button>
+                            <div class="form-group">
+                                <input type="password" placeholder="Confirm Password *" name="repeat" id="repeat" class="form-control" required>
+                            </div>
+
+                            <p id="msg-response3" style="font-size: 10pt;"></p>
+                            <button type="submit" id="submitPsw" class="btn btn-success">Change Password</button>
 
                         </div>
                     </form>
