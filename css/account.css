@@ -91,3 +91,8 @@ button:hover {
     left:50%;
     transform: translate(-50%, 15%);
 }
+
+#collapseDelete {
+    max-height: 45%;
+    overflow-y: scroll;
+}
