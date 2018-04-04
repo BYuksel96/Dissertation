@@ -123,6 +123,35 @@
 
                 <div class="card">
                     <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseDelete">Delete Helper Account</a>
+                    </div>
+                    <div id="collapseDelete" class="collapse pt">
+                        <p id="msg-response-delete" style="font-size: 10pt;"></p>
+                        <!-- display users table and delete button -->
+                        <?php
+                            $result = mysqli_query($connection, "SELECT * FROM `users` WHERE 1") or die (mysqli_error());
+                            echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                            echo "<tr> <th scope=\"col\">Username</th> <th scope=\"col\"></th> </tr>";
+
+                            while($row = mysqli_fetch_array($result)){
+
+                                echo "<tr>";
+                                echo '<td>' . $row['Username'] . '</td>';
+                                echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['ID'] . ' onclick="deleteAccount(this)">Remove Helper</button></td>';
+                                echo "</tr>";
+        
+                            }
+        
+                            echo "</table>";
+                        ?>
+
+                    </div>
+                </div>
+
+                <div class="gap"></div>
+
+                <div class="card">
+                    <div class="card-header">
                         <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Help Request Data</a>
                     </div>
                     <div id="collapseFour" class="collapse">
@@ -148,14 +177,6 @@
                         </form>
                     </div>
                 </div>
-
-                <!-- still to do:
-                    - need to create a table of demonstrator accounts (need to be able to delete the account)
-                    - need to create a table of students currently logged in the system. need to be able to terminate that session remotely (when deleting them from the database: answer 2 logic is the one to use on this link: https://stackoverflow.com/questions/5443355/remotely-destroy-a-session-in-php-user-logs-in-somewhere-else)
-                    - work on change password function
-                    - work on acc info section
-                    - maybe also consider another help request data section in which you can type instead of writing week and task numbers (so specific content like: "PAST PAPER 2015" then "Question 1")
-                 -->
 
             <?php } ?>
         </div>
