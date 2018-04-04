@@ -1,7 +1,7 @@
 <?php
     include('connection.php');
     session_start();
-	if(isset($_SESSION['accName']) || isset($_SESSION['studentNumber'])){
+	if(isset($_SESSION['demonstrator']) || isset($_SESSION['studentNumber'])){
 		header("location:main.php");
 	}
 ?>
