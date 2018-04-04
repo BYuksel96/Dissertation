@@ -37,9 +37,11 @@
         <div id="accordion">
 
             <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Account Info</a>
-                </div>
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                    <div class="card-header">
+                        Account Info
+                    </div>
+                </a>
                 <div id="collapseOne" class="collapse">
                     <p>account info goes here - to be done<p>
                 </div>
@@ -48,9 +50,11 @@
             <div class="gap"></div>
 
             <div class="card">
-                <div class="card-header">
-                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Change Password</a>
-                </div>
+                <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                    <div class="card-header">
+                        Change Password
+                    </div>
+                </a>
                 <div id="collapseTwo" class="collapse">
                     <form id="changePSW" class="card-body" name="changePSW">
                         <div class="container-fluid">
@@ -84,9 +88,11 @@
             <?php if ($_SESSION["accType"] == "admin") { ?>
 
                 <div class="card">
-                    <div class="card-header">
-                        <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Create Account</a>
-                    </div>
+                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <div class="card-header">
+                            Create Account
+                        </div>
+                    </a>
                     <div id="collapseThree" class="collapse">
                         <form id="crtAcc" class="class-body" name="crtAcc">
                             <div class="container-fluid">
@@ -122,14 +128,16 @@
                 <div class="gap"></div>
 
                 <div class="card">
-                    <div class="card-header">
-                        <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseDelete">Delete Helper Account</a>
-                    </div>
-                    <div id="collapseDelete" class="collapse pt">
+                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseDelete">
+                        <div class="card-header">
+                            Delete Helper Account
+                        </div>
+                    </a>
+                    <div id="collapseDelete" class="collapse">
                         <p id="msg-response-delete" style="font-size: 10pt;"></p>
                         <!-- display users table and delete button -->
                         <?php
-                            $result = mysqli_query($connection, "SELECT * FROM `users` WHERE 1") or die (mysqli_error());
+                            $result = mysqli_query($connection, "SELECT * FROM users WHERE 1") or die (mysqli_error());
                             echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                             echo "<tr> <th scope=\"col\">Username</th> <th scope=\"col\"></th> </tr>";
 
@@ -151,9 +159,44 @@
                 <div class="gap"></div>
 
                 <div class="card">
-                    <div class="card-header">
-                        <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Help Request Data</a>
+                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseStudents">
+                        <div class="card-header">
+                            Students Active In System
+                        </div>
+                    </a>
+                    <div id="collapseStudents" class="collapse">
+
+                        <p id="msg-response-logout" style="font-size: 10pt;"></p>
+                        
+                        <?php
+                            $result = mysqli_query($connection, "SELECT * FROM students WHERE 1") or die (mysqli_error());
+                            echo "<table id=\"loginTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                            echo "<tr> <th scope=\"col\">Student Number</th> <th scope=\"col\">Student Number</th> <th scope=\"col\"></th> </tr>";
+
+                            while($row = mysqli_fetch_array($result)){
+
+                                echo "<tr>";
+                                echo '<td>' . $row['StudentID'] . '</td>';
+                                echo '<td>' . $row['studentname'] . '</td>';
+                                echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['StudentID'] . ' onclick="manualLogout(this)">Logout Student</button></td>';
+                                echo "</tr>";
+        
+                            }
+        
+                            echo "</table>";
+                        ?>
+
                     </div>
+                </div>
+
+                <div class="gap"></div>
+
+                <div class="card">
+                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <div class="card-header">
+                            Help Request Data
+                        </div>
+                    </a>
                     <div id="collapseFour" class="collapse">
                         <form id="addData" class="card-body" name="addData">
                             <div class="container-fluid">
