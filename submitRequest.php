@@ -41,7 +41,6 @@
                 die($response);
             }
         } else {
-
             //check if user already has made a request
             $weekCheck = mysqli_query($connection, "SELECT * FROM help_request WHERE StudentID IN (SELECT students.StudentID FROM students WHERE students.StudentID = '$stuNum') AND active_check = \"TRUE\" "); //checking if username already exists in db
             if(mysqli_num_rows($weekCheck) != 0) {
@@ -52,7 +51,8 @@
                 $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6' AND active_check = \"TRUE\"");
                 if(mysqli_num_rows($seatCheck) == "0") {
                     $field7 = "TRUE";
-                    $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7')");
+                    $time = "00:00:00";
+                    $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check, TimeOfRequest, TimeOfHelp) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7',NOW(),'$time')");
                     if(!$sql) {
                         $output = "Error" . mysqli_error();
                         $response = json_encode(array('type' => 'error', 'text' => $output));
