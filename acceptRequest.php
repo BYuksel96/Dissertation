@@ -34,7 +34,7 @@
                 }
                 else {
                     //change active check to false
-                    $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"FALSE\" WHERE TicketNo = '$itemID'");
+                    $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"FALSE\", TimeOfHelp = NOW() WHERE TicketNo = '$itemID'");
                     if(!$changeState) {
                         $output = "Error" . mysqli_error();
                         $response = json_encode(array('type' => 'error', 'text' => $output));
