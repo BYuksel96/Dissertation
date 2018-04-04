@@ -10,7 +10,7 @@ $(function () { //waits for page to load before js function works
             dataType: 'json',
             data: $('#crtAcc').serialize(), //takes contents of the form
             success : function (data) { 
-                if(data.type == 'error'){ //if username exists or there is a sql error then this an error message will be displayed
+                if(data.type == 'error'){ //if username exists or there is a sql error then the error message will be displayed
                     $("#crtAcc")[0].reset();
                     $("#msg-response").css("color", "red");
                     document.getElementById("msg-response").innerHTML=data.text;
@@ -19,6 +19,7 @@ $(function () { //waits for page to load before js function works
                     $("#crtAcc")[0].reset();
                     $("#msg-response").css("color", "green");
                     document.getElementById("msg-response").innerHTML=data.text;
+                    $("#demonTable").load('account.php #demonTable');
                 }
             }
         });
@@ -79,3 +80,31 @@ $(function () { //waits for page to load before js function works
         });
     });
 });
+
+function deleteAccount(objButton) {
+
+    var userID = objButton.value;
+
+    $.ajax({
+        type: 'POST', //get or post? this time we want to post data to the php file
+        url: 'deleteUser.php', //php file we send the data to
+        dataType: 'json',
+        data: { user : userID },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#demonTable").load('account.php #demonTable');
+                $("#msg-response-delete").css("color", "green");
+                document.getElementById("msg-response-delete").innerHTML=data.text;
+            }
+            else{
+                $("#demonTable").load('account.php #demonTable');
+                $("#msg-response-delete").css("color", "red");
+                document.getElementById("msg-response-delete").innerHTML=data.text;
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
