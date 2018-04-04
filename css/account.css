@@ -96,3 +96,8 @@ button:hover {
     max-height: 45%;
     overflow-y: scroll;
 }
+
+#collapseStudents {
+    max-height: 65%;
+    overflow-y: scroll;
+}
