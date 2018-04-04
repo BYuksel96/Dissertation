@@ -1,4 +1,8 @@
 $(function () { //waits for page to load before js function works
+
+    var seconds = 5; 
+    setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000)
+
     //function below posts form data to createAcc.php
     $('#crtAcc').on('submit', function(e) { //function is called when create account button is pressed
 
@@ -100,6 +104,34 @@ function deleteAccount(objButton) {
                 $("#demonTable").load('account.php #demonTable');
                 $("#msg-response-delete").css("color", "red");
                 document.getElementById("msg-response-delete").innerHTML=data.text;
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
+
+function manualLogout(objButton) {
+
+    var studentID = objButton.value;
+
+    $.ajax({
+        type: 'POST', //get or post? this time we want to post data to the php file
+        url: 'manualLogout.php', //php file we send the data to
+        dataType: 'json',
+        data: { id : studentID },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#loginTable").load('account.php #loginTable');
+                $("#msg-response-logout").css("color", "green");
+                document.getElementById("msg-response-logout").innerHTML=data.text;
+            }
+            else{
+                $("#loginTable").load('account.php #loginTable');
+                $("#msg-response-logout").css("color", "red");
+                document.getElementById("msg-response-logout").innerHTML=data.text;
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
