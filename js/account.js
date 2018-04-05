@@ -1,7 +1,8 @@
 $(function () { //waits for page to load before js function works
 
     var seconds = 5; 
-    setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000)
+    setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000) //refresh login table every 5 seconds
+    setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000) //refresh help completed table every 5 seconds
 
     //function below posts form data to createAcc.php
     $('#crtAcc').on('submit', function(e) { //function is called when create account button is pressed
@@ -25,6 +26,10 @@ $(function () { //waits for page to load before js function works
                     document.getElementById("msg-response").innerHTML=data.text;
                     $("#demonTable").load('account.php #demonTable');
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
             }
         });
     });
@@ -49,6 +54,10 @@ $(function () { //waits for page to load before js function works
                     $("#msg-response2").css("color", "green");
                     document.getElementById("msg-response2").innerHTML=data.text;
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
             }
         });
     });
@@ -80,9 +89,38 @@ $(function () { //waits for page to load before js function works
                     $("#msg-response3").css("color", "green");
                     document.getElementById("msg-response3").innerHTML=data.text;
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
             }
         });
     });
+
+    // fputcsv - use this function to add contents of completed table into a csv. Simple create a new file for this work (completedTable2CSV.php). Use query on account.php, acquire data, use for loop and output into the csv
+    $('#tab2CSV').on('click', function(e) {
+        
+        e.preventDefault(); //prevents page from opening
+
+        $.ajax({
+            url: 'tableToCSV.php', //php we send the data to
+            dataType: 'json',
+            success : function (data) { 
+                if(data.type == 'success'){
+                    alert(data.text);
+                }
+                else{
+                    alert(data.text);
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
+            }
+        });
+
+    });
+    
 });
 
 function deleteAccount(objButton) {

@@ -171,7 +171,7 @@
                         <?php
                             $result = mysqli_query($connection, "SELECT * FROM students WHERE 1") or die (mysqli_error());
                             echo "<table id=\"loginTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                            echo "<tr> <th scope=\"col\">Student Number</th> <th scope=\"col\">Student Number</th> <th scope=\"col\"></th> </tr>";
+                            echo "<tr> <th scope=\"col\">Student Number</th> <th scope=\"col\">Student Name</th> <th scope=\"col\"></th> </tr>";
 
                             while($row = mysqli_fetch_array($result)){
 
@@ -179,6 +179,47 @@
                                 echo '<td>' . $row['StudentID'] . '</td>';
                                 echo '<td>' . $row['studentname'] . '</td>';
                                 echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['StudentID'] . ' onclick="manualLogout(this)">Logout Student</button></td>';
+                                echo "</tr>";
+        
+                            }
+        
+                            echo "</table>";
+                        ?>
+
+                    </div>
+                </div>
+
+                <div class="gap"></div>
+
+                <div class="card">
+                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseCompleted">
+                        <div class="card-header">
+                            Completed Requests
+                        </div>
+                    </a>
+                    <div id="collapseCompleted" class="collapse table-responsive">
+                        <!-- <button type="submit" class="btn btn-success bttn">Reset System</button> -->
+                        <button id="tab2CSV" class="btn btn-warning">Download to CSV</button>
+                        <?php
+                            //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
+                            $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
+                            echo "<table id=\"completedTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                            echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> </tr>";
+                        
+                            while($row = mysqli_fetch_array($result)){
+
+                                echo "<tr>";
+                                echo '<td>' . $row['Username'] . '</td>';
+                                echo '<td>' . $row['student_id'] . '</td>';
+                                echo '<td>' . $row['ticket_no'] . '</td>';
+                                echo '<td>' . $row['SubWeek'] . '</td>';
+                                echo '<td>' . $row['TaskNo'] . '</td>';
+                                echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                                echo '<td>' . $row['TimeAllocation'] . '</td>';
+                                echo '<td>' . $row['bDesc'] . '</td>';
+                                echo '<td>' . $row['SeatLocation'] . '</td>';
+                                echo '<td>' . $row['TimeOfRequest'] . '</td>';
+                                echo '<td>' . $row['TimeOfHelp'] . '</td>';
                                 echo "</tr>";
         
                             }

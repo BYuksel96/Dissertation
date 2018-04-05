@@ -4,7 +4,7 @@
 }
 
 .center {
-    width: 50%;
+    width: 66%;
     height: 75%;
     min-width: 250px; /* May need to adjust this depending on final outcome of seating system layout */
     left:50%;
@@ -12,6 +12,8 @@
     position:relative;
     border: 1px solid;
 }
+
+
 
 .desk { /* creating the table - in this case it is circular */
     position: relative;

@@ -3,9 +3,14 @@
     left: 50%;
     position: absolute;
     width: 35%;
-    min-width: 250px;
     height: 40%;
     transform: translate(-50%, -50%);
+}
+
+@media (max-width: 978px) {
+    .login {
+        width: 75%;
+    }
 }
 
 .bttn {

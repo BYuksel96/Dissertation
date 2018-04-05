@@ -7,6 +7,12 @@
     position:relative;
 }
 
+@media (max-width: 978px) {
+    #accordion {
+        width: 75%;
+    }
+}
+
 .gap {
     padding-top: 2.5%;
 }
@@ -98,6 +104,11 @@ button:hover {
 }
 
 #collapseStudents {
+    max-height: 65%;
+    overflow-y: scroll;
+}
+
+#collapseCompleted {
     max-height: 65%;
     overflow-y: scroll;
 }
