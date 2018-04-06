@@ -6,7 +6,6 @@ session_start();
 if (isset($_POST['uname'])){
 
     $output = ""; //declaring the variable
-    $_SESSION["accType"] = "";
     
     $uName = mysqli_real_escape_string($connection, $_POST['uname']);
     $psw = mysqli_real_escape_string($connection, $_POST['upsw']);

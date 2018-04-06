@@ -96,30 +96,6 @@ $(function () { //waits for page to load before js function works
             }
         });
     });
-
-    // fputcsv - use this function to add contents of completed table into a csv. Simple create a new file for this work (completedTable2CSV.php). Use query on account.php, acquire data, use for loop and output into the csv
-    $('#tab2CSV').on('click', function(e) {
-        
-        e.preventDefault(); //prevents page from opening
-
-        $.ajax({
-            url: 'tableToCSV.php', //php we send the data to
-            dataType: 'json',
-            success : function (data) { 
-                if(data.type == 'success'){
-                    alert(data.text);
-                }
-                else{
-                    alert(data.text);
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                console.log(textStatus, errorThrown);
-            }
-        });
-
-    });
     
 });
 
