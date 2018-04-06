@@ -112,3 +112,13 @@ button:hover {
     max-height: 65%;
     overflow-y: scroll;
 }
+
+#reset {
+    display: inline-block;
+    width:49.5%;
+}
+
+#tab2CSV {
+    display: inline-block;
+    width:49.5%;
+}

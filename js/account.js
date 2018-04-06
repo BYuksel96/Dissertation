@@ -96,6 +96,32 @@ $(function () { //waits for page to load before js function works
             }
         });
     });
+
+    $('#reset').on('click', function(e) {
+        
+        e.preventDefault();
+
+        $.ajax({
+            url: 'reset.php',
+            dataType: 'json',
+            success : function (data) {
+                if(data.type == 'success'){
+                    $("#completedTable").load('account.php #completedTable');
+                    $('#modalText').text(data.text);
+                    $('#responseModal').modal('show');
+                } else {
+                    $("#completedTable").load('account.php #completedTable');
+                    $('#modalText').text(data.text);
+                    $('#responseModal').modal('show');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
+            }
+        });
+
+    });
     
 });
 

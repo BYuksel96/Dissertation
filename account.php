@@ -197,9 +197,10 @@
                             Completed Requests
                         </div>
                     </a>
-                    <div id="collapseCompleted" class="collapse table-responsive">
+                    <div id="collapseCompleted" class="collapse table-responsive" style="text-align:center;">
                         <!-- <button type="submit" class="btn btn-success bttn">Reset System</button> -->
-                        <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-warning">Download to CSV</button></a>
+                        <button id="reset" class="btn btn-info">Reset System</button>
+                        <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a>
                         <?php
                             //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
                             $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
@@ -263,6 +264,23 @@
                 </div>
 
             <?php } ?>
+        </div>
+
+        <div class="modal fade" id="responseModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">System Info</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div id="modalText" class="modal-body"></div>
+
+                </div>
+            </div>
         </div>
     </body>
 </html>
