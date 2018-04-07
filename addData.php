@@ -8,6 +8,7 @@
         $field2 = mysqli_real_escape_string($connection, $_POST['subcat']);
 
         $field2 = str_replace(', ', ',', $field2);
+        $field2 = str_replace(' ,', ',', $field2);
 
         //check if account name exists in database, if yes then prompt user
         $weekCheck = mysqli_query($connection, "SELECT * FROM help_data WHERE Category = '$field1'"); //checking if username already exists in db

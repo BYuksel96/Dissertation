@@ -48,11 +48,13 @@ $(function () { //waits for page to load before js function works
                     $("#addData")[0].reset();
                     $("#msg-response2").css("color", "red");
                     document.getElementById("msg-response2").innerHTML=data.text;
+                    $("#dataTable").load('account.php #dataTable');
                 }
                 else{ //if account is created successfully then a message will appear saying just that
                     $("#addData")[0].reset();
                     $("#msg-response2").css("color", "green");
                     document.getElementById("msg-response2").innerHTML=data.text;
+                    $("#dataTable").load('account.php #dataTable');
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -179,4 +181,62 @@ function manualLogout(objButton) {
             console.log(textStatus, errorThrown);
         }
     });
+}
+
+function resetData(objButton){
+
+    var resetTable = objButton.value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'rrData.php', // reset/remove data php file - data from button is sent their
+        dataType: 'json',
+        data: { reset : resetTable },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#dataTable").load('account.php #dataTable');
+                $("#msg-response-dataTbl").css("color", "green");
+                document.getElementById("msg-response-dataTbl").innerHTML=data.text;
+            }
+            else{
+                $("#dataTable").load('account.php #dataTable');
+                $("#msg-response-dataTbl").css("color", "green");
+                document.getElementById("msg-response-dataTbl").innerHTML=data.text;
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+
+}
+
+function removeData(objButton){
+
+    var remove = objButton.value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'rrData.php', // reset/remove data php file - data from button is sent their
+        dataType: 'json',
+        data: { id : remove },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#dataTable").load('account.php #dataTable');
+                $("#msg-response-dataTbl").css("color", "green");
+                document.getElementById("msg-response-dataTbl").innerHTML=data.text;
+            }
+            else{
+                $("#dataTable").load('account.php #dataTable');
+                $("#msg-response-dataTbl").css("color", "green");
+                document.getElementById("msg-response-dataTbl").innerHTML=data.text;
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+
 }

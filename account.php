@@ -277,13 +277,14 @@
                         <div class="card-body">
                             <div class="container-fluid">
                                 <p>Use the table below to completey reset or delete specific help request data which has been provided into the system.</p>
+                                <p id="msg-response-dataTbl" style="color: green; font-size: 10pt;"></p>
                                 <hr class="formHR">
 
                                 <?php
                                     //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
-                                    $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.ID") or die (mysqli_error());
+                                    $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.Category") or die (mysqli_error());
                                     echo "<table id=\"dataTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                                    echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\">Reset Data</button></th> </tr>";
+                                    echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
                                 
                                     while($row = mysqli_fetch_array($result)){
 
@@ -291,7 +292,7 @@
                                         echo '<td>' . $row['Username'] . '</td>';
                                         echo '<td>' . $row['Category'] . '</td>';
                                         echo '<td>' . $row['SubCat'] . '</td>';
-                                        echo '<td> <button id="tabButton" class="btn btn-danger" name="Remove Entry" value=' . $row['ID'] . ' onclick="">Remove This Entry</button> </td>';
+                                        echo '<td> <button id="tabButton" class="btn btn-danger" name="Remove Entry" value=' . $row['ID'] . ' onclick="removeData(this)">Remove This Entry</button> </td>';
                                         echo "</tr>";
                 
                                     }
