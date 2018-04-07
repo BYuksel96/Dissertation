@@ -42,7 +42,7 @@
                         Account Info
                     </div>
                 </a>
-                <div id="collapseOne" class="collapse">
+                <div id="collapseOne" class="collapse card-body">
                     <p>account info goes here - to be done<p>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                         </div>
                     </a>
                     <div id="collapseThree" class="collapse">
-                        <form id="crtAcc" class="class-body" name="crtAcc">
+                        <form id="crtAcc" class="card-body" name="crtAcc">
                             <div class="container-fluid">
                                 <p>Fill in the form below to create an account for a demonstrator</p>
                                 <hr class="formHR">
@@ -133,9 +133,10 @@
                             Delete Helper Account
                         </div>
                     </a>
-                    <div id="collapseDelete" class="collapse">
+                    <div id="collapseDelete" class="collapse card-body">
                         <p id="msg-response-delete" style="font-size: 10pt;"></p>
-                        <!-- display users table and delete button -->
+                        <hr class="formHR">
+                        
                         <?php
                             $result = mysqli_query($connection, "SELECT * FROM users WHERE 1") or die (mysqli_error());
                             echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">";
@@ -164,9 +165,10 @@
                             Students Active In System
                         </div>
                     </a>
-                    <div id="collapseStudents" class="collapse">
+                    <div id="collapseStudents" class="collapse card-body">
 
                         <p id="msg-response-logout" style="font-size: 10pt;"></p>
+                        <hr class="formHR">
                         
                         <?php
                             $result = mysqli_query($connection, "SELECT * FROM students WHERE 1") or die (mysqli_error());
@@ -197,10 +199,10 @@
                             Completed Requests
                         </div>
                     </a>
-                    <div id="collapseCompleted" class="collapse table-responsive" style="text-align:center;">
-                        <!-- <button type="submit" class="btn btn-success bttn">Reset System</button> -->
+                    <div id="collapseCompleted" class="collapse card-body table-responsive" style="text-align:center;">
                         <button id="reset" class="btn btn-info">Reset System</button>
                         <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a>
+                        <hr class="formHR">
                         <?php
                             //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
                             $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
@@ -242,17 +244,17 @@
                     <div id="collapseFour" class="collapse">
                         <form id="addData" class="card-body" name="addData">
                             <div class="container-fluid">
-                                <p>The form below is where you can supply the data you expect students to fill out before they make a help request.</p>
+                                <p>The form below is where you can supply the help request data that students use to fill out their forms.</p>
                                 <hr class="formHR">
 
                                 <div class="form-group">
-                                    <label for="weekSub"><b>Enter week submission #:</b></label>
-                                    <input type="number" pattern="\d+" placeholder="Enter data here" name="weekSub" id="weekSub" class="form-control" required>
+                                    <label for="category"><b>Enter Category Name:</b></label>
+                                    <input type="text" placeholder="Enter data here" name="category" id="category" class="form-control" required>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="taskNum"><b>Enter the max task number (i.e. if week 11 contains 5 tasks to complete, enter the number 5 below):</b></label>
-                                    <input type="number" pattern="\d+" placeholder="Enter data here" name="taskNum" id="taskNum" class="form-control" required>
+                                    <label for="subcat"><b>Enter All Sub Categories Sepreated With Commas: (Example: Task 1,Task 2,Task 3)</b></label>
+                                    <input type="text" placeholder="Enter data here" name="subcat" id="subcat" class="form-control" required>
                                 </div>
 
                                 <p id="msg-response2" style="color: green; font-size: 10pt;"></p>
@@ -260,6 +262,45 @@
 
                             </div>
                         </form>
+                    </div>
+                </div>
+
+                <div class="gap"></div>
+
+                <div class="card">
+                    <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseRoD">
+                        <div class="card-header">
+                            Reset Or Delete: Help Request Data
+                        </div>
+                    </a>
+                    <div id="collapseRoD" class="collapse table-responsive">
+                        <div class="card-body">
+                            <div class="container-fluid">
+                                <p>Use the table below to completey reset or delete specific help request data which has been provided into the system.</p>
+                                <hr class="formHR">
+
+                                <?php
+                                    //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
+                                    $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.ID") or die (mysqli_error());
+                                    echo "<table id=\"dataTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                                    echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\">Reset Data</button></th> </tr>";
+                                
+                                    while($row = mysqli_fetch_array($result)){
+
+                                        echo "<tr>";
+                                        echo '<td>' . $row['Username'] . '</td>';
+                                        echo '<td>' . $row['Category'] . '</td>';
+                                        echo '<td>' . $row['SubCat'] . '</td>';
+                                        echo '<td> <button id="tabButton" class="btn btn-danger" name="Remove Entry" value=' . $row['ID'] . ' onclick="">Remove This Entry</button> </td>';
+                                        echo "</tr>";
+                
+                                    }
+                
+                                    echo "</table>";
+                                ?>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
