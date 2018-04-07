@@ -1,18 +1,27 @@
 <?php
     include('connection.php');
 
-    if(isset($_POST['weekSub'])){
-        $field1 = mysqli_real_escape_string($connection, $_POST['weekSub']); 
-        $field2 = mysqli_real_escape_string($connection, $_POST['taskNum']);
+    session_start();
+
+    if(isset($_POST['category'])){
+        $field1 = mysqli_real_escape_string($connection, $_POST['category']); 
+        $field2 = mysqli_real_escape_string($connection, $_POST['subcat']);
+
+        $field2 = str_replace(', ', ',', $field2);
 
         //check if account name exists in database, if yes then prompt user
-        $weekCheck = mysqli_query($connection, "SELECT * FROM help_data WHERE week = '$field1'"); //checking if username already exists in db
+        $weekCheck = mysqli_query($connection, "SELECT * FROM help_data WHERE Category = '$field1'"); //checking if username already exists in db
         if(mysqli_num_rows($weekCheck) != 0) {
-            $response = json_encode(array('type' => 'error', 'text' => 'The week you entered already exists...')); //message to send back to client side
+            $response = json_encode(array('type' => 'error', 'text' => 'The data you provided is already in the system...')); //message to send back to client side
             die($response);
         }
         else {
-            $sql = mysqli_query($connection, "INSERT INTO help_data(week, task) VALUES ('$field1','$field2')");
+            $demName = $_SESSION["demonstrator"];
+            $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //fidning student number associated with the ticket number
+            $resultDemID = mysqli_fetch_assoc($sqlQueryID);
+            $demonID = $resultDemID["ID"];
+            $sql = mysqli_query($connection, "INSERT INTO help_data(Users_ID,Category,SubCat) VALUES ('$demonID','$field1','$field2')");
+
             if(!$sql) {
                 $output = "Error" . mysqli_error();
                 $response = json_encode(array('type' => 'error', 'text' => $output));
