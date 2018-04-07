@@ -164,8 +164,13 @@
                                 <div class="form-group">
                                     <label for="weekSub"><b>Choose the category you need help with:<b style="color: red">*</b></b></label>
                                     <select name="weekSub" id="weekSub" class="form-control" required>
-                                        <option value="11">Week 11</option>
-                                        <option value="12">Week 12</option>
+                                        <?php
+                                            echo '<option value="">Pick a category...</option>';
+                                            $sql = mysqli_query($connection, "SELECT * FROM help_data");
+                                            while ($row = mysqli_fetch_assoc($sql)){
+                                                echo '<option value="' . $row['Category'] . '">'. $row['Category'] .'</option>';
+                                            }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">

@@ -2,6 +2,13 @@ $(function () { //waits for page to load before js function works
 
     var seconds = 5; 
     setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000)
+    // setInterval(function() {alert(selected_option_value)}, seconds*1000);
+
+    $('#weekSub').on('change', function(){
+        var selected_option_value=$("#weekSub option:selected").val();
+        alert(selected_option_value);
+        // left to do - post this value to a php file, set session variable for what category has been using this data, then in main.php use a sql query to display the correct contents (will need a while loop to spereate the , - comma)
+    });
 
     //function submits help request data
     $('#helpForm').on('submit', function(e) {
