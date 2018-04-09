@@ -21,7 +21,7 @@ $(function () { //waits for page to load before js function works
                     $('#taskNo').empty(); // Need to clear previous options before appending more items as options in the select box
                     // For each item in the array display it as an option
                     $.each(options, function (i, option) { // This function acts as a for loop going through each item in the 'options' array (jQuery)
-                        $('#taskNo').append($('<option>').val(option).html(option)) // appending all items in the array to the option tag in the select menu
+                        $('#taskNo').append($('<option>').val(option).html(option)); // appending all items in the array to the option tag in the select menu
                     });
                 }
             },
@@ -44,6 +44,7 @@ $(function () { //waits for page to load before js function works
             data: $('#helpForm').serialize(), //takes contents of the form (using form id tag)
             success : function (data) { 
                 if(data.type == 'error'){ //if there is an issue with the form being sent it is reset and an appropriate error message is displayed
+                    $('#taskNo').empty();
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
                     $('#modalText').text(data.text);
@@ -51,6 +52,7 @@ $(function () { //waits for page to load before js function works
                     $("#studentTable").load('main.php #studentTable');
                 }
                 else{ //if request is successful the form is reset and then closed
+                    $('#taskNo').empty();
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
                     $('#modalText').text(data.text);
@@ -71,7 +73,7 @@ function addSeat(objButton) {
     $("#submitButton").html("Submit Request");
     $("#submitButton").removeClass("btn btn-warning");
     $("#submitButton").addClass("btn btn-success");
-    $.ajax({
+    $.ajax({ // function is used for two things, one is to set the edit sessions and also to enter the seat number of the student into the seatFill val
         url: 'edit.php',
         dataType: 'json',
         success : function (data) { 
@@ -136,7 +138,8 @@ function editItem(objButton) {
         success : function (data) { 
             if(data.type == 'success'){
                 $("#weekSub").val(data.week);
-                $("#taskNo").val(data.task);
+                $('#taskNo').append($('<option>').val(data.task).html(data.task));
+                // $("#taskNo").val(data.task);
                 $("#severity").val(data.psev);
                 $("#time").val(data.time);
                 $("#description").val(data.desc);
