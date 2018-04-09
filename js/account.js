@@ -1,8 +1,8 @@
 $(function () { //waits for page to load before js function works
 
     var seconds = 5; 
-    setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000) //refresh login table every 5 seconds
-    setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000) //refresh help completed table every 5 seconds
+    setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000); //refresh login table every 5 seconds
+    setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000); //refresh help completed table every 5 seconds
 
     //function below posts form data to createAcc.php
     $('#crtAcc').on('submit', function(e) { //function is called when create account button is pressed

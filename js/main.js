@@ -1,12 +1,10 @@
 $(function () { //waits for page to load before js function works
 
     var seconds = 5; 
-    setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000)
-    // setInterval(function() {alert(selected_option_value)}, seconds*1000);
+    setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000);
 
     $('#weekSub').on('change', function(e){
         var selected_option_value=$("#weekSub option:selected").val();
-        // alert(selected_option_value);
         
         e.preventDefault();
 
@@ -17,11 +15,14 @@ $(function () { //waits for page to load before js function works
             data: { option : selected_option_value },
             success : function (data) {
                 if (data.type == 'success'){
-                    // alert(data.text)
-                    $('#taskNo').html($('<option>', {
-                        value: data.text,
-                        text: data.text
-                    }));
+                    // converting data returned from server to an array
+                    var temp = data.text; // Temporarily storing the data returend by the server
+                    var options = temp.split(','); // Splitting the string into an array to display all the options that have been provided by the admin
+                    $('#taskNo').empty(); // Need to clear previous options before appending more items as options in the select box
+                    // For each item in the array display it as an option
+                    $.each(options, function (i, option) { // This function acts as a for loop going through each item in the 'options' array (jQuery)
+                        $('#taskNo').append($('<option>').val(option).html(option)) // appending all items in the array to the option tag in the select menu
+                    });
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -29,7 +30,6 @@ $(function () { //waits for page to load before js function works
                 console.log(textStatus, errorThrown);
             }
         });
-        // left to do - post this value to a php file, set session variable for what category has been using this data, then in main.php use a sql query to display the correct contents (will need a while loop to spereate the , - comma)
     });
 
     //function submits help request data
