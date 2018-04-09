@@ -176,8 +176,19 @@
                                 <div class="form-group">
                                     <label for="taskNo"><b>Choose the sub category:<b style="color: red">*</b></b></label>
                                     <select name="taskNo" id="taskNo" class="form-control" required>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
+                                        <?php
+                                            // echo '<option value="">Pick a sub-category...</option>';
+                                            // if (isset($_SESSION['option_selected'])){
+                                            //     $option = $_SESSION['option_selected'];
+                                            //     $sql = mysqli_query($connection, "SELECT * FROM help_data WHERE Category = '$option'");
+                                            //     while ($row = mysqli_fetch_assoc($sql)){
+                                            //         echo '<option value="' . $row['SubCat'] . '">'. $row['SubCat'] .'</option>';
+                                            //     }
+                                            //     // When form is submitted or edited, $_SESSION['option_selected'] needs to be destroyed
+                                            // } else {
+                                            //     echo '<option value="">Please pick a primary category first...</option>';
+                                            // }
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="form-group">

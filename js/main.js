@@ -4,9 +4,31 @@ $(function () { //waits for page to load before js function works
     setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000)
     // setInterval(function() {alert(selected_option_value)}, seconds*1000);
 
-    $('#weekSub').on('change', function(){
+    $('#weekSub').on('change', function(e){
         var selected_option_value=$("#weekSub option:selected").val();
-        alert(selected_option_value);
+        // alert(selected_option_value);
+        
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: 'optionSelected.php',
+            dataType: 'json',
+            data: { option : selected_option_value },
+            success : function (data) {
+                if (data.type == 'success'){
+                    // alert(data.text)
+                    $('#taskNo').html($('<option>', {
+                        value: data.text,
+                        text: data.text
+                    }));
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
+            }
+        });
         // left to do - post this value to a php file, set session variable for what category has been using this data, then in main.php use a sql query to display the correct contents (will need a while loop to spereate the , - comma)
     });
 
