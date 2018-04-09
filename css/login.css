@@ -2,12 +2,18 @@
     top: 50%;
     left: 50%;
     position: absolute;
-    width: 35%;
+    width: 45%;
     height: 40%;
     transform: translate(-50%, -50%);
 }
 
-@media (max-width: 978px) {
+@media (max-width: 1200px) {
+    .login {
+        width: 55%;
+    }
+}
+
+@media (max-width: 1000px) {
     .login {
         width: 75%;
     }
