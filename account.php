@@ -133,7 +133,7 @@
                             Delete Helper Account
                         </div>
                     </a>
-                    <div id="collapseDelete" class="collapse card-body">
+                    <div id="collapseDelete" class="collapse card-body table-responsive">
                         <p id="msg-response-delete" style="font-size: 10pt;"></p>
                         <hr class="formHR">
                         
@@ -165,7 +165,7 @@
                             Students Active In System
                         </div>
                     </a>
-                    <div id="collapseStudents" class="collapse card-body">
+                    <div id="collapseStudents" class="collapse card-body table-responsive">
 
                         <p id="msg-response-logout" style="font-size: 10pt;"></p>
                         <hr class="formHR">
