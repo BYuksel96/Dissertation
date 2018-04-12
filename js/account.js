@@ -4,19 +4,19 @@ $(function () { //waits for page to load before js function works
     setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000); //refresh login table every 5 seconds
     setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000); //refresh help completed table every 5 seconds
 
-    $('.card').on('shown.bs.collapse', function () {
+    $('.card').on('show.bs.collapse', function () {
         var down = '.fa-angle-down.' + $(this).data("value");
         var up = '.fa-angle-up.' + $(this).data("value");
         // alert(cls);
-        $(down).hide(1000);
-        $(up).show(1000);
+        $(down).hide(750);
+        $(up).show(750);
     });
 
-    $('.card').on('hidden.bs.collapse', function () {
+    $('.card').on('hide.bs.collapse', function () {
         var down = '.fa-angle-down.' + $(this).data("value");
         var up = '.fa-angle-up.' + $(this).data("value");
-        $(up).hide(1000);
-        $(down).show(1000);
+        $(up).hide(750);
+        $(down).show(750);
     });
 
     //function below posts form data to createAcc.php

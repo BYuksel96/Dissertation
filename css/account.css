@@ -13,6 +13,12 @@
     }
 }
 
+@media (max-width: 750px) {
+    #accordion {
+        width: 97.5%;
+    }
+}
+
 .gap {
     padding-top: 2.5%;
 }
@@ -123,7 +129,24 @@ button:hover {
     width:49.5%;
 }
 
+@media (max-width: 450px) {
+    #reset {
+        display:inline-block;
+        width:75%;
+    }
+    #tab2CSV {
+        display:inline-block;
+        width:75%;
+    }
+}
+
 #collapseRoD {
     max-height: 500px;
     overflow-y: scroll;
+}
+
+.tabWide {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
