@@ -36,10 +36,12 @@
 
         <div id="accordion">
 
-            <div class="card">
+            <div class="card" data-value="c1">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                     <div class="card-header">
                         Account Info
+                        <i class="fa fa-angle-down c1" id="down" style="font-size: 200%; position: relative; float: right;"></i>
+                        <i class="fa fa-angle-up c1" id="up" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                     </div>
                 </a>
                 <div id="collapseOne" class="collapse card-body">
@@ -49,10 +51,12 @@
 
             <div class="gap"></div>
 
-            <div class="card">
+            <div class="card" data-value="c2">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                     <div class="card-header">
                         Change Password
+                        <i class="fa fa-angle-down c2" style="font-size: 200%; position: relative; float: right;"></i>
+                        <i class="fa fa-angle-up c2" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                     </div>
                 </a>
                 <div id="collapseTwo" class="collapse">
@@ -87,10 +91,12 @@
 
             <?php if ($_SESSION["accType"] == "admin") { ?>
 
-                <div class="card">
+                <div class="card" data-value="c3">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         <div class="card-header">
                             Create Account
+                            <i class="fa fa-angle-down c3" style="font-size: 200%; position: relative; float: right;"></i>
+                            <i class="fa fa-angle-up c3" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
                     <div id="collapseThree" class="collapse">
@@ -127,10 +133,12 @@
 
                 <div class="gap"></div>
 
-                <div class="card">
+                <div class="card" data-value="c4">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseDelete">
                         <div class="card-header">
                             Delete Helper Account
+                            <i class="fa fa-angle-down c4" style="font-size: 200%; position: relative; float: right;"></i>
+                            <i class="fa fa-angle-up c4" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
                     <div id="collapseDelete" class="collapse card-body table-responsive">
@@ -159,10 +167,12 @@
 
                 <div class="gap"></div>
 
-                <div class="card">
+                <div class="card" data-value="c5">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseStudents">
                         <div class="card-header">
                             Students Active In System
+                            <i class="fa fa-angle-down c5" style="font-size: 200%; position: relative; float: right;"></i>
+                            <i class="fa fa-angle-up c5" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
                     <div id="collapseStudents" class="collapse card-body table-responsive">
@@ -193,10 +203,12 @@
 
                 <div class="gap"></div>
 
-                <div class="card">
+                <div class="card" data-value="c6">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseCompleted">
                         <div class="card-header">
                             Completed Requests
+                            <i class="fa fa-angle-down c6" style="font-size: 200%; position: relative; float: right;"></i>
+                            <i class="fa fa-angle-up c6" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
                     <div id="collapseCompleted" class="collapse card-body table-responsive" style="text-align:center;">
@@ -235,10 +247,12 @@
 
                 <div class="gap"></div>
 
-                <div class="card">
+                <div class="card" data-value="c7">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                         <div class="card-header">
                             Help Request Data
+                            <i class="fa fa-angle-down c7" style="font-size: 200%; position: relative; float: right;"></i>
+                            <i class="fa fa-angle-up c7" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
                     <div id="collapseFour" class="collapse">
@@ -267,10 +281,12 @@
 
                 <div class="gap"></div>
 
-                <div class="card">
+                <div class="card" data-value="c8">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseRoD">
                         <div class="card-header">
                             Reset Or Delete: Help Request Data
+                            <i class="fa fa-angle-down c8" style="font-size: 200%; position: relative; float: right;"></i>
+                            <i class="fa fa-angle-up c8" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
                     <div id="collapseRoD" class="collapse table-responsive">

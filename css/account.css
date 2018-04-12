@@ -1,15 +1,15 @@
 #accordion {
     padding-top: 1.5%;
-    width: 50%;
+    width: 70%;
     min-width: 250px;
     left:50%;
     transform: translate(-50%);
     position:relative;
 }
 
-@media (max-width: 978px) {
+@media (max-width: 1200px) {
     #accordion {
-        width: 75%;
+        width: 85%;
     }
 }
 
