@@ -63,6 +63,7 @@
 }
 
 #studentTab {
+    width: 85%;
     text-align:center;
     position:relative;
 }
@@ -74,11 +75,15 @@
     margin-right: 5px;
 }
 
-@media (max-width: 978px) {
+@media (max-width: 1200px) {
     #tabButton {
         width: 100px;
         margin-bottom: 5px;
         margin-right: 5px;
+    }
+
+    #studentTab {
+        width: 100%;
     }
 }
 
