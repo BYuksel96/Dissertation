@@ -7,18 +7,6 @@
     transform: translate(-50%, -50%);
 }
 
-@media (max-width: 1200px) {
-    .login {
-        width: 55%;
-    }
-}
-
-@media (max-width: 1000px) {
-    .login {
-        width: 75%;
-    }
-}
-
 .bttn {
     width: 50%;
     cursor: pointer;
@@ -99,4 +87,32 @@ a:active {
     color: green;
     text-decoration:  none;
     font-size: 20px;
+}
+
+@media (max-width: 1200px) {
+    .login {
+        width: 55%;
+    }
+}
+
+@media (max-width: 1000px) {
+    .login {
+        width: 75%;
+    }
+
+    .bttn {
+        width: 65%;
+        left: 17.5%;
+    }
+}
+
+@media (max-width: 400px) {
+    .login {
+        width: 100%;
+    }
+
+    .bttn {
+        width: 80%;
+        left: 10%;
+    }
 }
