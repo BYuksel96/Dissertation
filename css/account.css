@@ -145,6 +145,11 @@ button:hover {
     overflow-y: scroll;
 }
 
+#tableStuff{
+    text-align:center;
+    position:relative;
+}
+
 .tabWide {
     max-width: 100%;
     height: auto;

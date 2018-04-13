@@ -217,33 +217,34 @@
                                 <button id="reset" class="btn btn-info">Reset System</button>
                                 <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a>
                                 <hr class="formHR">
-                                <?php
-                                    //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
-                                    $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
-                                    echo "<table id=\"completedTable\" class=\"table table-striped table-responsive tabWide\" style=\"text-align:center;\">";
-                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> </tr>";
-                                
-                                    while($row = mysqli_fetch_array($result)){
+                                <div class="container table-responsive">
+                                    <?php
+                                        //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
+                                        $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
+                                        echo "<table id=\"completedTable\" class=\"table table-striped tabWide\" style=\"text-align:center;\">";
+                                        echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> </tr>";
+                                    
+                                        while($row = mysqli_fetch_array($result)){
 
-                                        echo "<tr>";
-                                        echo '<td>' . $row['Username'] . '</td>';
-                                        echo '<td>' . $row['student_id'] . '</td>';
-                                        echo '<td>' . $row['ticket_no'] . '</td>';
-                                        echo '<td>' . $row['SubWeek'] . '</td>';
-                                        echo '<td>' . $row['TaskNo'] . '</td>';
-                                        echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                                        echo '<td>' . $row['TimeAllocation'] . '</td>';
-                                        echo '<td>' . $row['bDesc'] . '</td>';
-                                        echo '<td>' . $row['SeatLocation'] . '</td>';
-                                        echo '<td>' . $row['TimeOfRequest'] . '</td>';
-                                        echo '<td>' . $row['TimeOfHelp'] . '</td>';
-                                        echo "</tr>";
-                
-                                    }
-                
-                                    echo "</table>";
-                                ?>
-
+                                            echo "<tr>";
+                                            echo '<td>' . $row['Username'] . '</td>';
+                                            echo '<td>' . $row['student_id'] . '</td>';
+                                            echo '<td>' . $row['ticket_no'] . '</td>';
+                                            echo '<td>' . $row['SubWeek'] . '</td>';
+                                            echo '<td>' . $row['TaskNo'] . '</td>';
+                                            echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                                            echo '<td>' . $row['TimeAllocation'] . '</td>';
+                                            echo '<td>' . $row['bDesc'] . '</td>';
+                                            echo '<td>' . $row['SeatLocation'] . '</td>';
+                                            echo '<td>' . $row['TimeOfRequest'] . '</td>';
+                                            echo '<td>' . $row['TimeOfHelp'] . '</td>';
+                                            echo "</tr>";
+                    
+                                        }
+                    
+                                        echo "</table>";
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -295,15 +296,14 @@
                     </a>
                     <div id="collapseRoD" class="collapse">
                         <div class="card-body">
-                            <div class="container-fluid table-responsive">
-                                <p>Use the table below to completey reset or delete specific help request data which has been provided into the system.</p>
-                                <p id="msg-response-dataTbl" style="color: green; font-size: 10pt;"></p>
-                                <hr class="formHR">
-
+                            <p>Use the table below to completey reset or delete specific help request data which has been provided into the system.</p>
+                            <p id="msg-response-dataTbl" style="color: green; font-size: 10pt;"></p>
+                            <hr class="formHR">
+                            <div class="container table-responsive">
                                 <?php
                                     //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
                                     $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.Category") or die (mysqli_error());
-                                    echo "<table id=\"dataTable\" class=\"table table-striped table-responsive tabWide\" style=\"text-align:center;\">";
+                                    echo "<table id=\"dataTable\" class=\"table table-striped tabWide\" style=\"text-align:center;\">";
                                     echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
                                 
                                     while($row = mysqli_fetch_array($result)){
@@ -319,7 +319,6 @@
                 
                                     echo "</table>";
                                 ?>
-
                             </div>
                         </div>
                     </div>

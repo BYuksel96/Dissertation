@@ -13,8 +13,6 @@
     border: 1px solid;
 }
 
-
-
 .desk { /* creating the table - in this case it is circular */
     position: relative;
     width: 200px;
@@ -87,4 +85,10 @@
 .missing {
     color: red;
     font-weight: bold;
+}
+
+.tabWide {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
