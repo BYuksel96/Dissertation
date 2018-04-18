@@ -91,10 +91,7 @@ function buttonDisable(){
             var accType = data.text;
             var i;
             if (accType != 'student'){
-                for(i = 0; i < 7; i++) {
-                    var idName = '#seat' + i;
-                    $(idName).prop('disabled', true);
-                }
+                $('.seat').prop('disabled', true);
             }
         }
     });

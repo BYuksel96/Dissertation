@@ -39,27 +39,165 @@
         </nav>
 
         <div class="center">
-            <div class="desk">
+            <div id="tableA" class="desk">
                 <div class="seats">
                     A
                 </div>
                 <div class="seats">
-                    <button type="submit" id="seat1" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" value="A1" onclick="addSeat(this)">1</button>
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A1" onclick="addSeat(this)">1</button>
                 </div>
                 <div class="seats">
-                    <button type="submit" id="seat2" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" value="A2" onclick="addSeat(this)">2</button>
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A2" onclick="addSeat(this)">2</button>
                 </div>
                 <div class="seats">
-                    <button type="submit" id="seat3" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" value="A3" onclick="addSeat(this)">3</button>
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A3" onclick="addSeat(this)">3</button>
                 </div>
                 <div class="seats">
-                    <button type="submit" id="seat4" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" value="A4" onclick="addSeat(this)">4</button>
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A4" onclick="addSeat(this)">4</button>
                 </div>
                 <div class="seats">
-                    <button type="submit" id="seat5" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" value="A5" onclick="addSeat(this)">5</button>
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A5" onclick="addSeat(this)">5</button>
                 </div>
                 <div class="seats">
-                    <button type="submit" id="seat6" class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" value="A6" onclick="addSeat(this)">6</button>
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A6" onclick="addSeat(this)">6</button>
+                </div>
+            </div>
+            <div id="tableB" class="desk">
+                <div class="seats">
+                    B
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="B1" onclick="addSeat(this)">1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="B2" onclick="addSeat(this)">2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="B3" onclick="addSeat(this)">3</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="B4" onclick="addSeat(this)">4</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="B5" onclick="addSeat(this)">5</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="B6" onclick="addSeat(this)">6</button>
+                </div>
+            </div>
+            <div id="tableC" class="desk">
+                <div class="seats">
+                    C
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="C1" onclick="addSeat(this)">1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="C2" onclick="addSeat(this)">2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="C3" onclick="addSeat(this)">3</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="C4" onclick="addSeat(this)">4</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="C5" onclick="addSeat(this)">5</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="C6" onclick="addSeat(this)">6</button>
+                </div>
+            </div>
+            <div id="tableD" class="desk">
+                <div class="seats">
+                    D
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="D1" onclick="addSeat(this)">1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="D2" onclick="addSeat(this)">2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="D3" onclick="addSeat(this)">3</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="D4" onclick="addSeat(this)">4</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="D5" onclick="addSeat(this)">5</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="D6" onclick="addSeat(this)">6</button>
+                </div>
+            </div>
+            <div id="tableE" class="desk">
+                <div class="seats">
+                    E
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="E1" onclick="addSeat(this)">1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="E2" onclick="addSeat(this)">2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="E3" onclick="addSeat(this)">3</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="E4" onclick="addSeat(this)">4</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="E5" onclick="addSeat(this)">5</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="E6" onclick="addSeat(this)">6</button>
+                </div>
+            </div>
+            <div id="tableF" class="desk">
+                <div class="seats">
+                    F
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="F1" onclick="addSeat(this)">1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="F2" onclick="addSeat(this)">2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="F3" onclick="addSeat(this)">3</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="F4" onclick="addSeat(this)">4</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="F5" onclick="addSeat(this)">5</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="F6" onclick="addSeat(this)">6</button>
+                </div>
+            </div>
+            <div id="tableG" class="desk">
+                <div class="seats">
+                    G
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G1" onclick="addSeat(this)">1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G2" onclick="addSeat(this)">2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G3" onclick="addSeat(this)">3</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat4" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G4" onclick="addSeat(this)">4</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat5" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G5" onclick="addSeat(this)">5</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G6" onclick="addSeat(this)">6</button>
                 </div>
             </div>
         </div>

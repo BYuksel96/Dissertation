@@ -4,8 +4,8 @@
 }
 
 .center {
-    width: 66%;
-    height: 75%;
+    width: 50%;
+    height: 85%;
     min-width: 250px; /* May need to adjust this depending on final outcome of seating system layout */
     left:50%;
     transform: translate(-50%);
@@ -14,13 +14,53 @@
 }
 
 .desk { /* creating the table - in this case it is circular */
-    position: relative;
-    width: 200px;
-    height: 200px;
+    position: absolute;
+    width: 100px;
+    height: 100px;
     border: solid 1px;
     border-radius: 50%;
-    margin-left: 5%;
-    margin-top: 5%;
+}
+
+#tableA {
+    margin-left: 40%;
+    margin-top: 55%;
+    position: absolute;
+}
+
+#tableB {
+    margin-left: 75%;
+    margin-top: -15%;
+    position: absolute;
+}
+
+#tableC {
+    margin-left: 40%;
+    margin-top: -40%;
+    position: absolute;
+}
+
+#tableD {
+    margin-left: 75%;
+    margin-top: -15%;
+    position: absolute;
+}
+
+#tableE {
+    margin-left: 40%;
+    margin-top: -40%;
+    position: absolute;
+}
+
+#tableF {
+    margin-left: 75%;
+    margin-top: -15%;
+    position: absolute;
+}
+
+#tableG {
+    margin-left: 15%;
+    margin-top: -5%;
+    position: absolute;
 }
 
 .desk .seats{ /* positioning the contents of the table into the center to the move them out */
@@ -32,34 +72,33 @@
 
 .desk button{
     display: block;
-    width: 100%;
 }
 
 /* below we are positioning all the seats into their correct places. */
 
 #seat1 {
-    transform: rotate(90deg) translate(100px) rotate(-90deg);
+    transform: rotate(90deg) translate(55px) rotate(-90deg);
     /* first rotate positions item in correct place on circle, translate identifies how far out from the center of the circle and final rotate places item correct way round */
 }
 
 #seat2 {
-    transform: rotate(150deg) translate(100px) rotate(90deg);
+    transform: rotate(150deg) translate(55px) rotate(90deg);
 }
 
 #seat3 {
-    transform: rotate(205deg) translate(100px) rotate(90deg);
+    transform: rotate(205deg) translate(55px) rotate(90deg);
 }
 
 #seat4 {
-    transform: rotate(270deg) translate(100px) rotate(90deg);
+    transform: rotate(270deg) translate(55px) rotate(90deg);
 }
 
 #seat5 {
-    transform: rotate(335deg) translate(100px) rotate(90deg);
+    transform: rotate(335deg) translate(55px) rotate(90deg);
 }
 
 #seat6 {
-    transform: rotate(30deg) translate(100px) rotate(90deg);
+    transform: rotate(30deg) translate(55px) rotate(90deg);
 }
 
 #studentTab {
