@@ -4,13 +4,15 @@
 }
 
 .center {
-    width: 50%;
+    width: 725px;
     height: 650px;
-    min-width: 250px; /* May need to adjust this depending on final outcome of seating system layout */
+    min-width: 450px; /* May need to adjust this depending on final outcome of seating system layout */
     left:50%;
     transform: translate(-50%);
     position:relative;
     border: 1px solid;
+    display: block;
+    overflow-x: auto;
 }
 
 .desk { /* creating the table - in this case it is circular */
@@ -22,43 +24,43 @@
 }
 
 #tableA {
-    margin-left: 45%;
+    margin-left: 300px;
     margin-top: 400px;
     position: absolute;
 }
 
 #tableB {
-    margin-left: 75%;
+    margin-left: 545px;
     margin-top: 400px;
     position: absolute;
 }
 
 #tableC {
-    margin-left: 45%;
+    margin-left: 300px;
     margin-top: 225px;
     position: absolute;
 }
 
 #tableD {
-    margin-left: 75%;
+    margin-left: 545px;
     margin-top: 225px;
     position: absolute;
 }
 
 #tableE {
-    margin-left: 45%;
+    margin-left: 300px;
     margin-top: 50px;
     position: absolute;
 }
 
 #tableF {
-    margin-left: 75%;
+    margin-left: 545px;
     margin-top: 50px;
     position: absolute;
 }
 
 #tableG {
-    margin-left: 20%;
+    margin-left: 130px;
     margin-top: 100px;
     position: absolute;
 }
@@ -124,13 +126,15 @@
     #studentTab {
         width: 100%;
     }
-
-    .center {
-        width: 75%;
-    }
 }
 
 @media (max-width: 900px) {
+    .center {
+        width: 80%;
+    }
+}
+
+@media (max-width: 770px) {
     .center {
         width: 95%;
     }
