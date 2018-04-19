@@ -6,10 +6,9 @@
 .center {
     width: 725px;
     height: 650px;
-    min-width: 450px; /* May need to adjust this depending on final outcome of seating system layout */
-    left:50%;
+    left: 50%;
     transform: translate(-50%);
-    position:relative;
+    position:  relative;
     border: 1px solid;
     display: block;
     overflow-x: auto;
@@ -137,6 +136,12 @@
 @media (max-width: 770px) {
     .center {
         width: 95%;
+    }
+}
+
+@media (max-width: 400px) {
+    .center {
+        width: 100%;
     }
 }
 
