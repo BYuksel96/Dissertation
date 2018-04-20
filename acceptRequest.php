@@ -2,9 +2,6 @@
     include('connection.php');
     session_start();
 
-    //ticketnum
-    //stunum
-    //demonid
     if(isset($_POST['itemNum'])){
 
         $itemID = $_POST['itemNum'];

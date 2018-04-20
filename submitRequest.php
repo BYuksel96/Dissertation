@@ -52,7 +52,7 @@
                 if(mysqli_num_rows($seatCheck) == "0") {
                     $field7 = "TRUE";
                     $time = "00:00:00";
-                    $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check, TimeOfRequest, TimeOfHelp) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7',NOW(),'$time')");
+                    $sql = mysqli_query($connection, "INSERT INTO help_request(StudentID, SubWeek, TaskNo, ProblemSeverity, TimeAllocation, bDesc, SeatLocation, active_check, TimeOfRequest, TimeOfHelp, DateOfRequest) VALUES ('$stuNum','$field1','$field2','$field3','$field4','$field5','$field6','$field7',NOW(),'$time',NOW())");
                     if(!$sql) {
                         $output = "Error" . mysqli_error();
                         $response = json_encode(array('type' => 'error', 'text' => $output));
