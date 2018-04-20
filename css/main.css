@@ -3,7 +3,7 @@
     padding-right: 0px;
 }
 
-.center {
+.layout {
     width: 725px;
     height: 650px;
     left: 50%;
@@ -12,55 +12,57 @@
     border: 1px solid;
     display: block;
     overflow-x: auto;
+    background-image: url('../roomlayout.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: local;
 }
 
 .desk { /* creating the table - in this case it is circular */
     position: absolute;
     width: 100px;
     height: 100px;
-    border: solid 1px;
-    border-radius: 50%;
 }
 
 #tableA {
-    margin-left: 300px;
-    margin-top: 400px;
+    margin-left: 312px;
+    margin-top: 412px;
     position: absolute;
 }
 
 #tableB {
-    margin-left: 545px;
-    margin-top: 400px;
+    margin-left: 540px;
+    margin-top: 410px;
     position: absolute;
 }
 
 #tableC {
-    margin-left: 300px;
-    margin-top: 225px;
+    margin-left: 312px;
+    margin-top: 228px;
     position: absolute;
 }
 
 #tableD {
-    margin-left: 545px;
-    margin-top: 225px;
+    margin-left: 540px;
+    margin-top: 231px;
     position: absolute;
 }
 
 #tableE {
-    margin-left: 300px;
-    margin-top: 50px;
+    margin-left: 314px;
+    margin-top: 58px;
     position: absolute;
 }
 
 #tableF {
-    margin-left: 545px;
-    margin-top: 50px;
+    margin-left: 540px;
+    margin-top: 57px;
     position: absolute;
 }
 
 #tableG {
-    margin-left: 130px;
-    margin-top: 100px;
+    margin-left: 117px;
+    margin-top: 107px;
     position: absolute;
 }
 
@@ -78,28 +80,53 @@
 /* below we are positioning all the seats into their correct places. */
 
 #seat1 {
-    transform: rotate(90deg) translate(55px) rotate(-90deg);
+    transform: rotate(90deg) translate(57px) rotate(-90deg);
     /* first rotate positions item in correct place on circle, translate identifies how far out from the center of the circle and final rotate places item correct way round */
 }
 
 #seat2 {
-    transform: rotate(150deg) translate(55px) rotate(90deg);
+    transform: rotate(150deg) translate(60px) rotate(90deg);
 }
 
 #seat3 {
-    transform: rotate(205deg) translate(55px) rotate(90deg);
+    transform: rotate(205deg) translate(60px) rotate(94deg);
 }
 
 #seat4 {
-    transform: rotate(270deg) translate(55px) rotate(90deg);
+    transform: rotate(270deg) translate(57px) rotate(90deg);
 }
 
 #seat5 {
-    transform: rotate(335deg) translate(55px) rotate(90deg);
+    transform: rotate(335deg) translate(60px) rotate(86deg);
 }
 
 #seat6 {
-    transform: rotate(30deg) translate(55px) rotate(90deg);
+    transform: rotate(30deg) translate(60px) rotate(90deg);
+}
+
+#tabVert1 {
+    transform: rotate(120deg) translate(58px) rotate(-85deg);
+    /* first rotate positions item in correct place on circle, translate identifies how far out from the center of the circle and final rotate places item correct way round */
+}
+
+#tabVert2 {
+    transform: rotate(180deg) translate(57px) rotate(90deg);
+}
+
+#tabVert3 {
+    transform: rotate(242deg) translate(58px) rotate(88deg);
+}
+
+#tabVert4 {
+    transform: rotate(300deg) translate(58px) rotate(95deg);
+}
+
+#tabVert5 {
+    transform: rotate(0deg) translate(57px) rotate(90deg);
+}
+
+#tabVert6 {
+    transform: rotate(58deg) translate(58px) rotate(85deg);
 }
 
 #studentTab {
@@ -127,21 +154,51 @@
     }
 }
 
-@media (max-width: 900px) {
-    .center {
-        width: 80%;
-    }
-}
-
-@media (max-width: 770px) {
-    .center {
-        width: 95%;
-    }
-}
-
 @media (max-width: 400px) {
-    .center {
+    .layout {
         width: 100%;
+    }
+
+    #tableA {
+        margin-left: 259px;
+        margin-top: 404px;
+        position: absolute;
+    }
+    
+    #tableB {
+        margin-left: 487px;
+        margin-top: 403px;
+        position: absolute;
+    }
+    
+    #tableC {
+        margin-left: 259px;
+        margin-top: 220px;
+        position: absolute;
+    }
+    
+    #tableD {
+        margin-left: 487px;
+        margin-top: 223px;
+        position: absolute;
+    }
+    
+    #tableE {
+        margin-left: 261px;
+        margin-top: 48px;
+        position: absolute;
+    }
+    
+    #tableF {
+        margin-left: 487px;
+        margin-top: 50px;
+        position: absolute;
+    }
+    
+    #tableG {
+        margin-left: 62.5px;
+        margin-top: 97px;
+        position: absolute;
     }
 }
 
