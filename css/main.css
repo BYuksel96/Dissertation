@@ -1,8 +1,10 @@
+/* Removing padding properties from the page */
 .container-fluid {
     padding-left: 0px;
     padding-right: 0px;
 }
 
+/* Specifying the properities of the div which will contain the room layout - things such as the seat planning, seats, etc. will go into the div which has this styling */
 .layout {
     width: 725px;
     height: 650px;
@@ -18,12 +20,14 @@
     background-attachment: local;
 }
 
-.desk { /* creating the table - in this case it is circular */
+/* Creating the foundations of the table */
+.desk {
     position: absolute;
     width: 100px;
     height: 100px;
 }
 
+/* Specifying the location of each table */
 #tableA {
     margin-left: 312px;
     margin-top: 412px;
@@ -66,7 +70,8 @@
     position: absolute;
 }
 
-.desk .seats{ /* positioning the contents of the table into the center to the move them out */
+/* positioning the contents of the table (i.e. the div) into the center (i.e. put all the content inside the div into the middle) to then be able to position each seat correctly around the table  */
+.desk .seats{ 
     display: block;
     position: absolute;
     top: 50%; left: 50%;
@@ -77,11 +82,10 @@
     display: block;
 }
 
-/* below we are positioning all the seats into their correct places. */
-
+/* Below is how all the seats are positioned in to the correct places on the layout of the room */
 #seat1 {
     transform: rotate(90deg) translate(57px) rotate(-90deg);
-    /* first rotate positions item in correct place on circle, translate identifies how far out from the center of the circle and final rotate places item correct way round */
+    /* The first rotate positions the seat in correct place on the circle; Translate identifies how far out from the center of the circle the seat is to be positioned; The final rotate, rotates the direction the seat is facing */
 }
 
 #seat2 {
@@ -104,9 +108,9 @@
     transform: rotate(30deg) translate(60px) rotate(90deg);
 }
 
+/* Doing the same as before but changing positioning of the seats specific for the diffrent facing tables */
 #tabVert1 {
     transform: rotate(120deg) translate(58px) rotate(-85deg);
-    /* first rotate positions item in correct place on circle, translate identifies how far out from the center of the circle and final rotate places item correct way round */
 }
 
 #tabVert2 {
@@ -129,12 +133,14 @@
     transform: rotate(58deg) translate(58px) rotate(85deg);
 }
 
+/* Specifying the width and other properties of the table */
 #studentTab {
     width: 85%;
-    text-align:center;
-    position:relative;
+    text-align: center;
+    position: relative;
 }
 
+/* Specifying the properties of the buttons located in the table */
 #tabButton {
     width: 100px;
     padding-right: 0px;
@@ -142,11 +148,11 @@
     margin-right: 5px;
 }
 
+/* Specifying different attributes to the styling of certain items when the page width is of a smaller size */
 @media (max-width: 1200px) {
     #tabButton {
         width: 100px;
         margin-bottom: 5px;
-        margin-right: 5px;
     }
 
     #studentTab {

@@ -40,7 +40,7 @@
                 }
             }
             else { //if password is incorrect error message is sent back and displayed to the client
-                $output = "The password entered is inccorect";
+                $output = "The password entered is inccorect. Please try again...";
                 $response = json_encode(array('type' => 'old', 'text' => $output));
                 die($response);
             }

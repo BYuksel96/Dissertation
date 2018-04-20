@@ -1,12 +1,18 @@
-$(function () { //waits for page to load before js function works
+$(function () {
 
     var seconds = 5; 
-    setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000);
+    setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000); // Refreshing the queue table. Done to show if any changes have been made
 
+    // The function below is for when a student is making a request and is filling out the form.
+    // This specific function handles the dynamic changing of the content located in the sub-category box.
+    // The content shown in the sub-category box is affected by the option chosen in the 'category' box.
     $('#weekSub').on('change', function(e){
-        var selected_option_value=$("#weekSub option:selected").val();
+
+        var selected_option_value=$("#weekSub option:selected").val(); // Sotring the value of the 'category' option chosen by the student
         
         e.preventDefault();
+
+        // View account.js for clarification on the ajax function below and how it operates, if needed.
 
         $.ajax({
             type: 'POST',
@@ -15,13 +21,12 @@ $(function () { //waits for page to load before js function works
             data: { option : selected_option_value },
             success : function (data) {
                 if (data.type == 'success'){
-                    // converting data returned from server to an array
                     var temp = data.text; // Temporarily storing the data returend by the server
-                    var options = temp.split(','); // Splitting the string into an array to display all the options that have been provided by the admin
+                    var options = temp.split(','); // Splitting the string into an array to then be able to display all the options that have been provided by the admin for that specific category
                     $('#taskNo').empty(); // Need to clear previous options before appending more items as options in the select box
-                    // For each item in the array display it as an option
+                    // For each item in the array display it is displayed as an option in the select box
                     $.each(options, function (i, option) { // This function acts as a for loop going through each item in the 'options' array (jQuery)
-                        $('#taskNo').append($('<option>').val(option).html(option)); // appending all items in the array to the option tag in the select menu
+                        $('#taskNo').append($('<option>').val(option).html(option)); // Appending all items in the array as an option tag in the select menu
                     });
                 }
             },
@@ -32,33 +37,32 @@ $(function () { //waits for page to load before js function works
         });
     });
 
-    //function submits help request data
+    // Function below is used to submit help request data provided by the students into the database
     $('#helpForm').on('submit', function(e) {
 
-        e.preventDefault(); //prevents page from opening
+        e.preventDefault();
 
         $.ajax({
-            type: 'POST', //get or post? this time we want to post data to the php file
-            url: 'submitRequest.php', //php file we send the data to
+            type: 'POST', 
+            url: 'submitRequest.php',
             dataType: 'json',
-            data: $('#helpForm').serialize(), //takes contents of the form (using form id tag)
-            success : function (data) { 
-                if(data.type == 'error'){ //if there is an issue with the form being sent it is reset and an appropriate error message is displayed
-                    $('#taskNo').empty();
-                    $("#helpForm")[0].reset();
-                    $('#close').trigger('click');
-                    $('#modalText').text(data.text);
-                    $('#responseModal').modal('show');
-                    $("#studentTable").load('main.php #studentTable');
+            data: $('#helpForm').serialize(),
+            success : function (data) {
+                if(data.type == 'error'){
+                    $('#taskNo').empty(); // Emptying the sub-category field in the form
+                    $("#helpForm")[0].reset(); // Reseting the form
+                    $('#close').trigger('click'); // Using jquery to close the help request form
+                    $('#modalText').text(data.text); // Adding text to the modal which displays helpful responses to the student
+                    $('#responseModal').modal('show'); // Activating the response modal
+                    $("#studentTable").load('main.php #studentTable'); // Reloading the queueing table
                 }
-                else{ //if request is successful the form is reset and then closed
+                else{
                     $('#taskNo').empty();
                     $("#helpForm")[0].reset();
                     $('#close').trigger('click');
                     $('#modalText').text(data.text);
                     $('#responseModal').modal('show');
                     $("#studentTable").load('main.php #studentTable');
-                    //may want a better way of dealing with this... maybe another modal box to say account is created just some suggestion
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
@@ -69,11 +73,13 @@ $(function () { //waits for page to load before js function works
     });
 });
 
+// Javascript function which, when called, acquires info on the value of the seat position of the student.
+// This function also helps to serve the purpose of editting a specific session value, which is used to display the correct button on the help request form
 function addSeat(objButton) {
     $("#submitButton").html("Submit Request");
     $("#submitButton").removeClass("btn btn-warning");
     $("#submitButton").addClass("btn btn-success");
-    $.ajax({ // function is used for two things, one is to set the edit sessions and also to enter the seat number of the student into the seatFill val
+    $.ajax({
         url: 'edit.php',
         dataType: 'json',
         success : function (data) { 
@@ -83,6 +89,7 @@ function addSeat(objButton) {
     });
 }
 
+// The function below is used to disable the seat buttons is the account type of the user is not 'student'
 function buttonDisable(){
     $.ajax({
         url: 'accInfo.php',
@@ -97,12 +104,13 @@ function buttonDisable(){
     });
 }
 
+// The function below is how a student is able to click the delete button next to their help request and then remove it from the queue (and the system)
 function deleteItem(objButton) {
     var x = objButton.value;
 
     $.ajax({
-        type: 'POST', //get or post? this time we want to post data to the php file
-        url: 'delete.php', //php file we send the data to
+        type: 'POST',
+        url: 'delete.php',
         dataType: 'json',
         data: { itemNum : x },
         success : function (data) { 
@@ -124,6 +132,9 @@ function deleteItem(objButton) {
     });
 }
 
+// Function below is used to help bring up the help request form.
+// However this time the form is prepopulated with the data they provide in their initial help request submission
+// Essentially it allows them to edit their help request data without having to delete their current one and make a new request
 function editItem(objButton) {
     var x = objButton.value;
 
@@ -136,7 +147,7 @@ function editItem(objButton) {
             if(data.type == 'success'){
                 $("#weekSub").val(data.week);
                 $('#taskNo').append($('<option>').val(data.task).html(data.task));
-                // $("#taskNo").val(data.task);
+                // $("#taskNo").val(data.task); // This line of code does not work for prepopulating the sub-category box. (However, the line above does work)
                 $("#severity").val(data.psev);
                 $("#time").val(data.time);
                 $("#description").val(data.desc);
@@ -156,12 +167,14 @@ function editItem(objButton) {
     });
 }
 
+// The function below called when a demonstrator clicks the button to then attend to a student.
+// When that button is clicked the students help request ticket is removed from the queue and the table is then updated accordingly.
 function helpStudent(objButton) {
     var x = objButton.value;
 
     $.ajax({
-        type: 'POST', //get or post? this time we want to post data to the php file
-        url: 'acceptRequest.php', //php file we send the data to
+        type: 'POST',
+        url: 'acceptRequest.php',
         dataType: 'json',
         data: { itemNum : x },
         success : function (data) { 

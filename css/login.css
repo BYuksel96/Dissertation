@@ -1,3 +1,4 @@
+/* Specifying the style of the login box on login.php */
 .login {
     top: 50%;
     left: 50%;
@@ -7,6 +8,7 @@
     transform: translate(-50%, -50%);
 }
 
+/* Specifying the style of the buttons on login.php */
 .bttn {
     width: 50%;
     cursor: pointer;
@@ -15,6 +17,7 @@
     left:25%;
 }
 
+/* Specifying the style of success buttons on login.php */
 .btn-success {
     background-color: white;
     border-color: green;
@@ -23,6 +26,7 @@
     word-wrap: break-word;
 }
 
+/* Specifying the style of info buttons on login.php */
 .btn-info {
     top: 5px;
     background-color: white;
@@ -32,18 +36,7 @@
     word-wrap: break-word;
 }
 
-.form-group input[type="text"]:focus{
-    overflow: auto;
-}
-
-.form-group input[type="password"]:focus{
-    overflow: auto;
-}
-
-.form-group {
-    position: relative;
-}
-
+/* styling and positioning the 'a' tags fon the login page. (i.e. the Student and Demonstrator options - done to choose what part of the tool to login into)*/
 .student {
     float: left;
     width: 50%;
@@ -53,10 +46,6 @@
     word-wrap: break-word;
 }
 
-a {
-    color: grey;
-}
-
 .demonstrator {
     float: right;
     width: 50%;
@@ -64,6 +53,11 @@ a {
     position: relative;
     white-space: normal;
     word-wrap: break-word;
+}
+
+/* Specifying specific properties of all 'a' tags. I.e. when normal, when hovered over, when active, etc. */
+a {
+    color: grey;
 }
 
 a:link {
@@ -89,6 +83,7 @@ a:active {
     font-size: 20px;
 }
 
+/* Specyfing widths and other bits of content when the page is loaded up on smaller devices, etc. */
 @media (max-width: 1200px) {
     .login {
         width: 55%;

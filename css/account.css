@@ -1,3 +1,4 @@
+/* Specifying the dimensions of the accordion */
 #accordion {
     padding-top: 1.5%;
     width: 70%;
@@ -7,6 +8,7 @@
     position:relative;
 }
 
+/* Adjusting width of accordion depending on screen size */
 @media (max-width: 1200px) {
     #accordion {
         width: 85%;
@@ -19,15 +21,18 @@
     }
 }
 
+/* Producing the gap between the accordion items */
 .gap {
     padding-top: 2.5%;
 }
 
+/* Removing padding to change the styling on the page */
 .container-fluid {
     padding-left: 0px;
     padding-right: 0px;
 }
 
+/* Specifying styles for specific content on account.php */
 .accountInfo {
     padding-top: 2px;
     width: 50%;
@@ -46,6 +51,7 @@
     min-width: 250px;
 }
 
+/* Changing the styling of the hr tag */
 .formHR {
     margin-bottom: 25px;
     height: 1px;
@@ -54,14 +60,17 @@
     background: -webkit-gradient(linear, 0 0, 100% 0, from(white), to(white), color-stop(50%, grey)); 
 }
 
+/* Editing the form field background colour */
 .form-control {
-    background-color: #f1f1f1;
+    background-color: #f7f7f7;
 }
 
+/* Editing the form field background colour when it is focused - i.e. when the field is clicked, the background colour changes to the one specified here*/
 .form-control:focus {
     background-color: #ddd;
 }
 
+/* Specifying style for create account accordion content on account.php */
 #submitAcc { 
     width: 50%;
     min-width: 175px;
@@ -73,6 +82,7 @@
     transform: translate(-50%, 0%);
 }
 
+/* Changing styling of the buttons when hovered over */
 button:hover {
     opacity: 1;
 }
@@ -82,6 +92,7 @@ button:hover {
     padding-right: 15px;
 }
 
+/* Changing the style of the specific button on account.php */
 #submitButton { 
     width: 50%;
     min-width: 175px;
@@ -104,6 +115,7 @@ button:hover {
     transform: translate(-50%, 15%);
 }
 
+/* Specifying the height that specific accordions can go to on the screen */
 #collapseDelete {
     max-height: 45%;
     overflow-y: scroll;
@@ -119,6 +131,7 @@ button:hover {
     overflow-y: scroll;
 }
 
+/* Specifying the dimensions of buttons inside the accordion (completed requests) */
 #reset {
     display: inline-block;
     width:49.5%;
@@ -129,6 +142,7 @@ button:hover {
     width:49.5%;
 }
 
+/* Specifying different styles for when the screen is either that of the max-width defined or smaller */
 @media (max-width: 450px) {
     #reset {
         display:inline-block;
@@ -145,6 +159,7 @@ button:hover {
     overflow-y: scroll;
 }
 
+/* Adjusting specific stylinf of tables found in the accordions */
 #tableStuff{
     text-align:center;
     position:relative;
