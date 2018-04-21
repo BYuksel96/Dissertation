@@ -117,17 +117,17 @@ button:hover {
 
 /* Specifying the height that specific accordions can go to on the screen */
 #collapseDelete {
-    max-height: 45%;
+    max-height: 500px;
     overflow-y: scroll;
 }
 
 #collapseStudents {
-    max-height: 65%;
+    max-height: 500px;
     overflow-y: scroll;
 }
 
 #collapseCompleted {
-    max-height: 65%;
+    max-height: 500px;
     overflow-y: scroll;
 }
 
@@ -163,10 +163,4 @@ button:hover {
 #tableStuff{
     text-align:center;
     position:relative;
-}
-
-.tabWide {
-    max-width: 100%;
-    height: auto;
-    display: block;
 }

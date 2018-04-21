@@ -68,8 +68,7 @@
                 <div id="collapseTwo" class="collapse">
                     <form id="changePSW" class="card-body" name="changePSW">
                         <div class="container-fluid">
-                            <p>If you wish to change your password, you can do so here. Simply fill out the required fields and press the change password button once you are done.</p>
-                            <p style="color:red;">* Required fields</p>
+                            <p style="text-align:center;">If you wish to change your password, you can do so here. Simply fill out the required fields and press the change password button once you are done.</p>
                             <hr class="formHR"> <!-- Using hr tag to create a divider between the content in the card. Also has css styling added to it to make it slightly different -->
 
                             <div class="form-group">
@@ -84,6 +83,7 @@
                             <div class="form-group">
                                 <input type="password" placeholder="Confirm Password *" name="repeat" id="repeat" class="form-control" required>
                             </div>
+                            <p style="color:red;">* Required fields</p>
 
                             <p id="msg-response3" style="font-size: 10pt;"></p>
                             <button type="submit" id="submitPsw" class="btn btn-success">Change Password</button>
@@ -108,9 +108,10 @@
                         </div>
                     </a>
                     <div id="collapseThree" class="collapse">
+
                         <form id="crtAcc" class="card-body" name="crtAcc">
                             <div class="container-fluid">
-                                <p>Fill in the form below to create an account for a demonstrator</p>
+                                <p style="text-align:center;">Fill in the form below to create an account for a demonstrator</p>
                                 <hr class="formHR">
 
                                 <div class="form-group">
@@ -225,39 +226,37 @@
                     </a>
                     <div id="collapseCompleted" class="collapse">
                         <div class="card-body">
-                            <div style="text-align:center;">
-                                <button id="reset" class="btn btn-info">Reset System</button> <!--Button which, when clicked, will reset the whole system  -->
-                                <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a> <!-- Button which, when clicked, will download the table displayed in this card as a csv file -->
-                                <hr class="formHR">
-                                <div class="container table-responsive">
-                                    <?php
-                                        //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
-                                        $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
-                                        echo "<table id=\"completedTable\" class=\"table table-striped tabWide\" style=\"text-align:center;\">";
-                                        echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Date of Request</th> </tr>";
-                                    
-                                        while($row = mysqli_fetch_array($result)){
+                            <button id="reset" class="btn btn-info">Reset System</button> <!--Button which, when clicked, will reset the whole system  -->
+                            <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a> <!-- Button which, when clicked, will download the table displayed in this card as a csv file -->
+                            <hr class="formHR">
+                            <div class="container table-responsive">
+                                <?php
+                                    //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
+                                    $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
+                                    echo "<table id=\"completedTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Date of Request</th> </tr>";
+                                
+                                    while($row = mysqli_fetch_array($result)){
 
-                                            echo "<tr>";
-                                            echo '<td>' . $row['Username'] . '</td>';
-                                            echo '<td>' . $row['student_id'] . '</td>';
-                                            echo '<td>' . $row['ticket_no'] . '</td>';
-                                            echo '<td>' . $row['SubWeek'] . '</td>';
-                                            echo '<td>' . $row['TaskNo'] . '</td>';
-                                            echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                                            echo '<td>' . $row['TimeAllocation'] . '</td>';
-                                            echo '<td>' . $row['bDesc'] . '</td>';
-                                            echo '<td>' . $row['SeatLocation'] . '</td>';
-                                            echo '<td>' . $row['TimeOfRequest'] . '</td>';
-                                            echo '<td>' . $row['TimeOfHelp'] . '</td>';
-                                            echo '<td>' . $row['DateOfRequest'] . '</td>';
-                                            echo "</tr>";
-                    
-                                        }
-                    
-                                        echo "</table>";
-                                    ?>
-                                </div>
+                                        echo "<tr>";
+                                        echo '<td>' . $row['Username'] . '</td>';
+                                        echo '<td>' . $row['student_id'] . '</td>';
+                                        echo '<td>' . $row['ticket_no'] . '</td>';
+                                        echo '<td>' . $row['SubWeek'] . '</td>';
+                                        echo '<td>' . $row['TaskNo'] . '</td>';
+                                        echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                                        echo '<td>' . $row['TimeAllocation'] . '</td>';
+                                        echo '<td>' . $row['bDesc'] . '</td>';
+                                        echo '<td>' . $row['SeatLocation'] . '</td>';
+                                        echo '<td>' . $row['TimeOfRequest'] . '</td>';
+                                        echo '<td>' . $row['TimeOfHelp'] . '</td>';
+                                        echo '<td>' . $row['DateOfRequest'] . '</td>';
+                                        echo "</tr>";
+                
+                                    }
+                
+                                    echo "</table>";
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -277,7 +276,7 @@
                     <div id="collapseFour" class="collapse">
                         <form id="addData" class="card-body" name="addData">
                             <div class="container-fluid">
-                                <p>The form below is where you can supply the help request data that students use to fill out their forms.</p>
+                                <p style="text-align:center;">The form below is where you can supply the help request data that students use to fill out their forms.</p>
                                 <hr class="formHR">
 
                                 <div class="form-group">
@@ -311,29 +310,31 @@
                     </a>
                     <div id="collapseRoD" class="collapse">
                         <div class="card-body">
-                            <p>Use the table below to completey reset or delete specific help request data which has been provided into the system.</p>
-                            <p id="msg-response-dataTbl" style="color: green; font-size: 10pt;"></p>
-                            <hr class="formHR">
-                            <div class="container table-responsive">
-                                <?php
-                                    // Query below is used to acquire a list of all the help request data which have been provided into the system
-                                    $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.Category") or die (mysqli_error());
-                                    echo "<table id=\"dataTable\" class=\"table table-striped tabWide\" style=\"text-align:center;\">";
-                                    echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
-                                
-                                    while($row = mysqli_fetch_array($result)){
+                            <div style="text-align:center;">
+                                <p>Use the table below to completey reset or delete specific help request data which has been provided into the system.</p>
+                                <p id="msg-response-dataTbl" style="color: green; font-size: 10pt;"></p>
+                                <hr class="formHR">
+                                <div class="container table-responsive">
+                                    <?php
+                                        // Query below is used to acquire a list of all the help request data which have been provided into the system
+                                        $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.Category") or die (mysqli_error());
+                                        echo "<table id=\"dataTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                                        echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
+                                    
+                                        while($row = mysqli_fetch_array($result)){
 
-                                        echo "<tr>";
-                                        echo '<td>' . $row['Username'] . '</td>';
-                                        echo '<td>' . $row['Category'] . '</td>';
-                                        echo '<td>' . $row['SubCat'] . '</td>';
-                                        echo '<td> <button id="tabButton" class="btn btn-danger" name="Remove Entry" value=' . $row['ID'] . ' onclick="removeData(this)">Remove This Entry</button> </td>';
-                                        echo "</tr>";
-                
-                                    }
-                
-                                    echo "</table>";
-                                ?>
+                                            echo "<tr>";
+                                            echo '<td>' . $row['Username'] . '</td>';
+                                            echo '<td>' . $row['Category'] . '</td>';
+                                            echo '<td>' . $row['SubCat'] . '</td>';
+                                            echo '<td> <button id="tabButton" class="btn btn-danger" name="Remove Entry" value=' . $row['ID'] . ' onclick="removeData(this)">Remove This Entry</button> </td>';
+                                            echo "</tr>";
+                    
+                                        }
+                    
+                                        echo "</table>";
+                                    ?>
+                                </div>
                             </div>
                         </div>
                     </div>
