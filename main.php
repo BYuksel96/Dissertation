@@ -207,6 +207,17 @@
                     <button type="submit" id="seat6" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="G6" onclick="addSeat(this)">6</button>
                 </div>
             </div>
+            <div id="sideTab" class="desk">
+                <div class="seats">
+                    <button type="submit" id="side1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="Side 1" onclick="addSeat(this)">Side 1</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="side2" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="Side 2" onclick="addSeat(this)">Side 2</button>
+                </div>
+                <div class="seats">
+                    <button type="submit" id="side3" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="Side 3" onclick="addSeat(this)">Side 3</button>
+                </div>
+            </div>
         </div>
 
         <div id="studentTab" class="container-fluid table-responsive">

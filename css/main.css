@@ -70,6 +70,12 @@
     position: absolute;
 }
 
+#sideTab {
+    margin-left: 465px;
+    margin-top: 545px;
+    position: absolute;
+}
+
 /* positioning the contents of the table (i.e. the div) into the center (i.e. put all the content inside the div into the middle) to then be able to position each seat correctly around the table  */
 .desk .seats{ 
     display: block;
@@ -133,6 +139,18 @@
     transform: rotate(58deg) translate(58px) rotate(85deg);
 }
 
+#side1 {
+    transform: rotate(346.5deg) translate(-130px) rotate(-346.5deg);
+}
+
+#side2 {
+    transform: rotate(63deg) translate(34px) rotate(-63deg);
+}
+
+#side3 {
+    transform: rotate(11.5deg) translate(152px) rotate(-11.5deg);
+}
+
 /* Specifying the width and other properties of the table */
 #studentTab {
     width: 85%;
@@ -160,50 +178,105 @@
     }
 }
 
+@media (max-width: 700px) {
+    .layout {
+        width: 100%;
+    }
+
+    #tableA {
+        margin-left: 301px;
+        margin-top: 412px;
+        position: absolute;
+    }
+    
+    #tableB {
+        margin-left: 527px;
+        margin-top: 412px;
+        position: absolute;
+    }
+    
+    #tableC {
+        margin-left: 301px;
+        margin-top: 228px;
+        position: absolute;
+    }
+    
+    #tableD {
+        margin-left: 527px;
+        margin-top: 232px;
+        position: absolute;
+    }
+    
+    #tableE {
+        margin-left: 302px;
+        margin-top: 58px;
+        position: absolute;
+    }
+    
+    #tableF {
+        margin-left: 527px;
+        margin-top: 58px;
+        position: absolute;
+    }
+    
+    #tableG {
+        margin-left: 104px;
+        margin-top: 108px;
+        position: absolute;
+    }
+
+}
+
 @media (max-width: 400px) {
     .layout {
         width: 100%;
     }
 
     #tableA {
-        margin-left: 259px;
+        margin-left: 287px;
         margin-top: 412px;
         position: absolute;
     }
     
     #tableB {
-        margin-left: 487px;
+        margin-left: 515px;
         margin-top: 412px;
         position: absolute;
     }
     
     #tableC {
-        margin-left: 259px;
+        margin-left: 287px;
         margin-top: 228px;
         position: absolute;
     }
     
     #tableD {
-        margin-left: 487px;
+        margin-left: 515px;
         margin-top: 232px;
         position: absolute;
     }
     
     #tableE {
-        margin-left: 261px;
+        margin-left: 288px;
         margin-top: 58px;
         position: absolute;
     }
     
     #tableF {
-        margin-left: 487px;
+        margin-left: 515px;
         margin-top: 58px;
         position: absolute;
     }
     
     #tableG {
-        margin-left: 62.5px;
+        margin-left: 92px;
         margin-top: 108px;
+        position: absolute;
+    }
+
+    #sideTab {
+        margin-left: 440px;
+        margin-top: 545px;
         position: absolute;
     }
 }
