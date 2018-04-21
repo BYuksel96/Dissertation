@@ -1,10 +1,12 @@
 <?php
+    // PHP file which, when activated, will manually logout a student from the system. (Student is chosen by the admin)
+
     include('connection.php');
     session_start();
 
     if (isset($_POST['id'])){
-        $studentID = $_POST['id'];
-        $result = "DELETE FROM students WHERE StudentID = '$studentID'";
+        $studentID = $_POST['id']; // Storing the student ID (i.e. the students numbers)
+        $result = "DELETE FROM students WHERE StudentID = '$studentID'"; // Removing student from the DB table 'students'
         if(mysqli_query($connection,$result)){
             $response = json_encode(array('type' => 'success', 'text' => 'Logged student out.')); //message to send back to client side
             die($response);

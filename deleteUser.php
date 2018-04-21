@@ -5,7 +5,7 @@
     if (isset($_POST['user'])){
 
         $user = $_POST['user'];
-        $query = "DELETE FROM users WHERE ID = '$user'";
+        $query = "DELETE FROM users WHERE ID = '$user'"; // Query which will delete a helper/demonstrator account from the system
         if (mysqli_query($connection,$query)){
             $response = json_encode(array('type' => 'success', 'text' => 'User has now been removed')); //message to send back to client side
             die($response);

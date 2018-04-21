@@ -11,15 +11,16 @@
 
             $file = fopen("php://output", "w"); // Opening the file for it to be written into and downloaded to the users system
             $file_headers = array("Assisted By", "Student Number", "Ticket No.", "Chosen Category", "Sub Category", "Problem Severity", "Time Allocation", "Problem Description", "Seat Location", "Time Of Request", "Time Help Arrived", "Date of Request"); //File Headers
-            $header = false; // header check
+            $header = false; // Header check variable
 
             while($row = mysqli_fetch_array($sql_query, MYSQLI_ASSOC)){ //Fetching outcome of query
-                if(!$header){ // checking if the header has been written to the file
-                    fputcsv($file, array_values($file_headers)); // writting the headers to the file
-                    $header = true; // Identifying that headers have been written
+                if(!$header){ // Checking if the header has been written to the file
+                    fputcsv($file, array_values($file_headers)); // Writting the headers to the file
+                    $header = true; // Identifying that headers have now been written to the first line in the file
                 }
 
                 fputcsv($file, array_values($row)); // Writting the contents of the query to the file
+                
             }
 
             fclose($file); // Closing the file as we are now finished

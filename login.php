@@ -1,10 +1,11 @@
 <?php
     include('connection.php');
     session_start();
-	if(isset($_SESSION['demonstrator']) || isset($_SESSION['studentNumber'])){
-		header("location:main.php");
+	if(isset($_SESSION['demonstrator']) || isset($_SESSION['studentNumber'])){ // If session values are already set then user is sent to main.php
+		header("location:main.php"); // Relocating to main.php
 	}
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Login</title>
@@ -31,42 +32,46 @@
                 <a href="" id="demon-form">Demonstrator</a>
             </div>
             <br>
-            <form name="loginStu" id="student-login-form">
+            <form name="loginStu" id="student-login-form"> <!-- Student login form -->
                 <div class="container-fluid">
 
                     <hr>
 
                     <div class="form-group">
+                        <!-- Below is the field where the students name can be entered -->
                         <input type="text" placeholder="Enter Your Name" name="name" id="name" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
+                        <!-- Below is the field where the student number can be entered -->
                         <input type="text" placeholder="Enter Student Number" pattern="([A-Za-z]{1})([0-9]{6,})" title="Enter your i or s number" name="stuNum" id="stuNum" class="form-control" required>
                     </div>
                     <p id="msg-response-stu" style="color: red; font-size: 10pt;"></p>
                     <button type="submit" class="btn btn-success bttn">Login</button>
-                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#studentModal">Further Info</button>
+                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#studentModal">Further Info</button> <!-- Button which will trigger the showing of the students modal -->
                     
                     <hr>
 
                 </div>
             </form>
-            <form name="loginDem" id="demon-login-form" style="display: none;">
+            <form name="loginDem" id="demon-login-form" style="display: none;"> <!-- Demonstrator/helper login form -->
                 <div class="container-fluid">
 
                     <hr>
 
                     <div class="form-group">
+                        <!-- Below is the field where the demonstrator enters their username -->
                         <input type="text" placeholder="Enter Your Username" name="uname" id="uname" class="form-control" required>
                     </div>
 
                     <div class="form-group">
+                        <!-- Below is the field where the demonstrator enters their password -->
                         <input type="password" placeholder="Enter Password" name="upsw" id="upsw" class="form-control" required>
                     </div>
 
                     <p id="msg-response" style="color: red; font-size: 10pt;"></p>
                     <button type="submit" class="btn btn-success bttn">Login</button>
-                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#demonModal">Further Info</button>
+                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#demonModal">Further Info</button> <!-- Button which will trigger the showing of the demonstrator modal -->
 
                     <hr>
 

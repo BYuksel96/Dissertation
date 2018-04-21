@@ -3,14 +3,15 @@
     session_start();
 
     $stuNum = $_SESSION["studentNumber"];
-    if (isset($_SESSION["editItem"])){
-        $editCheck = $_SESSION["editItem"];
-        $ticket = $_SESSION["ticketNo"];
+    if (isset($_SESSION["editItem"])){ // Checking if the edit session variable has been set
+        $editCheck = $_SESSION["editItem"]; // Storing edit session variable in a var
+        $ticket = $_SESSION["ticketNo"]; // Storing students help request ticket number in a var
     } else {
         $editCheck = "";
     }
 
     if(isset($_POST['weekSub'])){
+        // Storing values of the data in the help request form in variables
         $field1 = mysqli_real_escape_string($connection, $_POST['weekSub']); 
         $field2 = mysqli_real_escape_string($connection, $_POST['taskNo']);
         $field3 = mysqli_real_escape_string($connection, $_POST['severity']); 
@@ -18,9 +19,9 @@
         $field5 = mysqli_real_escape_string($connection, $_POST['description']); 
         $field6 = mysqli_real_escape_string($connection, $_POST['seat']);
 
-        //check if ticket exists if it does then do an update query else insert
+        // If the editcheck variable value is 'true' then the form is to use an update query, as the studenmts wants to edit their current help request
         if ($editCheck == "true"){
-            $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE TicketNo = '$ticket' AND SeatLocation = '$field6' AND StudentID = '$stuNum'");
+            $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE TicketNo = '$ticket' AND SeatLocation = '$field6' AND StudentID = '$stuNum'"); // Checking that the correct student is editting the data for the provided ticket number
             if(mysqli_num_rows($seatCheck) != 0) {
                 
                 $sqlQuery = "UPDATE help_request SET SubWeek='$field1', TaskNo='$field2', ProblemSeverity='$field3', TimeAllocation='$field4', bDesc ='$field5' WHERE TicketNo = '$ticket' AND SeatLocation = '$field6' AND StudentID = '$stuNum'";
@@ -41,14 +42,14 @@
                 die($response);
             }
         } else {
-            //check if user already has made a request
+            // checking if the user already has made a help request
             $weekCheck = mysqli_query($connection, "SELECT * FROM help_request WHERE StudentID IN (SELECT students.StudentID FROM students WHERE students.StudentID = '$stuNum') AND active_check = \"TRUE\" "); //checking if username already exists in db
             if(mysqli_num_rows($weekCheck) != 0) {
                 $response = json_encode(array('type' => 'error', 'text' => 'You currently have an active request... Check table below...')); //message to send back to client side
                 die($response);
             }
             else {
-                $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6' AND active_check = \"TRUE\"");
+                $seatCheck = mysqli_query($connection, "SELECT SeatLocation FROM help_request WHERE SeatLocation = '$field6' AND active_check = \"TRUE\""); // Checking that someone isn't submitting a request in an already taken seat
                 if(mysqli_num_rows($seatCheck) == "0") {
                     $field7 = "TRUE";
                     $time = "00:00:00";

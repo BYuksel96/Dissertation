@@ -1,12 +1,13 @@
 <?php
     include('connection.php');
     session_start();
-    if(!isset($_SESSION['demonstrator'])){
-        header("location:main.php");
+    if(!isset($_SESSION['demonstrator'])){ // If session type 'demonstrator' is not set then the user cannot access this page and is redirected to main.php
+        header("location:main.php"); // Redirecting to main.php
     }
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Account</title>
@@ -16,17 +17,18 @@
 
         <link rel="shortcut icon" type="image/x-icon" href="bufavicon.ico" />
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Importing font-awesome - used for some of the icons on the page -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> <!-- Importing Bootstrap for creating frontend style -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/account.css">
-        <script src="js/account.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/account.css"> <!-- Importing external stylesheet -->
+        <script src="js/account.js"></script> <!-- Importing external js file -->
     </head>
 
     <body class="container-fluid">
 
+        <!-- Creating the navbar and populating it -->
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="nav navbar-nav ml-auto">
                 <li><a class="nav-link" href="main.php"><i class="fa fa-home"></i> Home</a></li>
@@ -34,6 +36,7 @@
             </ul>
         </nav>
 
+        <!-- Creating an accordion -->
         <div id="accordion">
 
             <div class="card" data-value="c1">
@@ -51,12 +54,15 @@
 
             <div class="gap"></div>
 
+            <!-- Start of an accordion card -->
+            <!-- The card below is how a demonstrator/helper can change their accounts password -->
             <div class="card" data-value="c2">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
                     <div class="card-header">
                         Change Password
                         <i class="fa fa-angle-down c2" style="font-size: 200%; position: relative; float: right;"></i>
                         <i class="fa fa-angle-up c2" style="font-size: 200%; position: relative; float: right; display: none;"></i>
+                        <!-- fa-angle-up has 'display: none' property as card is not collapsed. The display property changes when the card is clicked and is collapsing -->
                     </div>
                 </a>
                 <div id="collapseTwo" class="collapse">
@@ -64,7 +70,7 @@
                         <div class="container-fluid">
                             <p>If you wish to change your password, you can do so here. Simply fill out the required fields and press the change password button once you are done.</p>
                             <p style="color:red;">* Required fields</p>
-                            <hr class="formHR">
+                            <hr class="formHR"> <!-- Using hr tag to create a divider between the content in the card. Also has css styling added to it to make it slightly different -->
 
                             <div class="form-group">
                                 <input type="password" placeholder="Enter your current password *" name="oldpsw" id="oldpsw" class="form-control" required>
@@ -86,11 +92,13 @@
                     </form>
                 </div>
             </div>
+            <!-- End of the first accordion card -->
 
-            <div class="gap"></div>
+            <div class="gap"></div> <!-- Producing a gap between each card (css is used to do this) -->
 
-            <?php if ($_SESSION["accType"] == "admin") { ?>
-
+            <?php if ($_SESSION["accType"] == "admin") { ?> <!-- This line of code is used to hide cards, in the accordion, from demonstrators who don't have admin priveleges -->
+                
+                <!-- Card below is used to create demonstrator/helper accounts -->
                 <div class="card" data-value="c3">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
                         <div class="card-header">
@@ -133,6 +141,7 @@
 
                 <div class="gap"></div>
 
+                <!-- Card below is how you can delete helper accounts -->
                 <div class="card" data-value="c4">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseDelete">
                         <div class="card-header">
@@ -146,15 +155,16 @@
                         <hr class="formHR">
                         
                         <?php
+                            // Query below used to get a list of all the helper accounts
                             $result = mysqli_query($connection, "SELECT * FROM users WHERE 1") or die (mysqli_error());
-                            echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                            echo "<tr> <th scope=\"col\">Username</th> <th scope=\"col\"></th> </tr>";
+                            echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">"; // Creating a table to display all the demonstrators who have accounts
+                            echo "<tr> <th scope=\"col\">Username</th> <th scope=\"col\"></th> </tr>"; // Creating the headers of the table
 
-                            while($row = mysqli_fetch_array($result)){
+                            while($row = mysqli_fetch_array($result)){ // While loop used to output the result of the query
 
                                 echo "<tr>";
-                                echo '<td>' . $row['Username'] . '</td>';
-                                echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['ID'] . ' onclick="deleteAccount(this)">Remove Helper</button></td>';
+                                echo '<td>' . $row['Username'] . '</td>'; // Specifying the data that is to be displayed
+                                echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['ID'] . ' onclick="deleteAccount(this)">Remove Helper</button></td>'; // Adding button to allow the removal of helper accounts. Button, when clicked, passes the account ID to the account deletion JS function in account.js.
                                 echo "</tr>";
         
                             }
@@ -167,6 +177,7 @@
 
                 <div class="gap"></div>
 
+                <!-- Card below is where you can manually log students out of the system, if need be -->
                 <div class="card" data-value="c5">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseStudents">
                         <div class="card-header">
@@ -190,7 +201,7 @@
                                 echo "<tr>";
                                 echo '<td>' . $row['StudentID'] . '</td>';
                                 echo '<td>' . $row['studentname'] . '</td>';
-                                echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['StudentID'] . ' onclick="manualLogout(this)">Logout Student</button></td>';
+                                echo '<td><button id="tabButton" class="btn btn-danger" name="logout" value=' . $row['StudentID'] . ' onclick="manualLogout(this)">Logout Student</button></td>';
                                 echo "</tr>";
         
                             }
@@ -203,6 +214,7 @@
 
                 <div class="gap"></div>
 
+                <!-- Card below is where one can view all the completed help requests -->
                 <div class="card" data-value="c6">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseCompleted">
                         <div class="card-header">
@@ -214,8 +226,8 @@
                     <div id="collapseCompleted" class="collapse">
                         <div class="card-body">
                             <div style="text-align:center;">
-                                <button id="reset" class="btn btn-info">Reset System</button>
-                                <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a>
+                                <button id="reset" class="btn btn-info">Reset System</button> <!--Button which, when clicked, will reset the whole system  -->
+                                <a href="tableToCSV.php"><button id="tab2CSV"  class="btn btn-info">Download to CSV</button></a> <!-- Button which, when clicked, will download the table displayed in this card as a csv file -->
                                 <hr class="formHR">
                                 <div class="container table-responsive">
                                     <?php
@@ -253,6 +265,7 @@
 
                 <div class="gap"></div>
 
+                <!-- Card below is for providing the system with help request data (i.e. the categories and sub-categories which students can pick from) -->
                 <div class="card" data-value="c7">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                         <div class="card-header">
@@ -287,6 +300,7 @@
 
                 <div class="gap"></div>
 
+                <!-- Card below is how an admin can completely reset or delete specific help request data -->
                 <div class="card" data-value="c8">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseRoD">
                         <div class="card-header">
@@ -302,7 +316,7 @@
                             <hr class="formHR">
                             <div class="container table-responsive">
                                 <?php
-                                    //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
+                                    // Query below is used to acquire a list of all the help request data which have been provided into the system
                                     $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.Category") or die (mysqli_error());
                                     echo "<table id=\"dataTable\" class=\"table table-striped tabWide\" style=\"text-align:center;\">";
                                     echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
@@ -327,7 +341,8 @@
 
             <?php } ?>
         </div>
-
+                                    
+        <!-- Modal pop-up used to display any response information0 -->
         <div class="modal fade" id="responseModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

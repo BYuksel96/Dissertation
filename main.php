@@ -3,6 +3,7 @@
 
     session_start();
 
+    // Checking if login sessions are set, if not the user is redirected to the login page
     if(!isset($_SESSION['demonstrator'])){
         if(!isset($_SESSION['studentNumber'])){
             header("location:login.php");
@@ -11,6 +12,7 @@
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Help Request</title>
@@ -20,30 +22,35 @@
 
         <link rel="shortcut icon" type="image/x-icon" href="bufavicon.ico" />
 
+        <!-- Importing stylesheets and ajax etc. -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/main.css">
-        <script type="text/javascript" src="js/main.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/main.css"> <!-- Importing external css file -->
+        <script type="text/javascript" src="js/main.js"></script> <!-- Importing external js file -->
 
     </head>
 
-    <body class="container-fluid" onload="buttonDisable()">
+    <body class="container-fluid" onload="buttonDisable()"> <!-- On page load buttonDisable() function is called to disable the seats for demonstrator users -->
+        <!-- Navigation bar -->
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="nav navbar-nav ml-auto">
+                <!-- PHP code below used to specifically toggle showing the account button to only the demonstrators/helpers accounts -->
                 <?php if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
                 <li><a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
 
-        <div class="layout">
-            <div id="tableA" class="desk">
+        <div class="layout"> <!-- This div defines the box which the room layout is contained within -->
+            <div id="tableA" class="desk"> <!-- These type of div tags identify a table -->
                 <div class="seats">
                     A
                 </div>
                 <div class="seats">
+                    <!-- Each seat is a button. Once pressed the value of the button is used to populate the help request form field called "Seat" -->
+                    <!-- Clicking a seat button also triggers the help request form modal to pop-up on the screen -->
                     <button type="submit" id="tabVert1" class="btn btn-outline-success seat" data-toggle="modal" data-target="#myModal" value="A1" onclick="addSeat(this)">1</button>
                 </div>
                 <div class="seats">
@@ -205,6 +212,9 @@
         <div id="studentTab" class="container-fluid table-responsive">
             
             <?php 
+            // The php code is used to help show the queue table.
+            // There are two different tables which can be displayed. One is for the students and one if for the demonstrators
+            // It is differentiate by using the accType session variable
             
                 if ($_SESSION["accType"] == "student") {
                     // Displaying the student table
@@ -218,13 +228,13 @@
 
                     while($row = mysqli_fetch_array($result)){
 
-                        if ($studentID == $row['StudentID']){
+                        if ($studentID == $row['StudentID']){ // If ticket in the queue belongs to a student then a clickable 'edit' and 'delete' button will appear alongside their help request
                             echo "<tr class=\"table-success\">";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
                             echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" value=' . $row['TicketNo'] . ' onclick="editItem(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
                             echo "</tr>";
-                        } else{
+                        } else{ // If a ticket in the queue doesn't belong to the student then the 'edit' and 'delete' buttons are disabled
                             echo "<tr>";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
@@ -237,7 +247,7 @@
                     }
 
                     echo "</table>";
-                    // need to create javascript function which now populates the modal when the edit button is clicked
+
                 }
 
                 if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) {
@@ -255,9 +265,9 @@
                         echo '<th scope=\"row\">' . $count . '</th>';
                         echo '<td>' . $row['TicketNo'] . '</td>';
                         echo '<td>' . $row['StudentID'] . '</td>';
-                        if ($row['studentname'] == ""){
+                        if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
                             echo '<td class="missing">Student no longer available</td>';
-                        } else {
+                        } else { // Otherwise the students name will be visible to the demonstrator
                             echo '<td>' . $row['studentname'] . '</td>';
                         }
                         echo '<td>' . $row['SubWeek'] . '</td>';
@@ -281,10 +291,8 @@
         </div>
 
         <!-- Bootstrap Modal - used for students to fill out form containing help request data -->
-        <!-- add php code to stop demonstrator from opening the modal -->
         <?php 
-            
-            if ($_SESSION["accType"] == "student") {
+            if ($_SESSION["accType"] == "student") { // PHP code used to make sure only students can access this modal form
         ?>
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog modal-dialog-centered">
@@ -356,6 +364,7 @@
             </div>
         <?php } ?>
 
+        <!-- Below is a response modal. All responses from the server will be displayed in here to the user -->
         <div class="modal fade" id="responseModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
