@@ -323,7 +323,7 @@
                                     <select name="weekSub" id="weekSub" class="form-control" required>
                                         <?php
                                             echo '<option value="">Pick a category...</option>';
-                                            $sql = mysqli_query($connection, "SELECT * FROM help_data");
+                                            $sql = mysqli_query($connection, "SELECT * FROM help_data ORDER BY Category");
                                             while ($row = mysqli_fetch_assoc($sql)){
                                                 echo '<option value="' . $row['Category'] . '">'. $row['Category'] .'</option>';
                                             }
