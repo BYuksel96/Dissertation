@@ -139,12 +139,12 @@ button:hover {
 /* Specifying the dimensions of buttons inside the accordion (completed requests) */
 #reset {
     display: inline-block;
-    width:49.5%;
+    width:100%;
 }
 
 #tab2CSV {
     display: inline-block;
-    width:49.5%;
+    width:100%;
 }
 
 /* Specifying different styles for when the screen is either that of the max-width defined or smaller */

@@ -4,6 +4,7 @@ $(function () { // When the page is loaded all the functions below in this brack
     
     setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000); // The login table is refreshed every 5 seconds
     setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000); //The completed table is refreshed every 5 seconds
+    setInterval(function() {$("#responsesTable").load('account.php #responsesTable'); }, seconds*1000);
 
     // Tables are refreshed, as specified above, in order to display any changes that may have been made to the tables in the DB
     // For instance a student has made a request for help. Or a demonstrator has attended to a students and thus the reuqest is no longer in the DB table
@@ -126,35 +127,58 @@ $(function () { // When the page is loaded all the functions below in this brack
             }
         });
     });
-
-    // The function below is for when the admin wants to reset the whole system. Clears out DB table specific for keeping record of all completed requests and other help requests
-    $('#reset').on('click', function(e) {
-        
-        e.preventDefault();
-
-        $.ajax({
-            url: 'reset.php',
-            dataType: 'json',
-            success : function (data) {
-                if(data.type == 'success'){
-                    $("#completedTable").load('account.php #completedTable');
-                    $('#modalText').text(data.text);
-                    $('#responseModal').modal('show'); // Using a modal to display the messaged returned back to the user. Here jquery is used to actually show/activate the modal box
-                } else {
-                    $("#completedTable").load('account.php #completedTable');
-                    $('#modalText').text(data.text);
-                    $('#responseModal').modal('show');
-                }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert(errorThrown);
-                console.log(textStatus, errorThrown);
-            }
-        });
-
-    });
     
 });
+
+// The function below is for when the admin wants to reset the whole system. Clears out DB table specific for keeping record of all completed requests and other help requests
+function resetSystem() {
+
+    $.ajax({
+        url: 'reset.php',
+        dataType: 'json',
+        success : function (data) {
+            if(data.type == 'success'){
+                $("#completedTable").load('account.php #completedTable');
+                $("#responsesTable").load('account.php #responsesTable');
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show'); // Using a modal to display the messaged returned back to the user. Here jquery is used to actually show/activate the modal box
+            } else {
+                $("#completedTable").load('account.php #completedTable');
+                $("#responsesTable").load('account.php #responsesTable');
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+
+}
+
+function responses() {
+
+    $.ajax({
+        url: 'resetresponses.php',
+        dataType: 'json',
+        success : function (data) {
+            if(data.type == 'success'){
+                $("#responsesTable").load('account.php #responsesTable');
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show'); // Using a modal to display the messaged returned back to the user. Here jquery is used to actually show/activate the modal box
+            } else {
+                $("#responsesTable").load('account.php #responsesTable');
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}
 
 // Below is a javascript function. When called it will delete a demonstrator account (Deletes the account which was chosen by the admin)
 function deleteAccount(objButton) {
