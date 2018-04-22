@@ -131,6 +131,11 @@ button:hover {
     overflow-y: scroll;
 }
 
+#collapseResponses {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
 /* Specifying the dimensions of buttons inside the accordion (completed requests) */
 #reset {
     display: inline-block;
