@@ -163,9 +163,3 @@ button:hover {
     max-height: 500px;
     overflow-y: scroll;
 }
-
-/* Adjusting specific stylinf of tables found in the accordions */
-#tableStuff{
-    text-align:center;
-    position:relative;
-}

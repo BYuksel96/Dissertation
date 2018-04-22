@@ -276,33 +276,33 @@
                             <i class="fa fa-angle-up c4" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
                     </a>
-                    <div id="collapseResponses" class="collapse card-body table-responsive">
+                    <div id="collapseResponses" class="collapse card-body">
                         <p style="text-align: center;">Provided below is the list of responses left by helpers after they had attended to a student.</p>
                         <p id="msg-response-delete" style="font-size: 10pt;"></p>
                         <hr class="formHR">
-                        
-                        <?php
-                            // Query below used to get a list of all the helper accounts
-                            $result = mysqli_query($connection, "SELECT u.Username, hr.StudentID, hr.SubWeek, hr.TaskNo, hf.option_selected, hf.comments FROM helper_feedback hf LEFT JOIN help_request hr ON hr.TicketNo = hf.ticket_id LEFT JOIN users u ON u.ID = hf.users_id ORDER BY hf.ID") or die (mysqli_error());
-                            echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">"; // Creating a table to display all the demonstrators who have accounts
-                            echo "<tr> <th scope=\"col\">Helper Account</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Task Category</th> <th scope=\"col\">Task Sub-category</th> <th scope=\"col\">Feedback Category</th> <th scope=\"col\">Feedback comments</th> </tr>"; // Creating the headers of the table
+                        <div class="container table-responsive">
+                            <?php
+                                // Query below used to get a list of all the helper accounts
+                                $result = mysqli_query($connection, "SELECT u.Username, hr.StudentID, hr.SubWeek, hr.TaskNo, hf.option_selected, hf.comments FROM helper_feedback hf LEFT JOIN help_request hr ON hr.TicketNo = hf.ticket_id LEFT JOIN users u ON u.ID = hf.users_id ORDER BY hf.ID") or die (mysqli_error());
+                                echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">"; // Creating a table to display all the demonstrators who have accounts
+                                echo "<tr> <th scope=\"col\">Helper Account</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Task Category</th> <th scope=\"col\">Task Sub-category</th> <th scope=\"col\">Feedback Category</th> <th scope=\"col\">Feedback comments</th> </tr>"; // Creating the headers of the table
 
-                            while($row = mysqli_fetch_array($result)){ // While loop used to output the result of the query
+                                while($row = mysqli_fetch_array($result)){ // While loop used to output the result of the query
 
-                                echo "<tr>";
-                                echo '<td>' . $row['Username'] . '</td>'; // Specifying the data that is to be displayed
-                                echo '<td>' . $row['StudentID'] . '</td>';
-                                echo '<td>' . $row['SubWeek'] . '</td>';
-                                echo '<td>' . $row['TaskNo'] . '</td>';
-                                echo '<td>' . $row['option_selected'] . '</td>';
-                                echo '<td>' . $row['comments'] . '</td>';
-                                echo "</tr>";
-        
-                            }
-        
-                            echo "</table>";
-                        ?>
-
+                                    echo "<tr>";
+                                    echo '<td>' . $row['Username'] . '</td>'; // Specifying the data that is to be displayed
+                                    echo '<td>' . $row['StudentID'] . '</td>';
+                                    echo '<td>' . $row['SubWeek'] . '</td>';
+                                    echo '<td>' . $row['TaskNo'] . '</td>';
+                                    echo '<td>' . $row['option_selected'] . '</td>';
+                                    echo '<td>' . $row['comments'] . '</td>';
+                                    echo "</tr>";
+            
+                                }
+            
+                                echo "</table>";
+                            ?>
+                        </div>
                     </div>
                 </div>
 
