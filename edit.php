@@ -8,7 +8,7 @@
 
     if(isset($_POST['itemNum'])){
 
-        $itemID = $_POST['itemNum']; // storing ticket number in a var
+        $itemID = mysqli_real_escape_string($connection, $_POST['itemNum']); // storing ticket number in a var
         $sqlQuery = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID'"); // finding the student number associated with the ticket number
         $result = mysqli_fetch_assoc($sqlQuery); // fetching the result
 

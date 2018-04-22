@@ -426,6 +426,55 @@
                 </div>
             </div>
         </div>
+        <?php
+            if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) {
+        ?>
+                <!-- Below is a modal containing the form helpers fill out after the are done helping a student -->
+                <div class="modal fade" id="completedQs">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                        
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Helper Feedback</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
 
+                            <form id="completeForm" class="class-body" name="completedQS">
+                                <!-- Modal body -->
+                                <div id="modalText" class="modal-body">
+                                    <p>Help Completed :)</p>
+                                    <p>Please feel free to provide more detail about the nature of the problem you attended to.</p>
+
+                                    
+                                    <div class="form-group">
+                                        <label for="categories"><b>Choose a category:</b></label>
+                                        <select name="categories" id="categories" class="form-control">
+                                            <option value="Programmatic Error">Programmatic Error</option>
+                                            <option value="Logic Error">Logic Error</option>
+                                            <option value="Brief Clarification">Brief Clarification</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="moreinfo"><b>If applicable, or you want to, please provide further information on the nature of the issue you attended to:</b></label>
+                                        <textarea rows="4" cols="50" name="moreinfo" id="moreinfo" class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group" style="display: none;">
+                                        <input type="text" id="ticketNumber" name="ticketNumber" class="form-control" readonly>
+                                    </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" id="completedButton" name="submit" class="btn btn-success">Submit Information</button>
+                                    <button type="button" id="close" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+        <?php } ?>
     </body>
 </html>

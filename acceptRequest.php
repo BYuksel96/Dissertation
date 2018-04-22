@@ -4,11 +4,11 @@
 
     if(isset($_POST['itemNum'])){ // Checking if the itemNum (i.e. the ticket ID) has been posted. If so then work is carried out. If not an appropriate message is sent back to the user
 
-        $itemID = $_POST['itemNum']; // Storing the posted value into a variable
+        $itemID = mysqli_real_escape_string($connection, $_POST['itemNum']); // Storing the posted value into a variable
         $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session cariable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
 
-        // select query to acquire demon id
-        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //finding student number associated with the ticket number
+        // select query to acquire demonstrator id
+        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'");
         $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
         // select query to acquire student id
         $sqlQueryStuNum = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID' AND active_check = \"TRUE\""); //finding student number associated with the ticket number

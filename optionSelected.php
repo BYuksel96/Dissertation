@@ -7,7 +7,7 @@
     session_start();
 
     if (isset($_POST['option'])){
-        $option = $_POST['option']; // Storing the posted value in a var
+        $option = mysqli_real_escape_string($connection, $_POST['option']); // Storing the posted value in a var
         $result = '';
         $sql = mysqli_query($connection, "SELECT * FROM help_data WHERE Category = '$option'"); // Querying the database to get back the sub-category data
         while ($row = mysqli_fetch_assoc($sql)){

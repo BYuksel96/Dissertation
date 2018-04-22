@@ -5,7 +5,7 @@
 
     if(isset($_POST['itemNum'])){
 
-        $itemID = $_POST['itemNum']; // Storing the posted value into a variable
+        $itemID = mysqli_real_escape_string($connection, $_POST['itemNum']); // Storing the posted value into a variable
         
         $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"FALSE\", TimeHelpFinished = NOW() WHERE TicketNo = '$itemID'");
         if(!$changeState) {
@@ -19,6 +19,27 @@
 
     }
 
+    if(isset($_POST['categories'])){
 
+        $category = mysqli_real_escape_string($connection, $_POST['categories']);
+        $info = mysqli_real_escape_string($connection, $_POST['moreinfo']);
+        $ticketID = mysqli_real_escape_string($connection, $_POST['ticketNumber']);
+
+        $demName = $_SESSION["demonstrator"];
+        // select query to acquire demonstrator id
+        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //finding student number associated with the ticket number
+        $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
+        $demonID = $resultDemID["ID"];
+
+        $changeState = mysqli_query($connection, "INSERT INTO helper_feedback(users_id, ticket_id, option_selected, comments) VALUES ('$demonID','$ticketID','$category','$info')");
+        if(!$changeState){
+            $output = "Error" . mysqli_error();
+            $response = json_encode(array('type' => 'error', 'text' => $output));
+            die($response);
+        } else {
+            $response = json_encode(array('type' => 'success', 'text' => 'All done.'));
+            die($response);
+        }
+    }
 
 ?>

@@ -19,7 +19,7 @@
             die($response);
         }
     } else if(isset($_POST['id'])){ // If remove button is pressed then using the items ID only that specfic entry will be removed from the help_data DB table
-        $help_data_id = $_POST['id'];
+        $help_data_id = mysqli_real_escape_string($connection, $_POST['id']);
         $result = "DELETE FROM help_data WHERE ID = '$help_data_id'";
         if(mysqli_query($connection,$result)){
             $response = json_encode(array('type' => 'success', 'text' => 'The item has now been removed.')); //message to send back to client side

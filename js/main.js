@@ -71,6 +71,34 @@ $(function () {
             }
         });
     });
+
+    $('#completeForm').on('submit', function(e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST', 
+            url: 'completeRequest.php',
+            dataType: 'json',
+            data: $('#completeForm').serialize(),
+            success : function (data) {
+                if(data.type == 'error'){
+                    $("#completeForm")[0].reset(); // Reseting the form
+                    $('#close').trigger('click'); // Using jquery to close the form
+                    $("#studentTable").load('main.php #studentTable'); // Reloading the queueing table
+                }
+                else{
+                    $("#completeForm")[0].reset();
+                    $('#close').trigger('click');
+                    $("#studentTable").load('main.php #studentTable');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert(errorThrown);
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
 });
 
 // Javascript function which, when called, acquires info on the value of the seat position of the student.
@@ -206,11 +234,14 @@ function completeRequest(objButton) {
         data: { itemNum : x },
         success : function (data) { 
             if(data.type == 'success'){
+                $("#completeForm")[0].reset();
                 $("#studentTable").load('main.php #studentTable');
-                $('#modalText').text(data.text);
-                $('#responseModal').modal('show');
+                // $('#modalText').text(data.text);
+                $("#ticketNumber").val(x);
+                $('#completedQs').modal('show');
             }
             else{
+                $("#completeForm")[0].reset();
                 $("#studentTable").load('main.php #studentTable');
                 $('#modalText').text(data.text);
                 $('#responseModal').modal('show');

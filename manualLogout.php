@@ -5,7 +5,7 @@
     session_start();
 
     if (isset($_POST['id'])){
-        $studentID = $_POST['id']; // Storing the student ID (i.e. the students numbers)
+        $studentID = mysqli_real_escape_string($connection, $_POST['id']); // Storing the student ID (i.e. the students numbers)
         $result = "DELETE FROM students WHERE StudentID = '$studentID'"; // Removing student from the DB table 'students'
         if(mysqli_query($connection,$result)){
             $response = json_encode(array('type' => 'success', 'text' => 'Logged student out.')); //message to send back to client side
