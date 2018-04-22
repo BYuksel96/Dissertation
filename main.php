@@ -249,7 +249,7 @@
                             echo "<tr>";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
-                            echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#myModal" disabled>Edit</button><button id="tabButton" class="btn btn-danger" name="delete" disabled>Delete</button></td>';
+                            echo '<td></td>';
                             echo "</tr>";
                         }
                         
@@ -311,13 +311,14 @@
                     
                         <!-- Modal Header -->
                         <div class="modal-header">
-                            <h4 class="modal-title">Help Request Form</h4>
+                            <h4 class="modal-title">Help Request Form </h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         
                         <form id="helpForm" class="class-body" name="help">
                             <!-- Modal body -->
                             <div class="modal-body">
+                            <p style="color:red; font-size: 12px;">* Required fields</p>
                                 <div class="form-group">
                                     <label for="weekSub"><b>Choose the category you need help with:<b style="color: red">*</b></b></label>
                                     <select name="weekSub" id="weekSub" class="form-control" required>
@@ -353,7 +354,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="description"><b>Brief Problem Description:</b></label>
+                                    <label for="description"><b>Brief Problem Description: <b style="font-size: 12px;">(Not required)</b></b></label>
                                     <input type="text" placeholder="Description" name="description" id="description" class="form-control">
                                 </div>
                                 <div class="form-group">
