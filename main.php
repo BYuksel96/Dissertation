@@ -262,39 +262,72 @@
                 }
 
                 if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) {
-                    // Displaying the demonstrators table
-                    $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE active_check = \"TRUE\" ORDER BY TicketNo ASC") or die (mysqli_error());
-                    $count = 1;
+                    $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session cariable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
 
-                    echo "<table id=\"studentTable\" class=\"table table-striped tabWide\" style=\"text-align:center;\">";
-                    echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Submission Week</th> <th scope=\"col\">Task Number</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
-                    
+                    // select query to acquire demon id
+                    $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //fidning student number associated with the ticket number
+                    $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
 
-                    while($row = mysqli_fetch_array($result)){
+                    $demonID = $resultDemID["ID"];
 
-                        echo "<tr>";
-                        echo '<th scope=\"row\">' . $count . '</th>';
-                        echo '<td>' . $row['TicketNo'] . '</td>';
-                        echo '<td>' . $row['StudentID'] . '</td>';
-                        if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
-                            echo '<td class="missing">Student no longer available</td>';
-                        } else { // Otherwise the students name will be visible to the demonstrator
-                            echo '<td>' . $row['studentname'] . '</td>';
-                        }
-                        echo '<td>' . $row['SubWeek'] . '</td>';
-                        echo '<td>' . $row['TaskNo'] . '</td>';
-                        echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                        echo '<td>' . $row['TimeAllocation'] . '</td>';
-                        echo '<td>' . $row['bDesc'] . '</td>';
-                        echo '<td>' . $row['SeatLocation'] . '</td>';
-                        echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Help Student</button></td>';
-                        echo "</tr>";
+                    //Displaying the demonstrators table
+                    $inProgress = mysqli_query($connection, "SELECT hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'SEMI' AND hc.users_id = '$demonID'");
+                    if (mysqli_num_rows($inProgress) == 0){
+                        $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE active_check = \"TRUE\" ORDER BY TicketNo ASC") or die (mysqli_error());
+                        $count = 1;
+    
+                        echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                        echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
-                        $count++;
+    
+                        while($row = mysqli_fetch_array($result)){
+    
+                            echo "<tr>";
+                            echo '<th scope=\"row\">' . $count . '</th>';
+                            echo '<td>' . $row['TicketNo'] . '</td>';
+                            echo '<td>' . $row['StudentID'] . '</td>';
+                            if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
+                                echo '<td class="missing">Student no longer available</td>';
+                            } else { // Otherwise the students name will be visible to the demonstrator
+                                echo '<td>' . $row['studentname'] . '</td>';
+                            }
+                            echo '<td>' . $row['SubWeek'] . '</td>';
+                            echo '<td>' . $row['TaskNo'] . '</td>';
+                            echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                            echo '<td>' . $row['TimeAllocation'] . '</td>';
+                            echo '<td>' . $row['bDesc'] . '</td>';
+                            echo '<td>' . $row['SeatLocation'] . '</td>';
+                            echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Assist Student</button></td>';
+                            echo "</tr>";
+                            
+                            $count++;
+    
+                        }
+    
+                        echo "</table>";
 
+                    } else {
+                        echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                        echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
+                        
+                        while($row = mysqli_fetch_array($inProgress)){
+    
+                            echo "<tr>";
+                            echo '<td>' . $row['student_id'] . '</td>';
+                            echo '<td>' . $row['ticket_no'] . '</td>';
+                            echo '<td>' . $row['SubWeek'] . '</td>';
+                            echo '<td>' . $row['TaskNo'] . '</td>';
+                            echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                            echo '<td>' . $row['TimeAllocation'] . '</td>';
+                            echo '<td>' . $row['bDesc'] . '</td>';
+                            echo '<td>' . $row['SeatLocation'] . '</td>';
+                            echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['ticket_no'] . ' onclick="completeRequest(this)">Done</button></td>';
+                            echo "</tr>";
+    
+                        }
+    
+                        echo "</table>";
                     }
-
-                    echo "</table>";
 
                 }
 

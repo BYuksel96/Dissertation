@@ -232,9 +232,9 @@
                             <div class="container table-responsive">
                                 <?php
                                     //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
-                                    $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no AND hr.active_check = 'FALSE' LEFT JOIN users u ON u.ID = hc.users_id ORDER BY hc.ticket_no") or die (mysqli_error());
+                                    $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.TimeHelpFinished, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'FALSE' ORDER BY hc.ticket_no") or die (mysqli_error());
                                     echo "<table id=\"completedTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Date of Request</th> </tr>";
+                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
                                 
                                     while($row = mysqli_fetch_array($result)){
 
@@ -250,6 +250,7 @@
                                         echo '<td>' . $row['SeatLocation'] . '</td>';
                                         echo '<td>' . $row['TimeOfRequest'] . '</td>';
                                         echo '<td>' . $row['TimeOfHelp'] . '</td>';
+                                        echo '<td>' . $row['TimeHelpFinished'] . '</td>';
                                         echo '<td>' . $row['DateOfRequest'] . '</td>';
                                         echo "</tr>";
                 

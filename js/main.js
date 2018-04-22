@@ -195,3 +195,30 @@ function helpStudent(objButton) {
         }
     });
 }
+
+function completeRequest(objButton) {
+    var x = objButton.value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'completeRequest.php',
+        dataType: 'json',
+        data: { itemNum : x },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $("#studentTable").load('main.php #studentTable');
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
+            }
+            else{
+                $("#studentTable").load('main.php #studentTable');
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}

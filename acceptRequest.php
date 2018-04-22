@@ -8,13 +8,13 @@
         $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session cariable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
 
         // select query to acquire demon id
-        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //fidning student number associated with the ticket number
+        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //finding student number associated with the ticket number
         $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
         // select query to acquire student id
-        $sqlQueryStuNum = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID'"); //fidning student number associated with the ticket number
+        $sqlQueryStuNum = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID' AND active_check = \"TRUE\""); //finding student number associated with the ticket number
         $resultStuID = mysqli_fetch_assoc($sqlQueryStuNum); // fetching the result
         if (!$sqlQueryStuNum) { // If the result of the StudentID query is empty then an appropriate response is sent back to the user
-            // Below is how a response is ssent from server side back to the user
+            // Below is how a response is sent from server side back to the user
             $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue. Or another demonstrator is already attending to this student.'));
             die($response); // Exiting with our response
         }else{
@@ -32,7 +32,7 @@
                 }
                 else {
                     // changing the active check to false - This removes the help request from being displayed in the queueing table
-                    $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"FALSE\", TimeOfHelp = NOW() WHERE TicketNo = '$itemID'");
+                    $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"SEMI\", TimeOfHelp = NOW() WHERE TicketNo = '$itemID'");
                     if(!$changeState) {
                         $output = "Error" . mysqli_error();
                         $response = json_encode(array('type' => 'error', 'text' => $output));
