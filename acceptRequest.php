@@ -32,7 +32,7 @@
                 }
                 else {
                     // changing the active check to false - This removes the help request from being displayed in the queueing table
-                    $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"SEMI\", TimeOfHelp = NOW() WHERE TicketNo = '$itemID'");
+                    $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"ATTENDING\", TimeOfHelp = NOW() WHERE TicketNo = '$itemID'");
                     if(!$changeState) {
                         $output = "Error" . mysqli_error();
                         $response = json_encode(array('type' => 'error', 'text' => $output));

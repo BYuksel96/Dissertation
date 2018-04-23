@@ -235,7 +235,7 @@
                                     $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.TimeHelpFinished, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'FALSE' ORDER BY hc.ticket_no") or die (mysqli_error());
                                     echo "<table id=\"completedTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                                     echo "<tr> <th colspan=\"7\" scope=\"col\"><button id=\"reset\" class=\"btn btn-info\" onclick=\"resetSystem()\">Reset System (and helper responses table)</button></th> <th colspan=\"7\" scope=\"col\"><a href=\"tableToCSV.php\"><button id=\"tab2CSV\"  class=\"btn btn-info\">Download to CSV</button></a></th> </tr>";
-                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
+                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
                                 
                                     while($row = mysqli_fetch_array($result)){
 
@@ -285,7 +285,7 @@
                                 $result = mysqli_query($connection, "SELECT u.Username, hr.StudentID, hr.SubWeek, hr.TaskNo, hf.option_selected, hf.comments FROM helper_feedback hf LEFT JOIN help_request hr ON hr.TicketNo = hf.ticket_id LEFT JOIN users u ON u.ID = hf.users_id ORDER BY hf.ID") or die (mysqli_error());
                                 echo "<table id=\"responsesTable\" class=\"table table-striped\" style=\"text-align:center;\">"; // Creating a table to display all the demonstrators who have accounts
                                 echo "<tr> <th colspan=\"3\" scope=\"col\"><button style=\"width: 100%\" id=\"resetresponses\" class=\"btn btn-info\" onclick=\"responses()\">Reset Helper Responses Table</button></th> <th colspan=\"3\" scope=\"col\"><a href=\"responsesToCSV.php\"><button style=\"width: 80%\" id=\"responses2CSV\" class=\"btn btn-info\">Download table to CSV</button></a></th> </tr>";
-                                echo "<tr> <th scope=\"col\">Helper Account</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Task Category</th> <th scope=\"col\">Task Sub-category</th> <th scope=\"col\">Feedback Category</th> <th scope=\"col\">Feedback comments</th> </tr>"; // Creating the headers of the table
+                                echo "<tr> <th scope=\"col\">Helper Account</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub-category</th> <th scope=\"col\">Feedback Category</th> <th scope=\"col\">Feedback comments</th> </tr>"; // Creating the headers of the table
 
                                 while($row = mysqli_fetch_array($result)){ // While loop used to output the result of the query
 
@@ -394,7 +394,7 @@
                 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">System Info</h4>
+                        <h4 class="modal-title">Notification</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 

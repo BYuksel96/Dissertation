@@ -10,7 +10,7 @@
             header('Content-Disposition: attachment; filename=Helper_Responses.csv'); // Setting the export file name
 
             $file = fopen("php://output", "w"); // Opening the file for it to be written into and downloaded to the users system
-            $file_headers = array("Helper Account", "Student ID", "Task Category", "Task Sub-category", "Feedback Category", "Feedback comments"); // File Headers
+            $file_headers = array("Helper Account", "Student ID", "Chosen Task Category", "Task Sub-category", "Feedback Category", "Feedback comments"); // File Headers
 
             $header = false; // Header check variable
 

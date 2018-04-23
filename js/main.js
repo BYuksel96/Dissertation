@@ -3,6 +3,25 @@ $(function () {
     var seconds = 5; 
     setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000); // Refreshing the queue table. Done to show if any changes have been made
 
+    setInterval(function() {
+        //ajax in here
+        $.ajax({
+            url: 'attendanceCheck.php',
+            dataType: 'json',
+            success : function (data) { 
+                if(data.type == 'success'){
+                    $('#modalText').text(data.text); // Adding text to the modal which displays helpful responses to the student
+                    $('#responseModal').modal('show'); // Activating the response modal
+                    $("#studentTable").load('main.php #studentTable'); // Reloading the queueing table
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    
+    }, seconds*1000);
+
     // The function below is for when a student is making a request and is filling out the form.
     // This specific function handles the dynamic changing of the content located in the sub-category box.
     // The content shown in the sub-category box is affected by the option chosen in the 'category' box.

@@ -27,7 +27,7 @@
 
         $demName = $_SESSION["demonstrator"];
         // select query to acquire demonstrator id
-        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); //finding student number associated with the ticket number
+        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); // finding student number associated with the ticket number
         $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
         $demonID = $resultDemID["ID"];
 

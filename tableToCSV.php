@@ -10,7 +10,7 @@
             header('Content-Disposition: attachment; filename=Completed_Requests.csv'); // Setting the export file name
 
             $file = fopen("php://output", "w"); // Opening the file for it to be written into and downloaded to the users system
-            $file_headers = array("Assisted By", "Student Number", "Ticket No.", "Chosen Category", "Sub Category", "Problem Severity", "Time Allocation", "Problem Description", "Seat Location", "Time Of Request", "Time Help Arrived", "Time Help Was Completed", "Date of Request"); //File Headers
+            $file_headers = array("Assisted By", "Student Number", "Ticket No.", "Chosen Task Category", "Sub Category", "Problem Severity", "Time Allocation", "Problem Description", "Seat Location", "Time Of Request", "Time Help Arrived", "Time Help Was Completed", "Date of Request"); //File Headers
             $header = false; // Header check variable
 
             while($row = mysqli_fetch_array($sql_query, MYSQLI_ASSOC)){ //Fetching outcome of query
