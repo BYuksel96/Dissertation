@@ -21,7 +21,7 @@ if(isset($_SESSION["accType"])){ // Checking the accType session is set
             $response = json_encode(array('type' => 'error', 'text' => 'This help request has already been completed')); // Encoding the variable as a JSON object so it can be accessed on the frontend
             die($response); // Exiting the program and returning the value of the account type
         } else {
-            $response = json_encode(array('type' => 'success', 'text' => 'A demonstrator will be with you now.')); // Encoding the variable as a JSON object so it can be accessed on the frontend
+            $response = json_encode(array('type' => 'success', 'text' => 'A demonstrator will now be attending to you.')); // Encoding the variable as a JSON object so it can be accessed on the frontend
             die($response); // Exiting the program and returning the value of the account type
         }
     } else {

@@ -36,10 +36,19 @@
     <body class="container-fluid" onload="buttonDisable()"> <!-- On page load buttonDisable() function is called to disable the seats for demonstrator users -->
         <!-- Navigation bar -->
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <h1 style="font-size: 25px;">
+                <?php 
+                    if(isset($_SESSION["studentName"])) {
+                        echo "Welcome " . $_SESSION["studentName"];
+                    } else {
+                        echo "Help Request Menu";
+                    }
+                ?>
+            </h1>
             <ul class="nav navbar-nav ml-auto">
                 <!-- PHP code below used to specifically toggle showing the account button to only the demonstrators/helpers accounts -->
                 <?php if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
-                <li><a class="nav-link" href="logout.php" style="color: red;"><i class="fa fa-sign-out"></i> Logout</a></li>
+                <li><a class="nav-link" href="logout.php" style="color: red; font-weight: bold;"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
 
@@ -234,6 +243,7 @@
                     $studentID = $_SESSION["studentNumber"];
 
                     echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                    echo "<tr> <th colspan=\"3\" scope=\"col\">Queue Table</th> </tr>";
                     echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\"></th> </tr>";
                     
 
@@ -277,6 +287,7 @@
                         $count = 1;
     
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                        echo "<tr> <th colspan=\"11\" scope=\"col\">Queue Table</th> </tr>";
                         echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub-category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
     
@@ -308,6 +319,7 @@
 
                     } else {
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
+                        echo "<tr> <th colspan=\"9\" scope=\"col\">Currently assiting a student. Click 'Done' when you are finished.</th> </tr>";
                         echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
                         while($row = mysqli_fetch_array($inProgress)){

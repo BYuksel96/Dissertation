@@ -30,6 +30,7 @@
 
         <!-- Creating the navbar and populating it -->
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
+            <h1 style="font-size: 25px;"><i class="fa fa-user-circle"></i> <?php echo $_SESSION["demonstrator"]; ?></h1>
             <ul class="nav navbar-nav ml-auto">
                 <li><a class="nav-link" href="main.php"><i class="fa fa-home"></i> Home</a></li>
                 <li><a class="nav-link" href="logout.php" style="color: red;"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -42,7 +43,7 @@
             <div class="card" data-value="c1">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                     <div class="card-header">
-                        Account Info
+                        How to use the tool...
                         <i class="fa fa-angle-down c1" id="down" style="font-size: 200%; position: relative; float: right;"></i>
                         <i class="fa fa-angle-up c1" id="up" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                     </div>
