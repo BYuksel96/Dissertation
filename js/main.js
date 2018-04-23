@@ -272,3 +272,30 @@ function completeRequest(objButton) {
         }
     });
 }
+
+function assistance(objButton) {
+    var x = objButton.value;
+
+    $.ajax({
+        type: 'POST',
+        url: 'assistance.php',
+        dataType: 'json',
+        data: { itemNum : x },
+        success : function (data) { 
+            if(data.type == 'success'){
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
+                $("#studentTable").load('main.php #studentTable');
+            }
+            else{
+                $('#modalText').text(data.text);
+                $('#responseModal').modal('show');
+                $("#studentTable").load('main.php #studentTable');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            alert(errorThrown);
+            console.log(textStatus, errorThrown);
+        }
+    });
+}

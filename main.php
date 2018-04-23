@@ -281,9 +281,9 @@
                     $demonID = $resultDemID["ID"];
 
                     //Displaying the demonstrators table
-                    $inProgress = mysqli_query($connection, "SELECT hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'ATTENDING' OR hr.active_check = 'STUDENT NOTIFIED' AND hc.users_id = '$demonID'") or die (mysqli_error());
+                    $inProgress = mysqli_query($connection, "SELECT hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE ((hr.active_check = 'ATTENDING') OR (hr.active_check = 'STUDENT NOTIFIED')) AND (hc.users_id = '$demonID')") or die (mysqli_error());
                     if (mysqli_num_rows($inProgress) == 0){
-                        $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE active_check = \"TRUE\" ORDER BY TicketNo ASC") or die (mysqli_error());
+                        $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.active_check FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE hr.active_check = 'TRUE' OR hr.active_check = 'ASSISTANCE' ORDER BY TicketNo ASC") or die (mysqli_error());
                         $count = 1;
     
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
@@ -292,24 +292,43 @@
                         
     
                         while($row = mysqli_fetch_array($result)){
-    
-                            echo "<tr>";
-                            echo '<th scope=\"row\">' . $count . '</th>';
-                            echo '<td>' . $row['TicketNo'] . '</td>';
-                            echo '<td>' . $row['StudentID'] . '</td>';
-                            if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
-                                echo '<td class="missing">Student no longer available</td>';
-                            } else { // Otherwise the students name will be visible to the demonstrator
-                                echo '<td>' . $row['studentname'] . '</td>';
+                            if ($row['active_check'] == "ASSISTANCE"){
+                                echo "<tr class=\"table-danger\">";
+                                echo '<th scope=\"row\">' . $count . '</th>';
+                                echo '<td>' . $row['TicketNo'] . '</td>';
+                                echo '<td>' . $row['StudentID'] . '</td>';
+                                if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
+                                    echo '<td class="missing">Student no longer available</td>';
+                                } else { // Otherwise the students name will be visible to the demonstrator
+                                    echo '<td>' . $row['studentname'] . '</td>';
+                                }
+                                echo '<td>' . $row['SubWeek'] . '</td>';
+                                echo '<td>' . $row['TaskNo'] . '</td>';
+                                echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                                echo '<td>' . $row['TimeAllocation'] . '</td>';
+                                echo '<td>' . $row['bDesc'] . '</td>';
+                                echo '<td>' . $row['SeatLocation'] . '</td>';
+                                echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Assist Helper</button></td>';
+                                echo "</tr>";
+                            } else {
+                                echo "<tr>";
+                                echo '<th scope=\"row\">' . $count . '</th>';
+                                echo '<td>' . $row['TicketNo'] . '</td>';
+                                echo '<td>' . $row['StudentID'] . '</td>';
+                                if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
+                                    echo '<td class="missing">Student no longer available</td>';
+                                } else { // Otherwise the students name will be visible to the demonstrator
+                                    echo '<td>' . $row['studentname'] . '</td>';
+                                }
+                                echo '<td>' . $row['SubWeek'] . '</td>';
+                                echo '<td>' . $row['TaskNo'] . '</td>';
+                                echo '<td>' . $row['ProblemSeverity'] . '</td>';
+                                echo '<td>' . $row['TimeAllocation'] . '</td>';
+                                echo '<td>' . $row['bDesc'] . '</td>';
+                                echo '<td>' . $row['SeatLocation'] . '</td>';
+                                echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Assist Student</button></td>';
+                                echo "</tr>";
                             }
-                            echo '<td>' . $row['SubWeek'] . '</td>';
-                            echo '<td>' . $row['TaskNo'] . '</td>';
-                            echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                            echo '<td>' . $row['TimeAllocation'] . '</td>';
-                            echo '<td>' . $row['bDesc'] . '</td>';
-                            echo '<td>' . $row['SeatLocation'] . '</td>';
-                            echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Assist Student</button></td>';
-                            echo "</tr>";
                             
                             $count++;
     
@@ -319,7 +338,7 @@
 
                     } else {
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                        echo "<tr> <th colspan=\"9\" scope=\"col\">Currently assiting a student. Click 'Done' when you are finished.</th> </tr>";
+                        echo "<tr> <th colspan=\"9\" scope=\"col\">Currently assiting a student. Click 'Done' when you are finished or 'Acquire Assistance' if you need help.</th> </tr>";
                         echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
                         while($row = mysqli_fetch_array($inProgress)){
@@ -333,7 +352,7 @@
                             echo '<td>' . $row['TimeAllocation'] . '</td>';
                             echo '<td>' . $row['bDesc'] . '</td>';
                             echo '<td>' . $row['SeatLocation'] . '</td>';
-                            echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['ticket_no'] . ' onclick="completeRequest(this)">Done</button></td>';
+                            echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['ticket_no'] . ' onclick="completeRequest(this)">Done</button><button id="tabButton" class="btn btn-danger" name="attend" value=' . $row['ticket_no'] . ' onclick="assistance(this)">Acquire<br>Assistance</button></td>';
                             echo "</tr>";
     
                         }

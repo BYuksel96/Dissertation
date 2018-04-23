@@ -11,7 +11,7 @@
         $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'");
         $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
         // select query to acquire student id
-        $sqlQueryStuNum = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID' AND active_check = \"TRUE\""); //finding student number associated with the ticket number
+        $sqlQueryStuNum = mysqli_query($connection, "SELECT StudentID FROM help_request WHERE TicketNo = '$itemID' AND active_check = \"TRUE\" OR active_check = \"ASSISTANCE\""); //finding student number associated with the ticket number
         $resultStuID = mysqli_fetch_assoc($sqlQueryStuNum); // fetching the result
         if (!$sqlQueryStuNum) { // If the result of the StudentID query is empty then an appropriate response is sent back to the user
             // Below is how a response is sent from server side back to the user
