@@ -1,6 +1,6 @@
 /* Specifying the style of the login box on login.php */
 .login {
-    top: 50%;
+    top: 45%;
     left: 50%;
     position: absolute;
     width: 45%;
