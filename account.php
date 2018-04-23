@@ -32,7 +32,7 @@
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <ul class="nav navbar-nav ml-auto">
                 <li><a class="nav-link" href="main.php"><i class="fa fa-home"></i> Home</a></li>
-                <li><a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
+                <li><a class="nav-link" href="logout.php" style="color: red;"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
 

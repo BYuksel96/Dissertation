@@ -39,7 +39,7 @@
             <ul class="nav navbar-nav ml-auto">
                 <!-- PHP code below used to specifically toggle showing the account button to only the demonstrators/helpers accounts -->
                 <?php if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
-                <li><a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a></li>
+                <li><a class="nav-link" href="logout.php" style="color: red;"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
 
