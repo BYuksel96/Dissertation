@@ -49,7 +49,9 @@
                     </div>
                 </a>
                 <div id="collapseOne" class="collapse card-body">
-                    <p>account info goes here - to be done<p>
+                    <video width="100%" height="25%" controls>
+                    <source src="studentVid.mp4" type="video/mp4">
+                    </video>
                 </div>
             </div>
 

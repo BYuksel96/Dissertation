@@ -92,7 +92,10 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY" style="border:none; width:100%; height:25%;"></iframe>
+                        <!-- <iframe src="StudentVid.flv" style="border:none; width:100%; height:25%;"></iframe> -->
+                        <video width="100%" height="25%" controls>
+                        <source src="studentVid.mp4" type="video/mp4">
+                        </video>
                     </div>
 
                     <!-- Modal footer -->
@@ -116,7 +119,9 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        Insert video here...
+                        <video width="100%" height="25%" controls>
+                        <source src="demonstratorVid.mp4" type="video/mp4">
+                        </video>
                     </div>
 
                     <!-- Modal footer -->
