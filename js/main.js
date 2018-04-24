@@ -1,6 +1,6 @@
 $(function () {
 
-    var seconds = 5; // refresh rate on teh queue table
+    var seconds = 5; // refresh rate on the queue table
     var notify = 15; // variable used to set how many seconds the system should wait before seeing whether to notify a demonstrator or not
 
     setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000); // Refreshing the queue table. Done to show if any changes have been made
@@ -17,7 +17,7 @@ $(function () {
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                alert("error");
+                // alert("error");
                 console.log(textStatus, errorThrown);
             }
         });
