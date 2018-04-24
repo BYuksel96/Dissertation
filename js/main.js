@@ -1,7 +1,24 @@
 $(function () {
 
-    var seconds = 5; 
+    var seconds = 5; // refresh rate on teh queue table
+    var notify = 15; // variable used to set how many seconds the system should wait before seeing whether to notify a demonstrator or not
+
     setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000); // Refreshing the queue table. Done to show if any changes have been made
+
+    // Interval function below used to push a notification to the helper if they are not helping anyone and there is someone in the queue
+    setInterval(function() {
+
+        $.ajax({
+            url: 'queueCheck',
+            dataType: 'json',
+            success : function (data) {
+                if(data.type == 'success'){
+                    notifyMe();
+                }
+            }
+        });
+    
+    }, notify*1000); // Refreshing the queue table. Done to show if any changes have been made
 
     setInterval(function() {
         //ajax in here
@@ -298,4 +315,34 @@ function assistance(objButton) {
             console.log(textStatus, errorThrown);
         }
     });
+}
+
+// Code acquired from https://stackoverflow.com/questions/2271156/chrome-desktop-notification-example?noredirect=1&lq=1
+// request permission on page load
+document.addEventListener('DOMContentLoaded', function () {
+    if (!Notification) {
+        alert('Desktop notifications not available in your browser. Try Chromium.'); 
+        return;
+    }
+  
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+});
+  
+function notifyMe() {
+
+    if (Notification.permission !== "granted")
+        Notification.requestPermission();
+    else {
+        var notification = new Notification('Queue Notification', {
+        icon: 'bufavicon.ico',
+        body: "A student has just entered the queue",
+        });
+
+        notification.onclick = function () {
+        window.open("http://student30224.bucomputing.uk/main.php");      
+        };
+
+    }
+
 }
