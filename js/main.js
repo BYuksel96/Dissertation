@@ -9,12 +9,16 @@ $(function () {
     setInterval(function() {
 
         $.ajax({
-            url: 'queueCheck',
+            url: 'queueCheck.php',
             dataType: 'json',
             success : function (data) {
                 if(data.type == 'success'){
                     notifyMe();
                 }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert("error");
+                console.log(textStatus, errorThrown);
             }
         });
     
