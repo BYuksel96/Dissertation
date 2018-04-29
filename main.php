@@ -485,6 +485,7 @@
                                             <option value="Programmatic Error">Programmatic Error</option>
                                             <option value="Logic Error">Logic Error</option>
                                             <option value="Brief Clarification">Brief Clarification</option>
+                                            <option value="Eclipse issue">Eclipse issue</option>
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
