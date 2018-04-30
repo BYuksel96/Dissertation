@@ -149,7 +149,7 @@
                 <div class="card" data-value="c4">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseDelete">
                         <div class="card-header">
-                            Delete Helper Account
+                            Helper Accounts
                             <i class="fa fa-angle-down c4" style="font-size: 200%; position: relative; float: right;"></i>
                             <i class="fa fa-angle-up c4" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
@@ -163,12 +163,13 @@
                             // Query below used to get a list of all the helper accounts
                             $result = mysqli_query($connection, "SELECT * FROM users WHERE 1") or die (mysqli_error());
                             echo "<table id=\"demonTable\" class=\"table table-striped\" style=\"text-align:center;\">"; // Creating a table to display all the demonstrators who have accounts
-                            echo "<tr> <th scope=\"col\">Username</th> <th scope=\"col\"></th> </tr>"; // Creating the headers of the table
+                            echo "<tr> <th scope=\"col\">Username</th> <th scope=\"col\">Account Type</th> <th scope=\"col\"></th> </tr>"; // Creating the headers of the table
 
                             while($row = mysqli_fetch_array($result)){ // While loop used to output the result of the query
 
                                 echo "<tr>";
-                                echo '<td>' . $row['Username'] . '</td>'; // Specifying the data that is to be displayed
+                                echo '<td>' . $row['Username'] . '</td>'; // Displaying the user names
+                                echo '<td>' . $row['account_type'] . '</td>'; // Displaying the account type
                                 echo '<td><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['ID'] . ' onclick="deleteAccount(this)">Remove Helper</button></td>'; // Adding button to allow the removal of helper accounts. Button, when clicked, passes the account ID to the account deletion JS function in account.js.
                                 echo "</tr>";
         
@@ -235,10 +236,10 @@
                             <div class="container table-responsive">
                                 <?php
                                     //Query below is used to acquire a list of all the help requests which have been completed (Displays who helped with the reuqest, student id, etc.)
-                                    $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.TimeHelpFinished, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'FALSE' ORDER BY hc.ticket_no") or die (mysqli_error());
+                                    $result = mysqli_query($connection, "SELECT u.Username, hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.TimeHelpFinished, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'FALSE' ORDER BY hc.ticket_no") or die (mysqli_error());
                                     echo "<table id=\"completedTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                                     echo "<tr> <th colspan=\"7\" scope=\"col\"><button id=\"reset\" class=\"btn btn-info\" onclick=\"resetSystem()\">Reset System (and helper responses table)</button></th> <th colspan=\"7\" scope=\"col\"><a href=\"tableToCSV.php\"><button id=\"tab2CSV\"  class=\"btn btn-info\">Download to CSV</button></a></th> </tr>";
-                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Time Allocation</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
+                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
                                 
                                     while($row = mysqli_fetch_array($result)){
 
@@ -248,8 +249,6 @@
                                         echo '<td>' . $row['ticket_no'] . '</td>';
                                         echo '<td>' . $row['SubWeek'] . '</td>';
                                         echo '<td>' . $row['TaskNo'] . '</td>';
-                                        echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                                        echo '<td>' . $row['TimeAllocation'] . '</td>';
                                         echo '<td>' . $row['bDesc'] . '</td>';
                                         echo '<td>' . $row['SeatLocation'] . '</td>';
                                         echo '<td>' . $row['TimeOfRequest'] . '</td>';
@@ -315,7 +314,7 @@
                 <div class="card" data-value="c7">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                         <div class="card-header">
-                            Help Request Data
+                            Task Data
                             <i class="fa fa-angle-down c7" style="font-size: 200%; position: relative; float: right;"></i>
                             <i class="fa fa-angle-up c7" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>

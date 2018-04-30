@@ -49,7 +49,7 @@
                     </div>
                     <p id="msg-response-stu" style="color: red; font-size: 10pt;"></p>
                     <button type="submit" class="btn btn-success bttn">Login</button>
-                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#studentModal">How to use...</button> <!-- Button which will trigger the showing of the students modal -->
+                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#studentModal">How to use... (Students)</button> <!-- Button which will trigger the showing of the students modal -->
                     
                     <hr>
 
@@ -72,7 +72,7 @@
 
                     <p id="msg-response" style="color: red; font-size: 10pt;"></p>
                     <button type="submit" class="btn btn-success bttn">Login</button>
-                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#demonModal">How to use...</button> <!-- Button which will trigger the showing of the demonstrator modal -->
+                    <button type="button" class="btn btn-info bttn" data-toggle="modal" data-target="#demonModal">How to use... (Helpers)</button> <!-- Button which will trigger the showing of the demonstrator modal -->
 
                     <hr>
 
@@ -86,7 +86,7 @@
                 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">How to use...</h4>
+                        <h4 class="modal-title">How to use... (Students)</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -113,7 +113,7 @@
                 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">How to use...</h4>
+                        <h4 class="modal-title">How to use... (Helpers)</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 

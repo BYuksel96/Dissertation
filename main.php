@@ -47,7 +47,8 @@
             </h1>
             <ul class="nav navbar-nav ml-auto">
                 <!-- PHP code below used to specifically toggle showing the account button to only the demonstrators/helpers accounts -->
-                <?php if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
+                <?php if ($_SESSION["accType"] == "admin") { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Admin</a></li><?php } ?>
+                <?php if ($_SESSION["accType"] == "standard") { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
                 <li><a class="nav-link" href="logout.php" style="color: red; font-weight: bold;"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
@@ -288,7 +289,7 @@
     
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                         echo "<tr> <th colspan=\"11\" scope=\"col\">Queue Table</th> </tr>";
-                        echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub-category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
+                        echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub-category</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
     
                         while($row = mysqli_fetch_array($result)){
@@ -304,8 +305,6 @@
                                 }
                                 echo '<td>' . $row['SubWeek'] . '</td>';
                                 echo '<td>' . $row['TaskNo'] . '</td>';
-                                echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                                echo '<td>' . $row['TimeAllocation'] . '</td>';
                                 echo '<td>' . $row['bDesc'] . '</td>';
                                 echo '<td>' . $row['SeatLocation'] . '</td>';
                                 echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Assist Helper</button></td>';
@@ -322,8 +321,6 @@
                                 }
                                 echo '<td>' . $row['SubWeek'] . '</td>';
                                 echo '<td>' . $row['TaskNo'] . '</td>';
-                                echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                                echo '<td>' . $row['TimeAllocation'] . '</td>';
                                 echo '<td>' . $row['bDesc'] . '</td>';
                                 echo '<td>' . $row['SeatLocation'] . '</td>';
                                 echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['TicketNo'] . ' onclick="helpStudent(this)">Assist Student</button></td>';
@@ -339,7 +336,7 @@
                     } else {
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                         echo "<tr> <th colspan=\"9\" scope=\"col\">Currently assiting a student. Click 'Done' when you are finished or 'Acquire Assistance' if you need help.</th> </tr>";
-                        echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Severity</th> <th scope=\"col\">Est. Time Allocation</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
+                        echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
                         while($row = mysqli_fetch_array($inProgress)){
     
@@ -348,8 +345,6 @@
                             echo '<td>' . $row['ticket_no'] . '</td>';
                             echo '<td>' . $row['SubWeek'] . '</td>';
                             echo '<td>' . $row['TaskNo'] . '</td>';
-                            echo '<td>' . $row['ProblemSeverity'] . '</td>';
-                            echo '<td>' . $row['TimeAllocation'] . '</td>';
                             echo '<td>' . $row['bDesc'] . '</td>';
                             echo '<td>' . $row['SeatLocation'] . '</td>';
                             echo '<td><button id="tabButton" class="btn btn-success" name="attend" value=' . $row['ticket_no'] . ' onclick="completeRequest(this)">Done</button><button id="tabButton" class="btn btn-danger" name="attend" value=' . $row['ticket_no'] . ' onclick="assistance(this)">Acquire<br>Assistance</button></td>';
@@ -401,7 +396,7 @@
                                         <!-- This section is populated via main.js -->
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display:none;"> <!-- This feature is no longer used but may be required in the future -->
                                     <label for="severity"><b>Select Problem Severity:<b style="color: red">*</b></b></label>
                                     <select name="severity" id="severity" class="form-control" required>
                                         <option value="Low">Low</option>
@@ -409,7 +404,7 @@
                                         <option value="High">High</option>
                                     </select>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" style="display:none;"> <!-- This feature is no longer used but may be required in the future -->
                                     <label for="time"><b>Time Allocation Needed for Task:<b style="color: red">*</b></b></label>
                                     <select name="time" id="time" class="form-control" required>
                                         <option value="5">5 Minutes</option>
