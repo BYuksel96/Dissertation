@@ -349,7 +349,7 @@
                 <div class="card" data-value="c8">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseRoD">
                         <div class="card-header">
-                            Reset Or Delete: Help Request Data
+                            Reset Or Delete: Task Data
                             <i class="fa fa-angle-down c8" style="font-size: 200%; position: relative; float: right;"></i>
                             <i class="fa fa-angle-up c8" style="font-size: 200%; position: relative; float: right; display: none;"></i>
                         </div>
