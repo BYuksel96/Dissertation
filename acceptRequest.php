@@ -24,7 +24,7 @@
                 $response = json_encode(array('type' => 'error', 'text' => 'Student has deleted their help request and is no longer in the queue. Or another demonstrator is already attending to this student.'));
                 die($response);
             } else {
-                $sqlInsert = mysqli_query($connection, "INSERT INTO help_completed(users_id, student_id, ticket_no) VALUES ('$demonID','$stuID','$itemID')");
+                $sqlInsert = mysqli_query($connection, "INSERT INTO help_completed(users_id, ticket_no) VALUES ('$demonID','$itemID')");
                 if(!$sqlInsert) { // If there is an error with the query then an error message is sent back to the user
                     $output = "Error" . mysqli_error();
                     $response = json_encode(array('type' => 'error', 'text' => $output));

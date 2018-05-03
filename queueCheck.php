@@ -14,7 +14,7 @@
         $demonID = $resultDemID["ID"]; // acquiring the ID of the helper - used in the next query to check if they are currently assisting someone or not
 
         // check helper is currently helping someone
-        $inProgress = mysqli_query($connection, "SELECT hc.student_id, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE ((hr.active_check = 'ATTENDING') OR (hr.active_check = 'STUDENT NOTIFIED')) AND (hc.users_id = '$demonID')") or die (mysqli_error());
+        $inProgress = mysqli_query($connection, "SELECT hr.StudentID, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE ((hr.active_check = 'ATTENDING') OR (hr.active_check = 'STUDENT NOTIFIED')) AND (hc.users_id = '$demonID')") or die (mysqli_error());
         if(mysqli_num_rows($inProgress) != 0) {
             $response = json_encode(array('type' => 'error', 'text' => 'Currently helping student'));
             die($response);
