@@ -1,19 +1,25 @@
 <?php
-
+    /*
+    * This file is used to check if there are any students currently queueing for help.
+    * If there are then the file checks to see if the demonstrator/helper is currently assisting a student.
+    * If they are not then an identifier will be sent back to the front end where the js will then push a notification
+    * Onto the demonstrator/helpers screen to notify them that a student is waiting for help.
+    */
     include('connection.php');
     session_start();
 
     if(($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")){
 
-        $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session cariable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
+        // Acquiring demonstrator username from the session variable. This var is stored when the deomstrator logs in
+        // It is used to acquire demonstrators ID value from the DB
+        $demName = $_SESSION["demonstrator"];
 
-        // select query to acquire demon id
-        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); // finding student number associated with the ticket number
+        $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'");
         $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
 
-        $demonID = $resultDemID["ID"]; // acquiring the ID of the helper - used in the next query to check if they are currently assisting someone or not
+        $demonID = $resultDemID["ID"]; // This var is used in the next query to check if the helper is currently assisting a student
 
-        // check helper is currently helping someone
+        // checking if helper is currently helping a student
         $inProgress = mysqli_query($connection, "SELECT hr.StudentID, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE ((hr.active_check = 'ATTENDING') OR (hr.active_check = 'STUDENT NOTIFIED')) AND (hc.users_id = '$demonID')") or die (mysqli_error());
         if(mysqli_num_rows($inProgress) != 0) {
             $response = json_encode(array('type' => 'error', 'text' => 'Currently helping student'));
