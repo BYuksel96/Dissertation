@@ -1,4 +1,11 @@
 <?php
+    /*
+    * PHP file used to:
+    * 1. Acquire the students submitted (active) help request ticket data from the DB
+    * 2. Session variable is set to identify to the tool that the student wants to edit a ticket (this enables the 'edit' button to be displayed in the help request form)
+    * 3. The submitted help request ticket data is then sent back to the function that called this file
+    */
+
     include('connection.php');
     session_start();
 

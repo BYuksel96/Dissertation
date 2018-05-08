@@ -1,6 +1,6 @@
 <?php
     // This file is used to reset the whole system.
-    // It clear the help request and completed tables.
+    // It clears the help_request, help_completed and helper_feedback tables.
     // All ID's start from 1 again.
 
     include('connection.php');

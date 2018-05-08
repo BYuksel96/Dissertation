@@ -1,4 +1,8 @@
 <?php
+    /*
+    * PHP file used to download a csv copy of the helper feedback table to the admins machine (when the download to csv button is pressed)
+    */
+
     include('connection.php');
     session_start();
 
@@ -10,7 +14,7 @@
             header('Content-Disposition: attachment; filename=Helper_Responses.csv'); // Setting the export file name
 
             $file = fopen("php://output", "w"); // Opening the file for it to be written into and downloaded to the users system
-            $file_headers = array("Helper Account", "Student ID", "Chosen Task Category", "Task Sub-category", "Feedback Category", "Feedback comments"); // File Headers
+            $file_headers = array("Helper Account", "Student ID", "Chosen Task Category", "Task Subcategory", "Feedback Category", "Feedback comments"); // File Headers
 
             $header = false; // Header check variable
 
@@ -27,5 +31,7 @@
             fclose($file); // Closing the file as we are now finished
         }
     }
+
+    mysqli_close($connection);
 
 ?>

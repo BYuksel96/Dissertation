@@ -1,4 +1,8 @@
 <?php
+    /*
+    * This is the login page for the application.
+    */
+
     include('connection.php');
     session_start();
 	if(isset($_SESSION['demonstrator']) || isset($_SESSION['studentNumber'])){ // If session values are already set then user is sent to main.php
@@ -80,6 +84,7 @@
             </form>
         </div>
 
+        <!-- Modal for storing the video explaining how to use the tool for students -->
         <div class="modal fade" id="studentModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -107,6 +112,7 @@
             </div>
         </div>
 
+        <!-- Modal for storing the video explaining how to use the tool for helpers -->
         <div class="modal fade" id="demonModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">

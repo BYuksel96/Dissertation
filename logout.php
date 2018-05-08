@@ -1,4 +1,8 @@
 <?php
+    /*
+    * PHP file which handles the logout event of both students and helpers
+    */
+
     include('connection.php');
     session_start();
 

@@ -2,15 +2,15 @@
     /*
     * This file is used to check if there are any students currently queueing for help.
     * If there are then the file checks to see if the demonstrator/helper is currently assisting a student.
-    * If they are not then an identifier will be sent back to the front end where the js will then push a notification
-    * Onto the demonstrator/helpers screen to notify them that a student is waiting for help.
+    * If they are not then an identifier will be sent back to the frontend where the js will then push a notification
+    * onto the demonstrator/helpers screen to notify them that a student is waiting for help.
     */
     include('connection.php');
     session_start();
 
     if(($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")){
 
-        // Acquiring demonstrator username from the session variable. This var is stored when the deomstrator logs in
+        // Acquiring demonstrator username from the session variable. (This var was set when the deomstrator/helper logged in to the tool)
         // It is used to acquire demonstrators ID value from the DB
         $demName = $_SESSION["demonstrator"];
 

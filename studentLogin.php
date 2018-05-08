@@ -1,6 +1,10 @@
 <?php
-    // PHP file that is used to log students into the system
-
+    /* 
+    * PHP file that is used to log students into the tool.
+    * Takes student name and number and stores them in session variables
+    * It also creates a sesison variable which allows the tool to identify what type of user has logged in.
+    * In this case the account type of the user logging in would be set to student.
+    */
     include('connection.php');
     session_start();
 
@@ -28,7 +32,7 @@
                 die($response);
             }
             else {
-                $response = json_encode(array('type' => 'success', 'text' => 'Success: Account has been created!'));
+                $response = json_encode(array('type' => 'success', 'text' => 'Success: Login confirmed!'));
                 // Storing values, accordingly, into the session variables
                 $_SESSION["accType"] = "student"; 
                 $_SESSION["studentNumber"] = $studentID;

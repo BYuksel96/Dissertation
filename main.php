@@ -1,6 +1,10 @@
 <?php
-    include('connection.php');
+    /*
+    * This file contains the code for the work carried out on the page of this application.
+    * It consists of the main page design, how tables how are displayed, the help request forms, etc.
+    */
 
+    include('connection.php');
     session_start();
 
     // Checking if login sessions are set, if not the user is redirected to the login page
@@ -33,7 +37,7 @@
 
     </head>
 
-    <body class="container-fluid" onload="buttonDisable()"> <!-- On page load buttonDisable() function is called to disable the seats for demonstrator users -->
+    <body class="container-fluid" onload="buttonDisable()"> <!-- On page load buttonDisable() function is called to disable the seats for demonstrator account types -->
         <!-- Navigation bar -->
         <nav class="navbar navbar-expand-sm bg-light navbar-light">
             <h1 style="font-size: 25px;">
@@ -46,7 +50,7 @@
                 ?>
             </h1>
             <ul class="nav navbar-nav ml-auto">
-                <!-- PHP code below used to specifically toggle showing the account button to only the demonstrators/helpers accounts -->
+                <!-- PHP code below used to specifically toggle showing the account/admin button to only the demonstrators/helpers accounts -->
                 <?php if ($_SESSION["accType"] == "admin") { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Admin</a></li><?php } ?>
                 <?php if ($_SESSION["accType"] == "standard") { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
                 <li><a class="nav-link" href="logout.php" style="color: red; font-weight: bold;"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -233,9 +237,9 @@
         <div id="studentTab" class="container-fluid table-responsive">
             
             <?php 
-            // The php code is used to help show the queue table.
-            // There are two different tables which can be displayed. One is for the students and one if for the demonstrators
-            // It is differentiate by using the accType session variable
+            // This php code is used to help show the queue table.
+            // There are three different tables which can be displayed. One is for the students and two are for the demonstrators
+            // It is differentiated by using the accType session variable
             
                 if ($_SESSION["accType"] == "student") {
                     // Displaying the student table
@@ -256,7 +260,7 @@
                             echo '<td>' . $row['TicketNo'] . '</td>';
                             echo '<td><button id="tabButton" class="btn btn-warning" name="edit" data-toggle="modal" data-target="#studentForm" value=' . $row['TicketNo'] . ' onclick="editItem(this)">Edit</button><button id="tabButton" class="btn btn-danger" name="delete" value=' . $row['TicketNo'] . ' onclick="deleteItem(this)">Delete</button></td>';
                             echo "</tr>";
-                        } else{ // If a ticket in the queue doesn't belong to the student then the 'edit' and 'delete' buttons are disabled
+                        } else{ // Else display tickets normally in the queue table
                             echo "<tr>";
                             echo '<th scope=\"row\">' . $count . '</th>';
                             echo '<td>' . $row['TicketNo'] . '</td>';
@@ -273,7 +277,7 @@
                 }
 
                 if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) {
-                    $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session cariable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
+                    $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session variable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
 
                     // select query to acquire demon id
                     $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'"); // finding student number associated with the ticket number
@@ -281,20 +285,20 @@
 
                     $demonID = $resultDemID["ID"];
 
-                    // Displaying the demonstrators table
+                    // Query below is used to check if the helper is currently assisting a student
                     $inProgress = mysqli_query($connection, "SELECT hr.StudentID, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE ((hr.active_check = 'ATTENDING') OR (hr.active_check = 'STUDENT NOTIFIED')) AND (hc.users_id = '$demonID')") or die (mysqli_error());
-                    if (mysqli_num_rows($inProgress) == 0){
+                    if (mysqli_num_rows($inProgress) == 0){ // If helper isn't currently assisting a student use the next query (below)
                         $result = mysqli_query($connection, "SELECT hr.TicketNo, hr.StudentID, s.studentname, hr.SubWeek, hr.TaskNo, hr.ProblemSeverity, hr.TimeAllocation, hr.bDesc, hr.SeatLocation, hr.active_check FROM help_request hr LEFT JOIN students s ON s.StudentID = hr.StudentID WHERE hr.active_check = 'TRUE' OR hr.active_check = 'ASSISTANCE' ORDER BY TicketNo ASC") or die (mysqli_error());
                         $count = 1;
     
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                         echo "<tr> <th colspan=\"11\" scope=\"col\">Queue Table</th> </tr>";
-                        echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub-category</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
+                        echo "<tr> <th scope=\"col\">Current Queue</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Student Name</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Subcategory</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
     
                         while($row = mysqli_fetch_array($result)){
-                            if ($row['active_check'] == "ASSISTANCE"){
-                                echo "<tr class=\"table-danger\">";
+                            if ($row['active_check'] == "ASSISTANCE"){ // Checking if any helper needs assistance
+                                echo "<tr class=\"table-danger\">"; // Setting the background colour of this row in the table to red
                                 echo '<th scope=\"row\">' . $count . '</th>';
                                 echo '<td>' . $row['TicketNo'] . '</td>';
                                 echo '<td>' . $row['StudentID'] . '</td>';
@@ -314,7 +318,8 @@
                                 echo '<th scope=\"row\">' . $count . '</th>';
                                 echo '<td>' . $row['TicketNo'] . '</td>';
                                 echo '<td>' . $row['StudentID'] . '</td>';
-                                if ($row['studentname'] == ""){ // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
+                                // If the student is no longer active in the system (i.e. has logged out) then the Demonstrator will be informed of this
+                                if ($row['studentname'] == ""){ 
                                     echo '<td class="missing">Student no longer available</td>';
                                 } else { // Otherwise the students name will be visible to the demonstrator
                                     echo '<td>' . $row['studentname'] . '</td>';
@@ -333,10 +338,10 @@
     
                         echo "</table>";
 
-                    } else {
+                    } else { // If the helper is currently assisting a student then this table will be displayed. The table shows only the ticket of the student they are assisting.
                         echo "<table id=\"studentTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                         echo "<tr> <th colspan=\"9\" scope=\"col\">Currently assiting a student. Click 'Done' when you are finished or 'Acquire Assistance' if you need help.</th> </tr>";
-                        echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub-Category</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
+                        echo "<tr> <th scope=\"col\">Student ID</th> <th scope=\"col\">Ticket Number</th> <th scope=\"col\">Category</th> <th scope=\"col\">Subcategory</th> <th scope=\"col\">Problem Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\"></th> </tr>";
                         
                         while($row = mysqli_fetch_array($inProgress)){
     
@@ -360,7 +365,7 @@
             ?>
         </div>
 
-        <!-- Bootstrap Modal - used for students to fill out form containing help request data -->
+        <!-- Bootstrap Modal - used for students to fill out help request form data -->
         <?php 
             if ($_SESSION["accType"] == "student") { // PHP code used to make sure only students can access this modal form
         ?>
@@ -391,12 +396,12 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="taskNo"><b>Choose the sub category:<b style="color: red">*</b></b></label>
+                                    <label for="taskNo"><b>Choose the subcategory:<b style="color: red">*</b></b></label>
                                     <select name="taskNo" id="taskNo" class="form-control" required>
                                         <!-- This section is populated via main.js -->
                                     </select>
                                 </div>
-                                <div class="form-group" style="display:none;"> <!-- This feature is no longer used but may be required in the future -->
+                                <div class="form-group" style="display:none;"> <!-- This feature has been hidden as it is no longer used but may be required in future iterations -->
                                     <label for="severity"><b>Select Problem Severity:<b style="color: red">*</b></b></label>
                                     <select name="severity" id="severity" class="form-control" required>
                                         <option value="Low">Low</option>
@@ -404,7 +409,7 @@
                                         <option value="High">High</option>
                                     </select>
                                 </div>
-                                <div class="form-group" style="display:none;"> <!-- This feature is no longer used but may be required in the future -->
+                                <div class="form-group" style="display:none;"> <!-- This feature has been hidden as it is no longer used but may be required in future iterations -->
                                     <label for="time"><b>Time Allocation Needed for Task:<b style="color: red">*</b></b></label>
                                     <select name="time" id="time" class="form-control" required>
                                         <option value="5">5 Minutes</option>
@@ -435,7 +440,8 @@
             </div>
         <?php } ?>
 
-        <!-- Below is a response modal. All responses from the server will be displayed in here to the user -->
+        <!-- Below is a response modal. All notification messages will be displayed in here -->
+        <!-- The modal gets populated via the use of jQuery -->
         <div class="modal fade" id="responseModal">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -456,7 +462,7 @@
         <?php
             if (($_SESSION["accType"] == "admin") || ($_SESSION["accType"] == "standard")) {
         ?>
-                <!-- Below is a modal containing the form helpers fill out after the are done helping a student -->
+                <!-- Below is a modal containing the form helpers fill out after they are done helping a student -->
                 <div class="modal fade" id="completedQs">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -469,7 +475,7 @@
 
                             <form id="completeForm" class="class-body" name="completedQS">
                                 <!-- Modal body -->
-                                <div id="modalText" class="modal-body">
+                                <div class="modal-body">
                                     <p>Help Completed :)</p>
                                     <p>Please feel free to provide more detail about the nature of the problem you attended to.</p>
 

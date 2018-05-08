@@ -1,28 +1,31 @@
-$(function () { // When the page is loaded all the functions below in this bracket are active and accessible
+/*
+*
+* account.js - this javascript file is used in account.php
+* all the js front-end functionality for account.php comes from here.
+* this file is also used to send data to server side files and recieve responses back.
+*
+*/
 
-    var seconds = 5; // Creating a variable to hold a time value which is used later
+$(function () { // When the page is loaded all the functions below in this bracket are activated and accessible
+
+    var seconds = 5; // var used to store our time value which is used below
     
     setInterval(function() {$("#loginTable").load('account.php #loginTable'); }, seconds*1000); // The login table is refreshed every 5 seconds
-    setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000); //The completed table is refreshed every 5 seconds
-    setInterval(function() {$("#responsesTable").load('account.php #responsesTable'); }, seconds*1000);
+    setInterval(function() {$("#completedTable").load('account.php #completedTable'); }, seconds*1000); // The completed table is refreshed every 5 seconds
+    setInterval(function() {$("#responsesTable").load('account.php #responsesTable'); }, seconds*1000); // The responses table is refreshed every 5 seconds
 
-    // Tables are refreshed, as specified above, in order to display any changes that may have been made to the tables in the DB
-    // For instance a student has made a request for help. Or a demonstrator has attended to a students and thus the reuqest is no longer in the DB table
+    // Tables are refreshed, as specified above, in order to display any changes that may have been (or are being) made to the tables in the DB
 
-    // The function below is constantly looking out for when an accordion has been clicked on and is now in the process of collapsing.
-    // If activated, it will then carry out the work contained within this function.
+    // The two '.card' functions below are used to check if an accordion is toggeled. This is to help differentiate between the displaying of the up and down arrows
     $('.card').on('show.bs.collapse', function () {
-        // The variables below have been created to specifically be able to identify which accordion has been clicked on
-        // Without them only the first accordion would work
-        var down = '.fa-angle-down.' + $(this).data("value"); // Taking the data value of the clicked accordion to help identify specifically which accordion item was clicked
+        // The variables below have been created to specifically be able to identify which accordion has been clicked on. Without them only the first accordions arrows would changed
+        var down = '.fa-angle-down.' + $(this).data("value"); // Using the data value of the clicked accordion to help identify specifically which accordion item was clicked
         var up = '.fa-angle-up.' + $(this).data("value");
         // alert(cls);
         $(down).hide(750); // Animating and hiding the down arrow on the accordion
         $(up).show(750); // Animating and showing the up arrow on the accordion
     });
 
-    // The function below is constantly looking out for when an accordion has been clicked on and is now in the process of receeding.
-    // If activated, it will then carry out the work contained within this function.
     $('.card').on('hide.bs.collapse', function () {
         var down = '.fa-angle-down.' + $(this).data("value");
         var up = '.fa-angle-up.' + $(this).data("value");
@@ -36,7 +39,7 @@ $(function () { // When the page is loaded all the functions below in this brack
         e.preventDefault(); // prevents page from opening
 
         $.ajax({
-            type: 'POST', // get or post? this time we want to post the data from the form
+            type: 'POST', // Posting our data to the php file
             url: 'createAcc.php', // identifying the php file that the work is to be carried out in
             dataType: 'json', // This specifies how data is to be exchanged between the frontend and the server
             data: $('#crtAcc').serialize(), // Takes the contents of the form and encodes them as a string ready for submission
@@ -61,7 +64,7 @@ $(function () { // When the page is loaded all the functions below in this brack
         });
     });
 
-    // Function that submits help request data - The category and sub category data that is provided by the admin of the system
+    // Function that submits task data - The category and sub category data that is provided by the admin of the system
     $('#addData').on('submit', function(e) { // Function is called when the add data button in this form is pressed (The button is of type:submit)
 
         e.preventDefault(); //prevents page from opening
@@ -92,7 +95,7 @@ $(function () { // When the page is loaded all the functions below in this brack
         });
     });
 
-    // The function for changing the users password
+    // The function for changing a users password
     $('#changePSW').on('submit', function(e) {
 
         e.preventDefault(); //prevents page from opening
@@ -157,6 +160,7 @@ function resetSystem() {
 
 }
 
+// Function below is called when the button to reset the helper responses table is pressed
 function responses() {
 
     $.ajax({
@@ -180,7 +184,7 @@ function responses() {
     });
 }
 
-// Below is a javascript function. When called it will delete a demonstrator account (Deletes the account which was chosen by the admin)
+// Function below is used to delete a helper account from the system when the 'remove helper' button is pressed
 function deleteAccount(objButton) {
 
     var userID = objButton.value; // Storing the user ID of the account chosen to be deleted

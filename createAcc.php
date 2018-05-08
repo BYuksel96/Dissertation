@@ -1,4 +1,8 @@
 <?php
+    /*
+    * PHP file used to create a new helper account
+    */
+
     include('connection.php');
 
     if(isset($_POST['accName'])){

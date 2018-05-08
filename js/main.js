@@ -1,3 +1,10 @@
+/*
+*
+* main.js - js file used in main.php
+* Majority of frontend functionality and passing of data to serverside functionality is found in this file.
+* 
+*/
+
 $(function () {
 
     var seconds = 5; // refresh rate on the queue table
@@ -5,7 +12,7 @@ $(function () {
 
     setInterval(function() {$("#studentTable").load('main.php #studentTable'); }, seconds*1000); // Refreshing the queue table. Done to show if any changes have been made
 
-    // Interval function below used to push a notification to the helper if they are not helping anyone and there is someone in the queue
+    // Function below is used to push a notification to the helper if they are not helping anyone and there is someone active in the queue
     setInterval(function() {
 
         $.ajax({
@@ -22,10 +29,10 @@ $(function () {
             }
         });
     
-    }, notify*1000); // Refreshing the queue table. Done to show if any changes have been made
+    }, notify*1000); // Identify that this function is to be called every 15 seconds (as per the notify var)
 
+    // Function below is used to alert the student, with a modal notfication, that a helper is on their way.
     setInterval(function() {
-        //ajax in here
         $.ajax({
             url: 'attendanceCheck.php',
             dataType: 'json',
@@ -43,16 +50,14 @@ $(function () {
     
     }, seconds*1000);
 
-    // The function below is for when a student is making a request and is filling out the form.
-    // This specific function handles the dynamic changing of the content located in the sub-category box.
-    // The content shown in the sub-category box is affected by the option chosen in the 'category' box.
+    // The function below is for when a student is making a help request and is filling out the form.
+    // This specific function handles the dynamic changing of the content located in the subcategory box.
+    // The content shown in the subcategory box is affected by the option chosen in the 'category' box.
     $('#weekSub').on('change', function(e){
 
         var selected_option_value=$("#weekSub option:selected").val(); // Sotring the value of the 'category' option chosen by the student
         
         e.preventDefault();
-
-        // View account.js for clarification on the ajax function below and how it operates, if needed.
 
         $.ajax({
             type: 'POST',
@@ -61,12 +66,15 @@ $(function () {
             data: { option : selected_option_value },
             success : function (data) {
                 if (data.type == 'success'){
-                    var temp = data.text; // Temporarily storing the data returend by the server
-                    var options = temp.split(','); // Splitting the string into an array to then be able to display all the options that have been provided by the admin for that specific category
-                    $('#taskNo').empty(); // Need to clear previous options before appending more items as options in the select box
-                    // For each item in the array display it is displayed as an option in the select box
-                    $.each(options, function (i, option) { // This function acts as a for loop going through each item in the 'options' array (jQuery)
-                        $('#taskNo').append($('<option>').val(option).html(option)); // Appending all items in the array as an option tag in the select menu
+                    var temp = data.text; // Temporarily storing the data returned by the server
+                    // Next, the returened data is split into an array
+                    var options = temp.split(',');
+                    // Previous options are cleared before appending more items into the select box
+                    $('#taskNo').empty();
+                    // For each item in the array, display it is as an option in the select box. The function below acts as a for loop going through each item in the 'options' array (jQuery)
+                    $.each(options, function (i, option) {
+                        // Appending all items in the array as an option tag in the select box
+                        $('#taskNo').append($('<option>').val(option).html(option));
                     });
                 }
             },
@@ -77,7 +85,9 @@ $(function () {
         });
     });
 
-    // Function below is used to submit help request data provided by the students into the database
+    // Function below is used to submit help request data provided by the students into the database (called when help request form 'submit' button is pressed).
+    // The response of the outcome will either result in an appropriate success or failure message - displayed as a notfication on the screen.
+    // If student is successful in making a help request the outcome will then be seen in the refreshed queue table.
     $('#helpForm').on('submit', function(e) {
 
         e.preventDefault();
@@ -92,7 +102,7 @@ $(function () {
                     $('#taskNo').empty(); // Emptying the sub-category field in the form
                     $("#helpForm")[0].reset(); // Reseting the form
                     $('#close').trigger('click'); // Using jquery to close the help request form
-                    $('#modalText').text(data.text); // Adding text to the modal which displays helpful responses to the student
+                    $('#modalText').text(data.text); // Adding text to the notification modal which displays helpful responses to the student
                     $('#responseModal').modal('show'); // Activating the response modal
                     $("#studentTable").load('main.php #studentTable'); // Reloading the queueing table
                 }
@@ -112,6 +122,7 @@ $(function () {
         });
     });
 
+    // Function below is called when a helper presses the button to submit helper provided feedback data
     $('#completeForm').on('submit', function(e) {
 
         e.preventDefault();
@@ -142,7 +153,7 @@ $(function () {
 });
 
 // Javascript function which, when called, acquires info on the value of the seat position of the student.
-// This function also helps to serve the purpose of editting a specific session value, which is used to display the correct button on the help request form
+// This function also helps to serve the purpose of changing a specific session value (used to display the correct button (Submit button) in the help request form (instead of the 'edit' button))
 function addSeat(objButton) {
     $("#submitButton").html("Submit Request");
     $("#submitButton").removeClass("btn btn-warning");
@@ -151,13 +162,13 @@ function addSeat(objButton) {
         url: 'edit.php',
         dataType: 'json',
         success : function (data) { 
-            var x = objButton.value;
-            $("#seatFill").val(x);
+            var x = objButton.value; // Storing value of selected seat in a var
+            $("#seatFill").val(x); // Setting the seat value field in the help request form
         }
     });
 }
 
-// The function below is used to disable the seat buttons is the account type of the user is not 'student'
+// The function below is used to disable the seat buttons if the account type of the user is not 'student'
 function buttonDisable(){
     $.ajax({
         url: 'accInfo.php',
@@ -200,9 +211,9 @@ function deleteItem(objButton) {
     });
 }
 
-// Function below is used to help bring up the help request form.
-// However this time the form is prepopulated with the data they provide in their initial help request submission
-// Essentially it allows them to edit their help request data without having to delete their current one and make a new request
+// Function below is used to help bring up the help request form for editting an active request.
+// The form is prepopulated with the data students provided in their initial help request submission.
+// Essentially it allows them to edit their help request data without having to delete their current one and make a new request.
 function editItem(objButton) {
     var x = objButton.value;
 
@@ -264,6 +275,7 @@ function helpStudent(objButton) {
     });
 }
 
+// When a helper clicks the button to identify they are done helping a student, this function is called.
 function completeRequest(objButton) {
     var x = objButton.value;
 
@@ -278,7 +290,7 @@ function completeRequest(objButton) {
                 $("#studentTable").load('main.php #studentTable');
                 // $('#modalText').text(data.text);
                 $("#ticketNumber").val(x);
-                $('#completedQs').modal('show');
+                $('#completedQs').modal('show'); // Displaying the helper feedback modal form on the screen
             }
             else{
                 $("#completeForm")[0].reset();
@@ -294,6 +306,7 @@ function completeRequest(objButton) {
     });
 }
 
+// Function called when a helper identifies that they need assistance (button call)
 function assistance(objButton) {
     var x = objButton.value;
 
@@ -321,8 +334,8 @@ function assistance(objButton) {
     });
 }
 
-// Code acquired from https://stackoverflow.com/questions/2271156/chrome-desktop-notification-example?noredirect=1&lq=1
-// request permission on page load
+// Code was acquired from https://stackoverflow.com/questions/2271156/chrome-desktop-notification-example?noredirect=1&lq=1 (Code has been altered slightly to suite this application)
+// Firs request permission to allow push notifications on page load
 document.addEventListener('DOMContentLoaded', function () {
     if (!Notification) {
         alert('Desktop notifications not available in your browser. Try Chromium.'); 
@@ -332,15 +345,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (Notification.permission !== "granted")
         Notification.requestPermission();
 });
-  
+
+// This function is called to active a notification to the helper.
 function notifyMe() {
 
     if (Notification.permission !== "granted")
         Notification.requestPermission();
     else {
         var notification = new Notification('Queue Notification', {
-        icon: 'bufavicon.ico',
-        body: "A student has just entered the queue",
+        icon: 'bufavicon.ico', // Setting push notification icon
+        body: "A student has just entered the queue", // Setting the push notification text
         });
 
         notification.onclick = function () {

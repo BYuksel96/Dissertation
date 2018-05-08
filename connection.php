@@ -1,4 +1,8 @@
 <?php
+    /*
+    * PHP file used to establish a connection with the database
+    */
+
 	$host="localhost"; // Host name 
 	$username="root"; // Mysql username 
 	$password=""; // Mysql password

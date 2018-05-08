@@ -1,4 +1,9 @@
 <?php
+    /*
+    * PHP file used to change the state of a students ticket to "ASSISTANCE".
+    * This only occurs when a helper has identified that they need assistance.
+    * This file is used to put the ticket back in the queue (viewed only in the helper queue table), where other helpers can see that another helper needs assistance
+    */
 
     include('connection.php');
     session_start();

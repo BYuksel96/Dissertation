@@ -1,7 +1,7 @@
 <?php
     // Reset or Remove Data.
-    // This file is used to either completely reset all the help data which was provided by the systems admin.
-    // Or specifically remove chosen items from the help data (DB table).
+    // This file is used to either completely reset all the task data which was provided by the systems admin.
+    // Or specifically remove chosen items from the task data.
     include('connection.php');
 
     session_start();
@@ -29,5 +29,7 @@
             die($response);
         }
     }
+
+    mysqli_close($connection);
 
 ?>

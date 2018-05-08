@@ -1,4 +1,8 @@
 <?php
+    /*
+    * PHP file used to change the password helper password
+    */
+
     include('connection.php');
     session_start();
 

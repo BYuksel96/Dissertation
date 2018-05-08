@@ -1,4 +1,9 @@
 <?php
+    /*
+    * PHP fill used to:
+    * 1. Change the state of a student ticket to FALSE to identify that help has finished
+    * 2. Post helper feedback form data to the helper_feedback table
+    */
 
     include('connection.php');
     session_start();

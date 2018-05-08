@@ -1,4 +1,10 @@
 <?php
+    /*
+    * PHP file used to delete a help request ticket from the queue.
+    * Works by using the stored student id session variable to find help request ticket in the help_request table.
+    * A query is then used to delete it from in there.
+    */
+
     include('connection.php');
     session_start();
 

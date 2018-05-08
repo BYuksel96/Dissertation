@@ -1,4 +1,7 @@
 <?php
+    /*
+    * PHP file which, when called, will reset all the help feedback that was acquired (all is deleted from the helper_feedback table in the DB)
+    */
 
     include('connection.php');
     session_start();

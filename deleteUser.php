@@ -1,4 +1,8 @@
 <?php
+    /*
+    * PHP file used to felete a specified helper account from the system
+    */
+
     include('connection.php');
     session_start();
 

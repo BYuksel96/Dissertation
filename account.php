@@ -18,9 +18,13 @@
         <link rel="shortcut icon" type="image/x-icon" href="bufavicon.ico" />
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Importing font-awesome - used for some of the icons on the page -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> <!-- Importing Bootstrap for creating frontend style -->
+        <!-- Including latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Popper JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <!-- Include latest compiled JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/account.css"> <!-- Importing external stylesheet -->
         <script src="js/account.js"></script> <!-- Importing external js file -->
@@ -39,7 +43,8 @@
 
         <!-- Creating an accordion -->
         <div id="accordion">
-
+            <!-- Start of an accordion card -->
+            <!-- The card below is used to display the 'How to use...' video -->
             <div class="card" data-value="c1">
                 <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                     <div class="card-header">
@@ -54,8 +59,9 @@
                     </video>
                 </div>
             </div>
+            <!-- End of an accordion card -->
 
-            <div class="gap"></div>
+            <div class="gap"></div> <!-- Producing a gap between each card (css is used to do this) -->
 
             <!-- Start of an accordion card -->
             <!-- The card below is how a demonstrator/helper can change their accounts password -->
@@ -99,7 +105,7 @@
 
             <div class="gap"></div> <!-- Producing a gap between each card (css is used to do this) -->
 
-            <?php if ($_SESSION["accType"] == "admin") { ?> <!-- This line of code is used to hide cards, in the accordion, from demonstrators who don't have admin priveleges -->
+            <?php if ($_SESSION["accType"] == "admin") { ?> <!-- This line of code is used to hide cards, in the accordion, from demonstrators/helpers who don't have admin priveleges -->
                 
                 <!-- Card below is used to create demonstrator/helper accounts -->
                 <div class="card" data-value="c3">
@@ -239,7 +245,7 @@
                                     $result = mysqli_query($connection, "SELECT u.Username, hr.StudentID, hc.ticket_no, hr.SubWeek, hr.TaskNo, hr.bDesc, hr.SeatLocation, hr.TimeOfRequest, hr.TimeOfHelp, hr.TimeHelpFinished, hr.DateOfRequest FROM help_completed hc LEFT JOIN help_request hr ON hr.TicketNo = hc.ticket_no LEFT JOIN users u ON u.ID = hc.users_id WHERE hr.active_check = 'FALSE' ORDER BY hc.ticket_no") or die (mysqli_error());
                                     echo "<table id=\"completedTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                                     echo "<tr> <th colspan=\"7\" scope=\"col\"><button id=\"reset\" class=\"btn btn-info\" onclick=\"resetSystem()\">Reset System (and helper responses table)</button></th> <th colspan=\"7\" scope=\"col\"><a href=\"tableToCSV.php\"><button id=\"tab2CSV\"  class=\"btn btn-info\">Download to CSV</button></a></th> </tr>";
-                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
+                                    echo "<tr> <th scope=\"col\">Assisted By</th> <th scope=\"col\">Student Number</th> <th scope=\"col\">Ticket No.</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Subcategory</th> <th scope=\"col\">Description</th> <th scope=\"col\">Seat Location</th> <th scope=\"col\">Time Of Request</th> <th scope=\"col\">Time Help Arrived</th> <th scope=\"col\">Time Help Was Completed</th> <th scope=\"col\">Date of Request</th> </tr>";
                                 
                                     while($row = mysqli_fetch_array($result)){
 
@@ -268,7 +274,7 @@
 
                 <div class="gap"></div>
 
-                <!-- Card below is how you can delete helper accounts -->
+                <!-- Card below is where you can view all helper responses -->
                 <div class="card" data-value="c4">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseResponses">
                         <div class="card-header">
@@ -283,11 +289,11 @@
                         <hr class="formHR">
                         <div class="container table-responsive">
                             <?php
-                                // Query below used to get a list of all the helper accounts
+                                // Query below used to get a list of all the helper feedback that has be provided
                                 $result = mysqli_query($connection, "SELECT u.Username, hr.StudentID, hr.SubWeek, hr.TaskNo, hf.option_selected, hf.comments FROM helper_feedback hf LEFT JOIN help_request hr ON hr.TicketNo = hf.ticket_id LEFT JOIN users u ON u.ID = hf.users_id ORDER BY hf.ID") or die (mysqli_error());
-                                echo "<table id=\"responsesTable\" class=\"table table-striped\" style=\"text-align:center;\">"; // Creating a table to display all the demonstrators who have accounts
+                                echo "<table id=\"responsesTable\" class=\"table table-striped\" style=\"text-align:center;\">";
                                 echo "<tr> <th colspan=\"3\" scope=\"col\"><button style=\"width: 100%\" id=\"resetresponses\" class=\"btn btn-info\" onclick=\"responses()\">Reset Helper Responses Table</button></th> <th colspan=\"3\" scope=\"col\"><a href=\"responsesToCSV.php\"><button style=\"width: 80%\" id=\"responses2CSV\" class=\"btn btn-info\">Download table to CSV</button></a></th> </tr>";
-                                echo "<tr> <th scope=\"col\">Helper Account</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Sub-category</th> <th scope=\"col\">Feedback Category</th> <th scope=\"col\">Feedback comments</th> </tr>"; // Creating the headers of the table
+                                echo "<tr> <th scope=\"col\">Helper Account</th> <th scope=\"col\">Student ID</th> <th scope=\"col\">Chosen Task Category</th> <th scope=\"col\">Subcategory</th> <th scope=\"col\">Feedback Category</th> <th scope=\"col\">Feedback comments</th> </tr>"; // Creating the headers of the table
 
                                 while($row = mysqli_fetch_array($result)){ // While loop used to output the result of the query
 
@@ -310,7 +316,7 @@
 
                 <div class="gap"></div>
 
-                <!-- Card below is for providing the system with help request data (i.e. the categories and sub-categories which students can pick from) -->
+                <!-- Card below is for providing the system with task data (i.e. the categories and subcategories which students can pick from) -->
                 <div class="card" data-value="c7">
                     <a class="collapsed card-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
                         <div class="card-header">
@@ -331,7 +337,7 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="subcat"><b>Enter All Sub Categories Sepreated With Commas: (Example: Task 1,Task 2,Task 3)</b></label>
+                                    <label for="subcat"><b>Enter All Subcategories Sepreated With Commas: (Example: Task 1,Task 2,Task 3)</b></label>
                                     <input type="text" placeholder="Enter data here" name="subcat" id="subcat" class="form-control" required>
                                 </div>
 
@@ -362,10 +368,10 @@
                                 <hr class="formHR">
                                 <div class="container table-responsive">
                                     <?php
-                                        // Query below is used to acquire a list of all the help request data which have been provided into the system
+                                        // Query below is used to acquire a list of all the help request data which has been provided into the system
                                         $result = mysqli_query($connection, "SELECT hd.ID, u.Username, hd.Category, hd.SubCat FROM help_data hd LEFT JOIN users u ON u.ID = hd.users_id ORDER BY hd.Category") or die (mysqli_error());
                                         echo "<table id=\"dataTable\" class=\"table table-striped\" style=\"text-align:center;\">";
-                                        echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Sub Category</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
+                                        echo "<tr> <th scope=\"col\">Submited By</th> <th scope=\"col\">Category</th> <th scope=\"col\">Subcategory</th> <th scope=\"col\"><button id=\"resetData\" class=\"btn btn-info\" name=\"Reset Data\" value='reset' onclick=\"resetData(this)\">Reset Data</button></th> </tr>";
                                     
                                         while($row = mysqli_fetch_array($result)){
 

@@ -1,4 +1,11 @@
 <?php
+    /*
+    * PHP file that is used to change the the state of a help request ticket.
+    * When called, this fill is used to first check if the ticket still exists in the system (i.e. has someone else gone to assist the student or has the student deleted the ticket)
+    * If it is then, the state of the tickets active_check is changed. This is used to identify that the helper has accepted to assist the student. This then aids in removing the ticket from the main queue.
+    */
+
+
     include('connection.php');
     session_start();
 
@@ -7,7 +14,7 @@
         $itemID = mysqli_real_escape_string($connection, $_POST['itemNum']); // Storing the posted value into a variable
         $demName = $_SESSION["demonstrator"]; // Acquiring demonstrator username from the session cariable stored when the deomstrator has logged in - used to acquire demonstrator ID from DB
 
-        // select query to acquire demonstrator id
+        // select query to acquire demonstrator id from db table 'users'
         $sqlQueryID = mysqli_query($connection, "SELECT ID FROM users WHERE Username = '$demName'");
         $resultDemID = mysqli_fetch_assoc($sqlQueryID); // Acquiring the result of the query
         // select query to acquire student id
@@ -31,7 +38,7 @@
                     die($response);
                 }
                 else {
-                    // changing the active check to false - This removes the help request from being displayed in the queueing table
+                    // changing the active check to ATTENDING - This removes the help request ticket from being displayed in the queueing table
                     $changeState = mysqli_query($connection, "UPDATE help_request SET active_check = \"ATTENDING\", TimeOfHelp = NOW() WHERE TicketNo = '$itemID'");
                     if(!$changeState) {
                         $output = "Error" . mysqli_error();
