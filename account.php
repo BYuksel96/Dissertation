@@ -54,9 +54,15 @@
                     </div>
                 </a>
                 <div id="collapseOne" class="collapse card-body">
+                    Helper Functionalities (Video)
                     <video width="100%" height="25%" controls>
-                    <source src="studentVid.mp4" type="video/mp4">
+                    <source src="helper.mp4" type="video/mp4">
                     </video>
+                    <?php if ($_SESSION["accType"] == "admin") { ?>
+                    Admin Functionalities (Video)
+                    <video width="100%" height="25%" controls>
+                    <source src="admin.mp4" type="video/mp4">
+                    <?php } ?>
                 </div>
             </div>
             <!-- End of an accordion card -->
