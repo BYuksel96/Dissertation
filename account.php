@@ -54,12 +54,12 @@
                     </div>
                 </a>
                 <div id="collapseOne" class="collapse card-body">
-                    Helper Functionalities (Video)
+                    <p>Helper Functionalities (Video)</p>
                     <video width="100%" height="25%" controls>
                     <source src="helper.mp4" type="video/mp4">
                     </video>
                     <?php if ($_SESSION["accType"] == "admin") { ?>
-                    Admin Functionalities (Video)
+                    <p>Admin Functionalities (Video)</p>
                     <video width="100%" height="25%" controls>
                     <source src="admin.mp4" type="video/mp4">
                     <?php } ?>
