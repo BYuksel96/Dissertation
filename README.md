@@ -28,7 +28,7 @@ Contributing:
 Due to the nature of this project, contributions will not be prohibited at this current stage in time.
 
 Versioning:
-For the versions available, see the tags on this repository.
+(N/A)
 
 Authors:
 - Burak Yuksel (Bournemouth University - Software Engineering Student)
