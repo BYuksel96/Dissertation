@@ -158,6 +158,12 @@
     position: relative;
 }
 
+#displayTab {
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
 /* Specifying the properties of the buttons located in the table */
 #tabButton {
     width: 100px;

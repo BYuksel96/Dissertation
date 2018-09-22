@@ -52,7 +52,9 @@
             <ul class="nav navbar-nav ml-auto">
                 <!-- PHP code below used to specifically toggle showing the account/admin button to only the demonstrators/helpers accounts -->
                 <?php if ($_SESSION["accType"] == "admin") { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Admin</a></li><?php } ?>
+                <?php if ($_SESSION["accType"] == "admin") { ?><li><a class="nav-link" href="display.php"><i class="fa fa-television"></i> TV Display</a></li><?php } ?>
                 <?php if ($_SESSION["accType"] == "standard") { ?><li><a class="nav-link" href="account.php"><i class="fa fa-user-circle"></i> Account</a></li><?php } ?>
+                <?php if ($_SESSION["accType"] == "standard") { ?><li><a class="nav-link" href="display.php"><i class="fa fa-television"></i> TV Display</a></li><?php } ?>
                 <li><a class="nav-link" href="logout.php" style="color: red; font-weight: bold;"><i class="fa fa-sign-out"></i> Logout</a></li>
             </ul>
         </nav>
